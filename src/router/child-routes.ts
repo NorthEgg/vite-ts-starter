@@ -1,32 +1,23 @@
 const importModule = import.meta.glob('../modules/**/*.vue')
 const Layout = () => import('@/components/Layout/index.vue')
 const LayoutView = () => import('@/components/Layout/LayoutView.vue')
-const LayoutArea = () => import('@/components/Layout/LayoutArea.vue')
 
 const childRoutes: Array<RouteRecordRaw> = [
   {
-    path: 'test-layout',
-    name: '布局测试',
-    meta: {
-      title: 'TestLayout'
-    },
-    component: LayoutArea
-  },
-  {
-    path: 'user',
+    path: 'auth',
     component: Layout,
-    name: 'User',
+    name: 'Auth',
     meta: {
-      title: '账户'
+      title: '认证'
     },
     redirect: {
-      name: 'UserLogin'
+      name: 'AuthLogin'
     },
     children: [
       {
         path: 'login',
-        name: 'UserLogin',
-        component: importModule['../modules/UserAccount/pages/login.vue'],
+        name: 'AuthLogin',
+        component: importModule['../modules/Auth/pages/index.vue'],
         meta: {
           title: '登录'
         }
@@ -34,51 +25,51 @@ const childRoutes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    path: 'project',
+    path: 'catalog',
     component: Layout,
-    name: 'Project',
+    name: 'Catalog',
     redirect: {
-      name: 'ProjectList'
+      name: 'CatalogList'
     },
     children: [
       {
         path: '',
-        name: 'ProjectList',
+        name: 'CatalogList',
         meta: {
-          title: '项目列表'
+          title: '资源列表'
         },
-        component: importModule['../modules/Project/pages/list.vue']
+        component: importModule['../modules/Catalog/pages/index.vue']
       },
       {
         path: 'list',
-        name: 'ProjectList',
-        component: importModule['../modules/Project/pages/list.vue'],
+        name: 'CatalogListAlias',
+        component: importModule['../modules/Catalog/pages/index.vue'],
         meta: {
-          title: '项目管理'
+          title: '资源目录'
         }
       }
     ]
   },
   {
-    path: 'result',
+    path: 'detail',
     redirect: {
-      name: 'ProjectList'
+      name: 'CatalogList'
     }
   },
   {
-    path: 'result/:projectId',
+    path: 'detail/:resourceId',
     component: LayoutView,
-    name: 'result',
+    name: 'Detail',
     redirect: {
-      name: 'ResultOverview'
+      name: 'DetailOverview'
     },
     children: [
       {
         path: 'overview',
-        name: 'ResultOverview',
-        component: importModule['../modules/Result/pages/overview.vue'],
+        name: 'DetailOverview',
+        component: importModule['../modules/Detail/pages/index.vue'],
         meta: {
-          title: '总览'
+          title: '详情页'
         }
       }
     ]

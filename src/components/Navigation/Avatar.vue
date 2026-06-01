@@ -9,13 +9,11 @@ export default defineComponent({
   components: {
     SwitchButton
   },
-  setup () {
-    const router = useRouter()
-    const route = useRoute()
+  setup() {
     const localeInject = useLocale()
     const commandList = computed(() => [
       {
-        label: localeInject.t('login.signout'),
+        label: localeInject.t('auth.signout'),
         icon: 'switch-button',
         click: () => {
           Cookie.remove('token')
@@ -24,9 +22,8 @@ export default defineComponent({
       }
     ])
 
-    const handleCommand = (cmdItem) => {
-      console.log('cmdItem', cmdItem)
-      cmdItem?.click()
+    const handleCommand = (cmdItem: { click?: () => void; }) => {
+      cmdItem.click?.()
     }
     return {
       commandList,
@@ -38,14 +35,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <el-dropdown
-    class="navigation-avatar"
-    trigger="hover"
-  >
-    <div style="outline: none; padding: 0 12px;">
-      <img
-        src="@/assets/images/navigation-avatar.webp"
-      >
+  <el-dropdown class="navigation-avatar" trigger="hover">
+    <div style="outline: none; padding: 0 12px">
+      <img src="@/assets/images/navigation-avatar.webp">
     </div>
     <template #dropdown>
       <el-dropdown-menu>

@@ -1,4 +1,5 @@
-import { store } from '@/store'
+import { pinia } from '@/store'
+import { useSessionStore } from '@/store/useSessionStore'
 import Cookie from 'js-cookie'
 import { allowlist } from '@/router/auth-list'
 import { systemTitle } from '@/locales/data'
@@ -11,50 +12,45 @@ NProgress.configure({
 })
 
 export function createRouterGuards(router: Router) {
-  router.beforeEach(async (to, from, next) => {
+  const sessionStore = useSessionStore(pinia)
+
+  router.beforeEach(async (to, _from, next) => {
     NProgress.start()
 
     document.title = `${ to.meta.title || '' } - ${ systemTitle }`
 
-    globalThis.console.log('😄😄😄 ', to)
+    const currentRouteLocale = Array.isArray(to.params.locale)
+      ? to.params.locale[0]
+      : to.params.locale
 
-    const currentRouteLocale = to.params.locale
-
-    if (
-      allowlist.find(
-        name => to.name === name
-      )
-    ) {
+    if (allowlist.find((name) => to.name === name)) {
       next()
       return
     }
 
     if (!Cookie.get('token')) {
-      next(`/${ currentRouteLocale || store.state.UserAccount.locale }/user/login`)
+      next(`/${ currentRouteLocale || sessionStore.locale }/auth/login`)
       return
     }
 
     // 获取用户信息
-    const { data, error } = await store.dispatch('UserAccount/getUserInfo')
+    const { data, error } = await sessionStore.loadCurrentUser()
 
     if (error) {
-      store.dispatch('UserAccount/setLanguage', {
-        locale: currentRouteLocale || data.language || store.state.UserAccount.locale
-      })
+      sessionStore.setLocale(
+        currentRouteLocale || data.locale || sessionStore.locale
+      )
       Cookie.remove('token')
-      next(`/${ currentRouteLocale || store.state.UserAccount.locale }/user/login`)
+      next(`/${ currentRouteLocale || sessionStore.locale }/auth/login`)
       return
     }
 
     // TODO: It must be used together with the backend
-    store.dispatch('UserAccount/setLanguage', {
-      locale: currentRouteLocale || data.language
-    })
+    sessionStore.setLocale(currentRouteLocale || data.locale)
     next()
   })
 
-  router.afterEach((to) => {
+  router.afterEach(() => {
     NProgress.done()
   })
 }
-

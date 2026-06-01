@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-
     "declaration": false,
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    
+
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": true,
@@ -20,18 +19,25 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["esnext", "dom"],
-    "types": [
-      "vite/client",
-      "vitest/globals",
-      "node",
-      "element-plus/global"
-    ],
-    "baseUrl": "./",
+    "types": ["vite/client", "vitest/globals", "node", "element-plus/global"],
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    "__tests__/**/*.ts",
+    "__tests__/**/*.tsx",
+    "auto-imports.d.ts",
+    "components.d.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
   "exclude": ["node_modules"]
 }

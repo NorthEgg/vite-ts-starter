@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowSyntheticDefaultImports": true,
+    "types": ["node"]
+  },
+  "include": [
+    "vite.config.ts",
+    "uno.config.ts",
+    "eslint.config.js",
+    "lint-staged.config.js",
+    "commitlint.config.js"
+  ]
+}

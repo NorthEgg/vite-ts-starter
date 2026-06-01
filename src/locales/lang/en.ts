@@ -7,6 +7,8 @@ export default {
     goback: 'Back to the previous page',
     empty: 'No data available',
     i18nTest: 'Test internationalization',
+    rangeStart: 'Start time',
+    rangeEnd: 'End time',
     pleaseInput: 'Please Input',
     btnCancel: 'Cancel',
     btnConfirm: 'Confirm'
@@ -14,33 +16,32 @@ export default {
   nav: {
     action: 'Action'
   },
-  login: {
-    hydl: 'Hi, Welcome',
+  auth: {
+    welcome: 'Hi, Welcome',
     signin: 'Sign In',
-    username: 'Username',
     email: 'Email',
-    pwd: 'Password',
-    fgtpwd: 'Forgot password?',
-    plsemail: 'Please enter a email',
-    plscurrentemail: 'Please enter the correct email',
-    plspwd: 'Please enter a password',
+    password: 'Password',
+    forgotPassword: 'Forgot password?',
+    emailRequired: 'Please enter a email',
+    emailInvalid: 'Please enter the correct email',
+    passwordRequired: 'Please enter a password',
     signout: 'Sign out',
     loginSuccess: 'Login successfully'
   },
-  project: {
-    manageTitle: 'Project management',
-    create: 'New Project',
-    name: 'Project name',
-    corpName: 'Corporation Name',
-    notes: 'Remark',
-    createDate: 'Create date',
-    state: 'State',
-    publish: 'Publish',
-    stop: 'Stop',
-    publishedSuccessfully: 'Published Successfully',
-    publishingStop: 'Stop Publishing'
+  catalog: {
+    manageTitle: 'Resource catalog',
+    create: 'Create resource',
+    name: 'Resource title',
+    subtitle: 'Subtitle',
+    description: 'Description',
+    updatedAt: 'Updated at',
+    state: 'Status',
+    publish: 'Activate',
+    stop: 'Deactivate',
+    activated: 'Resource activated',
+    deactivated: 'Resource deactivated'
   },
-  result: {
-    title: 'Project details'
+  detail: {
+    title: 'Detail panel'
   }
 }

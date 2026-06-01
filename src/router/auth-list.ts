@@ -1,4 +1,1 @@
-export const allowlist = [
-  '404',
-  'UserLogin'
-]
+export const allowlist = ['404', 'AuthLogin']

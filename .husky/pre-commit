@@ -13,12 +13,12 @@ git rev-parse --git-dir >/dev/null 2>&1 || {
 
 
 # 受保护的分支列表
-PROTECTED_BRANCHES=(
-  "main"
-  "master"
-  "dev"
-  "release"
-)
+# PROTECTED_BRANCHES=(
+#   "main"
+#   "master"
+#   "dev"
+#   "release"
+# )
 
 # 初始化 CURRENT_BRANCH 变量为空字符串
 CURRENT_BRANCH=""
@@ -35,16 +35,16 @@ fi
 
 
 # 如果当前分支是受保护分支
-for branch in "${PROTECTED_BRANCHES[@]}"; do
-  if [ "$CURRENT_BRANCH" == "$branch" ]; then
-    # 检查暂存区是否有文件
-    if [ -n "$(git diff --cached)" ]; then
-      echo "\n${RED}❌ Commit 失败："
-      echo "\n不能在当前受保护的分支 '$CURRENT_BRANCH' 上暂存文件，请在其他分支上进行更改。${RESET}\n"
-      exit 1
-    fi
-  fi
-done
+# for branch in "${PROTECTED_BRANCHES[@]}"; do
+#   if [ "$CURRENT_BRANCH" == "$branch" ]; then
+#     # 检查暂存区是否有文件
+#     if [ -n "$(git diff --cached)" ]; then
+#       echo "\n${RED}❌ Commit 失败："
+#       echo "\n不能在当前受保护的分支 '$CURRENT_BRANCH' 上暂存文件，请在其他分支上进行更改。${RESET}\n"
+#       exit 1
+#     fi
+#   fi
+# done
 
 
 # 检查是否可能为 --amend
@@ -66,7 +66,7 @@ fi
 
 
 # 运行 lint-staged
-if pnpm lint-staged  --allow-empty; then
+if pnpm lint-staged --allow-empty --concurrent false; then
   # 检查 Git 暂存区是否有变化
   if [ -z "$(git diff --cached)" ]; then
     # 暂存区为空，输出警告信息

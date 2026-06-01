@@ -7,39 +7,23 @@ export default defineComponent({
   components: {
     NavigationNavBar,
     NavigationSideGoBack
-  },
-  setup () {
-    const router = useRouter()
-    const store = useBaseStore()
-
-    return {
-    }
   }
 })
-
 </script>
 
 <template>
   <LayoutArea>
     <template #top>
-      <NavigationNavBar
-        :fixed="false"
-      >
-        <NavigationSideGoBack
-          :title="_t('base.goback')"
-        />
+      <NavigationNavBar :fixed="false">
+        <NavigationSideGoBack :title="_t('base.goback')" />
       </NavigationNavBar>
     </template>
     <template #side>
-      <LayoutSection
-        has-divider
-        :title="_t('result.title')"
-      >
-        <ul>
-          <li>Test Menu 这里放菜单1</li>
-          <li>Test Menu 这里放菜单2</li>
-          <li>Test Menu 这里放菜单3</li>
-        </ul>
+      <LayoutSection has-divider :title="_t('detail.title')">
+        <p class="layout-view__placeholder">
+          Replace this side panel with module-specific navigation, filters, or
+          auxiliary content.
+        </p>
       </LayoutSection>
     </template>
     <template #content>
@@ -49,4 +33,9 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
+.layout-view__placeholder {
+  margin: 0;
+  line-height: 1.6;
+  color: #606266;
+}
 </style>

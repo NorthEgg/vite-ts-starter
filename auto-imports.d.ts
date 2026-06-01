@@ -69,17 +69,21 @@ declare global {
   const toValue: typeof import('vue').toValue
   const triggerRef: typeof import('vue').triggerRef
   const unref: typeof import('vue').unref
+  const useAppStore: typeof import('./src/hooks/useBaseStore').useAppStore
   const useAttrs: typeof import('vue').useAttrs
   const useBaseStore: typeof import('./src/hooks/useBaseStore').default
+  const useCatalogStore: typeof import('./src/hooks/useBaseStore').useCatalogStore
   const useCssModule: typeof import('vue').useCssModule
   const useCssVars: typeof import('vue').useCssVars
   const useCurrentInstance: typeof import('./src/hooks/useCurrentInstance').default
+  const useDetailStore: typeof import('./src/hooks/useBaseStore').useDetailStore
   const useId: typeof import('vue').useId
   const useLanguage: typeof import('./src/hooks/useLanguage').useLanguage
   const useLink: typeof import('vue-router').useLink
   const useModel: typeof import('vue').useModel
   const useRoute: typeof import('vue-router').useRoute
   const useRouter: typeof import('vue-router').useRouter
+  const useSessionStore: typeof import('./src/hooks/useBaseStore').useSessionStore
   const useSlots: typeof import('vue').useSlots
   const useStore: typeof import('vuex').useStore
   const useTemplateRef: typeof import('vue').useTemplateRef
@@ -129,7 +133,6 @@ declare module 'vue' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
-    readonly key: UnwrapRef<typeof import('./src/hooks/useBaseStore')['key']>
     readonly mapActions: UnwrapRef<typeof import('vuex')['mapActions']>
     readonly mapGetters: UnwrapRef<typeof import('vuex')['mapGetters']>
     readonly mapMutations: UnwrapRef<typeof import('vuex')['mapMutations']>
@@ -167,17 +170,20 @@ declare module 'vue' {
     readonly toValue: UnwrapRef<typeof import('vue')['toValue']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
+    readonly useAppStore: UnwrapRef<typeof import('./src/hooks/useBaseStore')['useAppStore']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
-    readonly useBaseStore: UnwrapRef<typeof import('./src/hooks/useBaseStore')['default']>
+    readonly useCatalogStore: UnwrapRef<typeof import('./src/hooks/useBaseStore')['useCatalogStore']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useCurrentInstance: UnwrapRef<typeof import('./src/hooks/useCurrentInstance')['default']>
+    readonly useDetailStore: UnwrapRef<typeof import('./src/hooks/useBaseStore')['useDetailStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
     readonly useLanguage: UnwrapRef<typeof import('./src/hooks/useLanguage')['useLanguage']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
+    readonly useSessionStore: UnwrapRef<typeof import('./src/hooks/useBaseStore')['useSessionStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useStore: UnwrapRef<typeof import('vuex')['useStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>

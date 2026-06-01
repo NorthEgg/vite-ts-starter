@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { defaultLanguageLocale } from '@/locales'
-const store = useBaseStore()
+import { useSessionStore } from '@/hooks/useBaseStore'
+
+const sessionStore = useSessionStore()
 const route = useRoute()
-const router = useRouter()
 
 const { currentLocaleLang } = useLanguage()
 
@@ -11,21 +12,17 @@ watch(
   () => {
     if (route.name === '404') return
 
-    store.dispatch('UserAccount/setLanguage', {
-      locale: route.params.locale || defaultLanguageLocale
-    })
+    sessionStore.setLocale(String(route.params.locale || defaultLanguageLocale))
   }
 )
 </script>
 
 <template>
-  <ElConfigProvider
-    :locale="currentLocaleLang"
-  >
+  <ElConfigProvider :locale="currentLocaleLang">
     <router-view />
   </ElConfigProvider>
 </template>
 
 <style lang="scss">
-@use "@/styles/index";
+@use '@/styles/index';
 </style>

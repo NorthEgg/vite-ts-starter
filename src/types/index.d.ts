@@ -1,5 +1,3 @@
-import type { ActionTree } from 'vuex'
-import type { getFilterResponse } from '@/store/utils/mixin'
 import type { DialogProps } from 'element-plus'
 
 import type {
@@ -25,21 +23,10 @@ declare module 'vue' {
     $ModalDialog: (options: PropsOptionsUnion) => VNode
     getValidatorRules: (...args: any[]) => ReturnType<typeof validatorRules>
     getRequiredRules: (...args: any[]) => ReturnType<typeof requiredRules>
-    getRequiredRadioRules: (...args: any[]) => ReturnType<typeof requiredRadioRules>
+    getRequiredRadioRules: (
+      ...args: any[]
+    ) => ReturnType<typeof requiredRadioRules>
     getImageListRules: (...args: any[]) => ReturnType<typeof imageListRules>
-  }
-}
-
-declare module 'vuex' {
-  export interface Module<S, R> {
-    actions?: ActionTree<S, R>
-    _name: string
-    getAction: (name: string) => typeof name
-    getMutation: (name: string) => typeof name
-  }
-  export interface Store<S> {
-    filterResponse: typeof getFilterResponse
-    readonly state: S
   }
 }
 
@@ -90,5 +77,4 @@ declare global {
 
   type PropsOptionsUnion = ComponentOriginOptions | Mutable
   type PropsOptionsMixed = Partial<ComponentOriginOptions & Mutable>
-
 }

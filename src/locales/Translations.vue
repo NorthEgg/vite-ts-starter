@@ -1,13 +1,12 @@
 <script lang="ts">
 import { localesMapping } from '@/locales'
 
-import { ArrowDown } from '@element-plus/icons-vue'
 import LogoIcon from '@/locales/LogoIcon.vue'
+import { useSessionStore } from '@/hooks/useBaseStore'
 
 export default defineComponent({
   name: 'TranslationsBox',
   components: {
-    ArrowDown,
     LogoIcon
   },
   props: {
@@ -16,12 +15,12 @@ export default defineComponent({
       default: false
     }
   },
-  setup () {
+  setup() {
     const route = useRoute()
     const router = useRouter()
-    const store = useBaseStore()
+    const sessionStore = useSessionStore()
     const localesList = ref(localesMapping)
-    const currentLocale = computed(() => store.state.UserAccount.locale)
+    const currentLocale = computed(() => sessionStore.locale)
 
     const handleChange = (targetLocaleItem) => {
       setTimeout(() => {
@@ -32,9 +31,7 @@ export default defineComponent({
             locale: localeCode
           }
         })
-        store.dispatch('UserAccount/setLanguage', {
-          locale: localeCode
-        })
+        sessionStore.setLocale(localeCode)
       })
     }
     return {
@@ -60,9 +57,7 @@ export default defineComponent({
       <!-- Translations<el-icon class="el-icon--right">
         <ArrowDown />
       </el-icon> -->
-      <LogoIcon
-        :dark="dark"
-      />
+      <LogoIcon :dark="dark" />
     </span>
     <template #dropdown>
       <el-dropdown-menu>

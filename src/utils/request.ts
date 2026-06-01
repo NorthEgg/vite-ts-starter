@@ -2,20 +2,13 @@ import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 import Cookie from 'js-cookie'
 
+import type { ApiErrorShape, ApiResponse } from '@/api/core/types'
 import { camelizeKeys, decamelizeKeys } from '@/utils/camelCase'
 
 // redirect error
-function errorRedirect (url: string) {
+function errorRedirect(url: string) {
+  void url
   // Router.push(`/${url}`)
-}
-
-export interface RespData<T> {
-  success?: boolean
-  errorCode?: number
-  error?: number | string | null
-  msg?: string
-  data?: T
-  [key: string]: any
 }
 
 // code Message
@@ -56,6 +49,20 @@ export const codeMessage: any = {
   504: 'Gateway Timeout.'
 }
 
+function normalizeError(
+  error: unknown,
+  fallbackMessage: string
+): ApiErrorShape {
+  return {
+    code: 'request_failed',
+    message: fallbackMessage,
+    details:
+      error && typeof error === 'object'
+        ? (error as Record<string, unknown>)
+        : undefined
+  }
+}
+
 // Instance for axios
 const service: AxiosInstance = axios.create({
   // API from the environment variable
@@ -65,13 +72,11 @@ const service: AxiosInstance = axios.create({
 
 // request拦截器
 service.interceptors.request.use(
-  request => {
+  (request) => {
     const token = Cookie.get('token')
 
     // Conversion of hump nomenclature
-    if (
-      !(request.data instanceof FormData)
-    ) {
+    if (!(request.data instanceof FormData)) {
       request.data = decamelizeKeys(request.data)
     }
 
@@ -92,14 +97,14 @@ service.interceptors.request.use(
 
     return request
   },
-  error => {
+  (error) => {
     return Promise.reject(error)
   }
 )
 
 // respone拦截器
 service.interceptors.response.use(
-  response => {
+  (response) => {
     /**
      * response data
      *   {
@@ -110,15 +115,16 @@ service.interceptors.response.use(
      */
 
     const data = response.data
+    const contentType = String(response.headers['content-type'] ?? '')
     Promise.resolve().then(() => {
       useResHeadersAPI(response.headers, data)
     })
 
     if (
       response.request.responseType === 'blob' &&
-      /json$/gi.test(response.headers['content-type'])
+      /json$/gi.test(contentType)
     ) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const reader = new FileReader()
         reader.onload = () => {
           response.data = JSON.parse(reader.result as string)
@@ -129,15 +135,33 @@ service.interceptors.response.use(
       })
     } else if (data instanceof Blob) {
       return {
+        success: true,
         data,
-        msg: '',
-        error: 0
+        message: '',
+        error: null
       }
     }
 
-    return camelizeKeys(data)
+    const normalizedData = camelizeKeys(data)
+
+    if (
+      normalizedData &&
+      typeof normalizedData === 'object' &&
+      'success' in normalizedData &&
+      'data' in normalizedData &&
+      'error' in normalizedData
+    ) {
+      return normalizedData
+    }
+
+    return {
+      success: true,
+      data: normalizedData,
+      message: normalizedData?.msg || 'OK',
+      error: null
+    } satisfies ApiResponse
   },
-  error => {
+  (error) => {
     /**
      * 某些特定的接口 404 500 需要跳转
      * 在需要重定向的接口中传入 redirect字段  值为要跳转的路由
@@ -151,22 +175,28 @@ service.interceptors.response.use(
     }
     if (error.response) {
       return {
-        data: {},
-        error: error.response.status,
-        msg: codeMessage[error.response.status] || error.response.data.message
-      }
-    } else {
-      // 某些特定的接口 failed 需要跳转
-      return {
-        data: {},
-        error: 5000,
-        msg: '服务请求不可用，请重试或检查您的网络。'
-      }
+        success: false,
+        data: null,
+        message:
+          codeMessage[error.response.status] || error.response.data.message,
+        error: {
+          code: `http_${ error.response.status }`,
+          message:
+            codeMessage[error.response.status] || error.response.data.message
+        }
+      } satisfies ApiResponse<null>
     }
+
+    return {
+      success: false,
+      data: null,
+      message: '服务请求不可用，请重试或检查您的网络。',
+      error: normalizeError(error, '服务请求不可用，请重试或检查您的网络。')
+    } satisfies ApiResponse<null>
   }
 )
 
-export function sleep (time = 0) {
+export function sleep(time = 0) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({})
@@ -174,7 +204,7 @@ export function sleep (time = 0) {
   })
 }
 
-function extractFileNameFromContentDispositionHeader (value: string) {
+function extractFileNameFromContentDispositionHeader(value: string) {
   const patterns = [
     /filename\*=[^']+'\w*'"([^"]+)";?/i,
     /filename\*=[^']+'\w*'([^;]+);?/i,
@@ -183,7 +213,7 @@ function extractFileNameFromContentDispositionHeader (value: string) {
   ]
 
   let responseFilename: any
-  patterns.some(regex => {
+  patterns.some((regex) => {
     responseFilename = regex.exec(value)
     return responseFilename !== null
   })
@@ -198,13 +228,18 @@ function extractFileNameFromContentDispositionHeader (value: string) {
   return null
 }
 
-export function downloadFile (boldData: any, filename = 'test-filename', type: string) {
+export function downloadFile(
+  boldData: any,
+  filename = 'test-filename',
+  type: string
+) {
   // TODO: https://blog.csdn.net/weixin_42142057/article/details/97655591
-  const blob = boldData instanceof Blob
-    ? boldData
-    : new Blob([boldData], {
-      type
-    })
+  const blob =
+    boldData instanceof Blob
+      ? boldData
+      : new Blob([boldData], {
+        type
+      })
   const url = window.URL.createObjectURL(blob)
 
   const link = document.createElement('a')
@@ -218,7 +253,7 @@ export function downloadFile (boldData: any, filename = 'test-filename', type: s
   document.body.removeChild(link)
 }
 
-export function useResHeadersAPI (headers: any, resData: any) {
+export function useResHeadersAPI(headers: any, resData: any) {
   const disposition = headers['content-disposition']
   if (disposition) {
     let filename: any = ''

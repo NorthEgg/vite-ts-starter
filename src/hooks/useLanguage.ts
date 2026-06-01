@@ -1,12 +1,13 @@
 import { currentLocaleMap } from '@/locales'
+import { useSessionStore } from '@/hooks/useBaseStore'
 
 export const useLanguage = () => {
-  const store = useBaseStore()
+  const sessionStore = useSessionStore()
 
   const currentLocaleLang = computed(() => {
     let locale: any = null
 
-    const targetLocaleItem = currentLocaleMap(store.state.UserAccount.locale)
+    const targetLocaleItem = currentLocaleMap(sessionStore.locale)
 
     if (targetLocaleItem) {
       locale = targetLocaleItem.localeLang

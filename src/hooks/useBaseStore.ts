@@ -1,9 +1,4 @@
-import type { IGlobalState } from '@/store'
-import type { Store } from 'vuex'
-
-// 定义 injection key
-export const key: InjectionKey<Store<IGlobalState>> = Symbol()
-
-export default function useBaseStore() {
-  return useStore<IGlobalState>()
-}
+export { useAppStore } from '@/store/useAppStore'
+export { useCatalogStore } from '@/store/useCatalogStore'
+export { useDetailStore } from '@/store/useDetailStore'
+export { useSessionStore } from '@/store/useSessionStore'

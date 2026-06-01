@@ -29,7 +29,6 @@ declare module 'vue' {
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
     FooterCustom: typeof import('./src/components/FooterCustom/index.vue')['default']
     FooterCustomOctocat: typeof import('./src/components/FooterCustom/octocat.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld/index.vue')['default']
     IconFont: typeof import('./src/components/IconFont/index.vue')['default']
     Layout: typeof import('./src/components/Layout/index.vue')['default']
     LayoutArea: typeof import('./src/components/Layout/LayoutArea.vue')['default']

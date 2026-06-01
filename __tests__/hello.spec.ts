@@ -1,15 +1,9 @@
 import { expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
-import HelloWorld from '@/components/HelloWorld/index.vue'
+import NotFound from '@/components/404.vue'
 
-// https://stackoverflow.com/questions/56398742/eslint-throws-no-undef-errors-when-linting-jest-test-files
-test('displays message', () => {
-  const wrapper = mount(HelloWorld, {
-    props: {
-      msg: 'Hello world'
-    }
-  })
+test('renders not found page', () => {
+  const wrapper = mount(NotFound)
 
-  // Assert the rendered text of the component
-  expect(wrapper.text()).toContain('Hello world')
+  expect(wrapper.text()).toContain('NOT-FOUND 404')
 })

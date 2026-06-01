@@ -1,4 +1,4 @@
-@use "@/styles/element-variables.scss" as *;
+@use '@/styles/element-variables.scss' as *;
 
 .el-form-item__label {
   color: #606266;
@@ -21,7 +21,9 @@
   padding-right: 20px;
   background-color: #fff !important;
   border: none !important;
-  box-shadow: 0 -4px 14px 3px rgba(#000, 0.06), 0 12px 28px 0 rgba(#000, 0.06) !important;
+  box-shadow:
+    0 -4px 14px 3px rgba(#000, 0.06),
+    0 12px 28px 0 rgba(#000, 0.06) !important;
 }
 
 .el-message .el-message__content {
@@ -48,7 +50,7 @@
   border-radius: 6px;
 }
 
-// UserAccount
+// Auth
 
 .wrap-user {
 
@@ -68,11 +70,11 @@
 }
 
 .setting__word-break {
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .setting__word-break > div {
-  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
 }
 
 .add-member-dialog .el-dialog__body {

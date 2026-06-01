@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import Octocat from './octocat.vue'
 
-
 withDefaults(
   defineProps<{
     showBorder?: boolean
@@ -11,31 +10,21 @@ withDefaults(
   }
 )
 
-const link = ref('https://github.com/pdsuwwz')
-
+const link = ref('https://github.com/NorthEgg')
 </script>
 
 <template>
   <footer
     class="footer"
     :class="{
-      'border': showBorder
+      border: showBorder
     }"
   >
-    <div
-      class="footer-container"
-    >
-      <p
-        class="text"
-      >
+    <div class="footer-container">
+      <p class="text">
         <Octocat />
-        MIT Licensed | Copyright © 2020-PRESENT <a
-          target="_blank"
-          :href="link"
-          class="github-link"
-        >
-          Wisdom
-        </a>
+        Personal starter template
+        <a target="_blank" :href="link" class="github-link"> Repository </a>
       </p>
     </div>
   </footer>
