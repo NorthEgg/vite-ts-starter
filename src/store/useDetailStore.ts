@@ -1,17 +1,8 @@
 import { defineStore } from 'pinia'
 
 import { handleApiResponse } from '@/api/core/helpers'
-import { getDetailPanel } from '@/modules/Detail/api'
-
-export interface DetailPanel {
-  title: string
-  summary: string
-  sections: Array<{
-    id: string
-    title: string
-    description: string
-  }>
-}
+import { getDetailOverview } from '@/modules/Detail/services'
+import type { DetailPanelModel } from '@/modules/Detail/models/detail'
 
 export const useDetailStore = defineStore('detail', {
   state: () => ({
@@ -19,11 +10,11 @@ export const useDetailStore = defineStore('detail', {
       title: '',
       summary: '',
       sections: []
-    } as DetailPanel
+    } as DetailPanelModel
   }),
   actions: {
     async loadDetail(resourceId: string) {
-      const response = await getDetailPanel(resourceId)
+      const response = await getDetailOverview(resourceId)
 
       await handleApiResponse(response, {
         onSuccess: (data) => {

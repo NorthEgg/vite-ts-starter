@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { defaultLanguageLocale } from '@/locales'
-import { useSessionStore } from '@/hooks/useBaseStore'
+import { useSessionStore } from '@/composables/useBaseStore'
+import { useLanguage } from '@/composables/useLanguage'
 
 const sessionStore = useSessionStore()
 const route = useRoute()

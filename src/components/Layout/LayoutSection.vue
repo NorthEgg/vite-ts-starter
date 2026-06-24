@@ -26,10 +26,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    v-loading="loading"
-    class="layout-section-container"
-  >
+  <div v-loading="loading" class="layout-section-container">
     <div class="layout-section-container__header">
       <div class="layout-section-container__header-head text_nowrap">
         <h1
@@ -46,10 +43,7 @@ export default defineComponent({
       </div>
     </div>
     <div class="layout-section-container__content">
-      <div
-        v-if="hasDivider"
-        class="content-divider"
-      ></div>
+      <div v-if="hasDivider" class="content-divider"></div>
       <div
         class="layout-section-container__content-inner"
         :class="{
@@ -86,7 +80,6 @@ export default defineComponent({
     }
 
     .layout-section-container__header-action {
-
     }
   }
 
@@ -104,7 +97,6 @@ export default defineComponent({
     }
 
     .layout-section-container__content-inner {
-
       &.is-flex {
         flex: 1;
         display: flex;

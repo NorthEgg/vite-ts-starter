@@ -4,7 +4,6 @@ import en from 'element-plus/es/locale/lang/en'
 import selfEn from '@/locales/lang/en'
 import selfZhHans from '@/locales/lang/zh-hans'
 
-
 /**
  * I18n language locale mappings
  *
@@ -31,11 +30,11 @@ export const localesMapping = [
 
 export const currentLocaleMap = (targetLocaleCode) => {
   return localesMapping.find(
-    localeItem => localeItem.localeCode === targetLocaleCode
+    (localeItem) => localeItem.localeCode === targetLocaleCode
   )
 }
 
-export type LangTypes = typeof localesMapping[number]['localeCode']
+export type LangTypes = (typeof localesMapping)[number]['localeCode']
 
 /**
  * Default language locale for the application

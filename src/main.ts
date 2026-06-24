@@ -13,9 +13,7 @@ import Widgets from '@/widgets'
 const app = createApp(App)
 
 function setupPlugins() {
-  app
-    .use(Widgets)
-    .mixin(Mixin)
+  app.use(Widgets).mixin(Mixin)
 }
 
 async function setupApp() {

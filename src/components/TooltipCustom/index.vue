@@ -6,13 +6,10 @@ interface Props {
   placement?: Placement
 }
 
-withDefaults(
-  defineProps<Props>(),
-  {
-    content: '',
-    placement: 'top'
-  }
-)
+withDefaults(defineProps<Props>(), {
+  content: '',
+  placement: 'top'
+})
 </script>
 
 <template>
@@ -23,12 +20,8 @@ withDefaults(
     popper-class="custom-tooltip"
     v-bind="$attrs"
   >
-    <template
-      #content
-    >
-      <div
-        class="tooltip-inner"
-      >
+    <template #content>
+      <div class="tooltip-inner">
         {{ content }}
       </div>
     </template>

@@ -22,7 +22,7 @@ export default defineComponent({
       }
     ])
 
-    const handleCommand = (cmdItem: { click?: () => void; }) => {
+    const handleCommand = (cmdItem: { click?: () => void }) => {
       cmdItem.click?.()
     }
     return {
@@ -37,7 +37,7 @@ export default defineComponent({
 <template>
   <el-dropdown class="navigation-avatar" trigger="hover">
     <div style="outline: none; padding: 0 12px">
-      <img src="@/assets/images/navigation-avatar.webp">
+      <img src="@/assets/images/navigation-avatar.webp" />
     </div>
     <template #dropdown>
       <el-dropdown-menu>

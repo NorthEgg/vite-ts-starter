@@ -29,7 +29,7 @@ export default defineComponent({
     >
       <div class="navbar-header-box">
         <slot></slot>
-        <div style="flex: 1;"></div>
+        <div style="flex: 1"></div>
         <NavigationSideAction />
         <NavigationAvatar />
         <Translations dark />
@@ -39,7 +39,6 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-
 $headerHeight: 48px;
 
 .navigation-navbar-header-container {

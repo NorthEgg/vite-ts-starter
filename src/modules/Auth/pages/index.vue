@@ -3,11 +3,10 @@ import { ElMessage, useLocale } from 'element-plus'
 import { Promotion } from '@element-plus/icons-vue'
 
 import AuthContainerLayout from '@/modules/Auth/components/AuthContainerLayout.vue'
+import { useAuthLogin } from '@/modules/Auth/composables/useAuthLogin'
 
 import Translations from '@/locales/Translations.vue'
-import { useSessionStore } from '@/hooks/useBaseStore'
-
-import Cookie from 'js-cookie'
+import { useSessionStore } from '@/composables/useBaseStore'
 
 export default defineComponent({
   name: 'AuthLoginPage',
@@ -18,20 +17,23 @@ export default defineComponent({
   },
   setup() {
     const { proxy } = useCurrentInstance()
-
     const sessionStore = useSessionStore()
     const route = useRoute()
     const router = useRouter()
-
-    const isLoading = ref(true)
-    const inputErrorEmail = ref('')
-    const inputErrorPassword = ref('')
-    const formData = reactive({
-      email: '',
-      password: ''
-    })
-
     const localeInject = useLocale()
+    const {
+      formData,
+      inputErrorEmail,
+      inputErrorPassword,
+      isLoading,
+      onSubmit,
+      setLoading
+    } = useAuthLogin({
+      sessionStore,
+      localeInject,
+      route,
+      router
+    })
 
     const configAuth = computed(() => {
       return {
@@ -90,7 +92,7 @@ export default defineComponent({
               text: localeInject.t('auth.forgotPassword'),
               click() {
                 ElMessage.info({
-                  message: `😄 ${ localeInject.t('auth.forgotPassword') }`
+                  message: `😄 ${localeInject.t('auth.forgotPassword')}`
                 })
               }
             },
@@ -103,45 +105,6 @@ export default defineComponent({
           }
         ]
       }
-    })
-
-    function setLoading(loading = false) {
-      isLoading.value = loading
-    }
-
-    function onSubmit(refForm: any) {
-      if (isLoading.value) return
-
-      refForm.validate(async (valid: boolean) => {
-        if (!valid) return
-        inputErrorEmail.value = ''
-        inputErrorPassword.value = ''
-
-        setLoading(true)
-        const { error, data, message } = await sessionStore.login(formData)
-        if (error) {
-          inputErrorEmail.value = ' '
-          inputErrorPassword.value = message
-          setLoading(false)
-          return
-        }
-        Cookie.set('token', data.token)
-        router
-          .replace(`/${ route.params.locale || '' }`)
-          .then(() => {
-            ElMessage.success({
-              message: localeInject.t('auth.loginSuccess')
-            })
-          })
-          .catch(() => {})
-      })
-    }
-
-    setLoading(true)
-    onMounted(() => {
-      nextTick(() => {
-        setLoading(false)
-      })
     })
 
     return {

@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { Loading } from '@element-plus/icons-vue'
 
-import { sleep } from '@/utils/request'
+import { sleep } from '@/api/request'
 import { ElMessage, useLocale } from 'element-plus'
-import { useCatalogStore } from '@/hooks/useBaseStore'
+import { useCatalogStore } from '@/composables/useBaseStore'
+import type { ResourceSummary } from '@/modules/Catalog/models/resource'
 
 defineOptions({
   name: 'CatalogItem'
@@ -11,7 +12,7 @@ defineOptions({
 
 const props = defineProps({
   dataset: {
-    type: Object as PropType<import('@/store/useCatalogStore').ResourceSummary>,
+    type: Object as PropType<ResourceSummary>,
     default() {
       return {
         id: '',
@@ -35,6 +36,7 @@ const getActionIcon = computed(() => {
 async function handleToggleStatus() {
   if (isLoading.value) return
 
+  const previousStatus = props.dataset.status
   isLoading.value = true
 
   await sleep(300)
@@ -42,7 +44,7 @@ async function handleToggleStatus() {
 
   isLoading.value = false
 
-  if (props.dataset.status === 'active') {
+  if (previousStatus === 'active') {
     ElMessage.info(localeInject.t('catalog.deactivated'))
   } else {
     ElMessage.success(localeInject.t('catalog.activated'))

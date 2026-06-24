@@ -11,16 +11,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    class="go-back-container"
-  >
-    <router-link
-      :to="`/${$route.params.locale || ''}`"
-    >
-      <IconFont
-        icon="iconarrow_left"
-        class="go-back-icon"
-      />
+  <div class="go-back-container">
+    <router-link :to="`/${$route.params.locale || ''}`">
+      <IconFont icon="iconarrow_left" class="go-back-icon" />
       <h1 class="go-back-title">
         {{ title }}
       </h1>

@@ -23,7 +23,7 @@ for (const relativePath of requiredFiles) {
   const absolutePath = path.join(root, relativePath)
 
   if (!fs.existsSync(absolutePath)) {
-    failures.push(`Missing required file: ${ relativePath }`)
+    failures.push(`Missing required file: ${relativePath}`)
   }
 }
 
@@ -62,7 +62,7 @@ for (const file of filesToCheck) {
   for (const pattern of forbiddenPatterns) {
     if (pattern.test(content)) {
       failures.push(
-        `Forbidden placeholder found in ${ path.relative(root, file) }: ${ pattern }`
+        `Forbidden placeholder found in ${path.relative(root, file)}: ${pattern}`
       )
     }
   }
@@ -71,7 +71,7 @@ for (const file of filesToCheck) {
 if (failures.length) {
   console.error('Template check failed:')
   for (const failure of failures) {
-    console.error(`- ${ failure }`)
+    console.error(`- ${failure}`)
   }
   process.exit(1)
 }

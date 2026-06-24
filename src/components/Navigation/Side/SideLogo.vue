@@ -3,7 +3,7 @@ import { useLocale } from 'element-plus'
 
 export default defineComponent({
   name: 'NavigationSideLogo',
-  setup () {
+  setup() {
     const localeInject = useLocale()
 
     const title = computed(() => localeInject.t('base.systemTitle'))
@@ -16,17 +16,9 @@ export default defineComponent({
 </script>
 
 <template>
-  <div
-    class="side-logo-container"
-  >
-    <router-link
-      :to="`/${$route.params.locale || ''}`"
-    >
-      <img
-        class="side-logo-img"
-        src="@/assets/images/logo.svg"
-        alt="商标"
-      >
+  <div class="side-logo-container">
+    <router-link :to="`/${$route.params.locale || ''}`">
+      <img class="side-logo-img" src="@/assets/images/logo.svg" alt="商标" />
       <h1 class="side-logo-title">
         {{ title }}
       </h1>

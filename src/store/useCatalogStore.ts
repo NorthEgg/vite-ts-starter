@@ -1,17 +1,17 @@
 import { defineStore } from 'pinia'
 
 import { handleApiResponse } from '@/api/core/helpers'
-import type { ApiResponse, ListResult } from '@/api/core/types'
-import { getResourceList, toggleResourceStatus } from '@/modules/Catalog/api'
-
-export interface ResourceSummary {
-  id: string
-  title: string
-  subtitle: string
-  description: string
-  status: 'draft' | 'active'
-  updatedAt: string
-}
+import type { ApiResponse } from '@/api/core/types'
+import {
+  createCatalogResource,
+  getCatalogList,
+  updateCatalogResourceStatus
+} from '@/modules/Catalog/services'
+import type {
+  CreateResourcePayload,
+  ResourceListResult,
+  ResourceSummary
+} from '@/modules/Catalog/models/resource'
 
 export const useCatalogStore = defineStore('catalog', {
   state: () => ({
@@ -20,7 +20,7 @@ export const useCatalogStore = defineStore('catalog', {
   }),
   actions: {
     async loadItems(keyword?: string) {
-      const response = await getResourceList({
+      const response = await getCatalogList({
         keyword
       })
 
@@ -33,16 +33,16 @@ export const useCatalogStore = defineStore('catalog', {
       return response
     },
     async toggleItemStatus(id: string) {
-      const response = await toggleResourceStatus({
+      const response = await updateCatalogResourceStatus({
         id
       })
 
       await handleApiResponse(response, {
-        onSuccess: () => {
+        onSuccess: (data) => {
           const target = this.items.find((item) => item.id === id)
 
           if (target) {
-            target.status = target.status === 'active' ? 'draft' : 'active'
+            target.status = data.status
           }
         }
       })
@@ -52,30 +52,18 @@ export const useCatalogStore = defineStore('catalog', {
     seedItems(items: ResourceSummary[]) {
       this.items = items
     },
-    async createItem(payload: {
-      title: string
-      subtitle: string
-      description: string
-    }) {
-      const createdItem: ResourceSummary = {
-        id: `resource-${ Date.now() }`,
-        title: payload.title,
-        subtitle: payload.subtitle,
-        description: payload.description,
-        status: 'draft',
-        updatedAt: new Date().toISOString().slice(0, 10)
-      }
+    async createItem(payload: CreateResourcePayload) {
+      const response = await createCatalogResource(payload)
 
-      this.items = [createdItem, ...this.items]
+      await handleApiResponse(response, {
+        onSuccess: (createdItem) => {
+          this.items = [createdItem, ...this.items]
+        }
+      })
 
-      return {
-        data: createdItem,
-        error: null,
-        message: 'Created successfully',
-        success: true
-      }
+      return response
     }
   }
 })
 
-export type CatalogListResponse = ApiResponse<ListResult<ResourceSummary>>
+export type CatalogListResponse = ApiResponse<ResourceListResult>

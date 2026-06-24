@@ -1,6 +1,7 @@
 <script lang="ts">
 import { useLocale } from 'element-plus'
-import { useCatalogStore } from '@/hooks/useBaseStore'
+import { useCatalogStore } from '@/composables/useBaseStore'
+import { useCatalogList } from '@/modules/Catalog/composables/useCatalogList'
 
 import NavigationSideLogo from '@/components/Navigation/Side/SideLogo.vue'
 import NavigationNavBar from '@/components/Navigation/NavBar.vue'
@@ -22,51 +23,17 @@ export default defineComponent({
     const { proxy } = useCurrentInstance()
     const catalogStore = useCatalogStore()
     const localeInject = useLocale()
-
-    function handleCreateResource() {
-      const formData = reactive({
-        title: '',
-        subtitle: '',
-        description: ''
-      })
-      proxy.$ModalDialog({
-        title: localeInject.t('catalog.create'),
-        top: '10vh',
-        width: '50vw',
-        showClose: true,
-        closeOnClickModal: false,
-        closeOnPressEscape: false,
-        renderComponent: {
-          data: formData,
-          component: ResourceForm
-        },
-        async onConfirm(instance, context) {
-          const isValid = await instance.validateRules()
-          if (!isValid) return Promise.reject(new Error('error'))
-
-          context.fullLoading = true
-          const { error } = await catalogStore.createItem(formData)
-
-          context.fullLoading = false
-
-          if (error) {
-            return Promise.reject(new Error('error'))
-          }
-
-          await catalogStore.loadItems()
-        }
-      })
-    }
-
-    const loadingContent = ref(true)
-    const handleSelectSearch = async (keyword?: string) => {
-      loadingContent.value = true
-      await catalogStore.loadItems(keyword)
-      loadingContent.value = false
-    }
-    handleSelectSearch()
-
-    const testI18nDate = ref()
+    const {
+      handleCreateResource,
+      handleSelectSearch,
+      loadingContent,
+      testI18nDate
+    } = useCatalogList({
+      catalogStore,
+      localeInject,
+      openDialog: proxy.$ModalDialog,
+      resourceFormComponent: ResourceForm
+    })
 
     return {
       localeInject,

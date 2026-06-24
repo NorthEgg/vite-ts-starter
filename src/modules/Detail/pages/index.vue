@@ -1,23 +1,13 @@
 <script lang="ts">
-import { storeToRefs } from 'pinia'
-import { useDetailStore } from '@/hooks/useBaseStore'
+import { useDetailStore } from '@/composables/useBaseStore'
+import { useDetailOverview } from '@/modules/Detail/composables/useDetailOverview'
 
 export default defineComponent({
   name: 'DetailOverviewPage',
   setup() {
     const detailStore = useDetailStore()
-    const route = useRoute()
-    const { panel: overviewData } = storeToRefs(detailStore)
-    const currentResourceId = computed(() =>
-      String(route.params.resourceId || 'resource-001')
-    )
+    const { overviewData } = useDetailOverview(detailStore)
 
-    async function init() {
-      const { error } = await detailStore.loadDetail(currentResourceId.value)
-      void error
-    }
-
-    init()
     return {
       overviewData
     }

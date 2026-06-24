@@ -5,17 +5,10 @@ export default {
     'stylelint-config-recommended-vue',
     'stylelint-config-recommended-vue/scss'
   ],
-  plugins: ['@stylistic/stylelint-plugin'],
   ignoreFiles: ['**/*.js', '**/*.ts'],
   defaultSeverity: 'error',
   rules: {
     'unit-disallowed-list': ['rem', 'pt'],
-    '@stylistic/indentation': [
-      2,
-      {
-        baseIndentLevel: 0
-      }
-    ],
     'no-empty-source': null,
     'block-no-empty': null,
     'declaration-block-no-duplicate-custom-properties': null,
@@ -35,25 +28,10 @@ export default {
     ],
     'property-no-unknown': null,
     'scss/at-rule-no-unknown': null,
-    'at-rule-empty-line-before': [
-      'always',
-      {
-        except: ['first-nested', 'blockless-after-same-name-blockless']
-      }
-    ],
-    'custom-property-empty-line-before': [
-      'always',
-      {
-        except: ['after-custom-property', 'first-nested']
-      }
-    ],
-    'declaration-empty-line-before': [
-      'always',
-      {
-        except: ['after-declaration', 'first-nested']
-      }
-    ],
-    'rule-empty-line-before': ['always-multi-line'],
+    'at-rule-empty-line-before': null,
+    'custom-property-empty-line-before': null,
+    'declaration-empty-line-before': null,
+    'rule-empty-line-before': null,
     'property-no-vendor-prefix': [
       true,
       {

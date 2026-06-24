@@ -2,23 +2,18 @@ import Cookie from 'js-cookie'
 import { defineStore } from 'pinia'
 
 import { handleApiResponse } from '@/api/core/helpers'
-import type { AuthUser } from '@/api/core/types'
 import {
-  changeLanguagePreference,
-  getCurrentUser,
-  signIn,
-  signOut
-} from '@/modules/Auth/api'
-
-type LoginPayload = {
-  email: string
-  password: string
-}
+  getCurrentSession,
+  loginSession,
+  logoutSession,
+  updateLanguagePreference
+} from '@/modules/Auth/services'
+import type { AuthUserModel, LoginPayload } from '@/modules/Auth/models/session'
 
 export const useSessionStore = defineStore('session', {
   state: () => ({
     locale: 'en',
-    currentUser: null as AuthUser | null
+    currentUser: null as AuthUserModel | null
   }),
   getters: {
     isAuthenticated: (state) => Boolean(state.currentUser)
@@ -28,20 +23,18 @@ export const useSessionStore = defineStore('session', {
       this.locale = locale
     },
     async changeLanguage(locale: string) {
-      const response = await changeLanguagePreference({
-        locale
-      })
+      const response = await updateLanguagePreference(locale)
 
       await handleApiResponse(response, {
-        onSuccess: () => {
-          this.locale = locale
+        onSuccess: (data) => {
+          this.locale = data.locale
         }
       })
 
       return response
     },
     async login(payload: LoginPayload) {
-      const response = await signIn(payload)
+      const response = await loginSession(payload)
 
       await handleApiResponse(response, {
         onSuccess: (data) => {
@@ -55,7 +48,7 @@ export const useSessionStore = defineStore('session', {
       return response
     },
     async logout() {
-      const response = await signOut()
+      const response = await logoutSession()
 
       await handleApiResponse(response, {
         onSuccess: () => {
@@ -68,7 +61,7 @@ export const useSessionStore = defineStore('session', {
       return response
     },
     async loadCurrentUser() {
-      const response = await getCurrentUser()
+      const response = await getCurrentSession()
 
       await handleApiResponse(response, {
         onSuccess: (data) => {

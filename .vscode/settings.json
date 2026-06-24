@@ -3,22 +3,19 @@
   "editor.formatOnSave": false,
 
   // Auto fix
-  
+
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never",
-		"source.fixAll.stylelint": "explicit"
+    "source.fixAll.stylelint": "explicit"
   },
   "eslint.run": "onType",
   "eslint.format.enable": true,
-	"stylelint.validate": [
-    "vue",
-		"scss"
-  ],
+  "stylelint.validate": ["vue", "scss"],
   "css.validate": false,
-	"less.validate": false,
+  "less.validate": false,
 
-	"files.autoSaveDelay": 500,
+  "files.autoSaveDelay": 500,
 
   // Enable eslint for all supported languages
   "eslint.validate": [

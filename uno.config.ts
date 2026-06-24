@@ -8,15 +8,8 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  presets: [
-    presetWind3(),
-    presetAttributify(),
-    presetIcons()
-  ],
-  transformers: [
-    transformerDirectives(),
-    transformerAttributifyJsx()
-  ],
+  presets: [presetWind3(), presetAttributify(), presetIcons()],
+  transformers: [transformerDirectives(), transformerAttributifyJsx()],
   theme: {
     breakpoints: {
       sm: '600px'
@@ -31,7 +24,8 @@ export default defineConfig({
   },
   rules: [
     [
-      'navbar-shadow', {
+      'navbar-shadow',
+      {
         'box-shadow': '0 1px 4px rgb(0 21 41 / 8%)'
       }
     ],
@@ -39,7 +33,7 @@ export default defineConfig({
       /^bgimage-(\w+)-(.+)-(svg|png|jpg|gif)$/,
       ([, dir, fname, fext]) => {
         return {
-          'background-image': `url(@/assets/${ dir }/${ fname }.${ fext })`
+          'background-image': `url(@/assets/${dir}/${fname}.${fext})`
         }
       }
     ]

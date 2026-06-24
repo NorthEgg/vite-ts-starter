@@ -54,3 +54,19 @@ export async function handleApiResponse<TData>(
 
   return response
 }
+
+export function mapApiResponse<TSource, TTarget>(
+  response: ApiResponse<TSource>,
+  mapper: (data: TSource) => TTarget
+): ApiResponse<TTarget> {
+  if (!response.success || response.error) {
+    return {
+      success: false,
+      data: null as unknown as TTarget,
+      message: response.message,
+      error: response.error
+    }
+  }
+
+  return createSuccessResponse(mapper(response.data), response.message)
+}

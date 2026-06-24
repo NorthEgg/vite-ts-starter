@@ -30,7 +30,7 @@ function getPackageName(id: string) {
 
 function matchesPackage(packageName: string | undefined, target: string) {
   if (!packageName) return false
-  return packageName === target || packageName.startsWith(`${ target }/`)
+  return packageName === target || packageName.startsWith(`${target}/`)
 }
 
 function getManualChunk(id: string) {
@@ -47,7 +47,7 @@ function getManualChunk(id: string) {
   return 'vendor-misc'
 }
 
-function getAssetFileName(assetInfo: { name?: string; }) {
+function getAssetFileName(assetInfo: { name?: string }) {
   const assetName = assetInfo.name ?? ''
   const ext = path.extname(assetName).slice(1)
 
@@ -137,7 +137,7 @@ export default defineConfig(({ mode }) => {
           }
         ],
         resolvers: mode === 'development' ? [] : [ElementPlusResolver()],
-        dirs: ['./src/hooks'],
+        dirs: ['./src/composables'],
         dts: './auto-imports.d.ts',
         eslintrc: {
           enabled: true

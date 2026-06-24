@@ -24,7 +24,7 @@ export default defineComponent({
     }
   },
   emits: ['click'],
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const getClassName = computed(() => {
       const className: string[] = []
       if (props.verticalCenter) {
@@ -70,33 +70,18 @@ export default defineComponent({
     :class="getClassName"
     @click="handleClick()"
   >
-    <filter
-      id="drop-shadow"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <feGaussianBlur
-        in="SourceAlpha"
-        stdDeviation="2"
-      />
-      <feOffset
-        dx="1"
-        dy="1"
-        result="offsetblur"
-      />
+    <filter id="drop-shadow" xmlns="http://www.w3.org/2000/svg">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" />
+      <feOffset dx="1" dy="1" result="offsetblur" />
       <feComponentTransfer>
-        <feFuncA
-          type="linear"
-          slope="0.2"
-        />
+        <feFuncA type="linear" slope="0.2" />
       </feComponentTransfer>
       <feMerge>
         <feMergeNode />
         <feMergeNode in="SourceGraphic" />
       </feMerge>
     </filter>
-    <g
-      v-bind="getAttrs()"
-    >
+    <g v-bind="getAttrs()">
       <use :xlink:href="'#' + icon" />
     </g>
   </svg>

@@ -10,6 +10,4 @@ export default defineComponent({
   </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

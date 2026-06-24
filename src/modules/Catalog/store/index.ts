@@ -1,2 +1,7 @@
-export type { ResourceSummary as CatalogItemSummary } from '@/store/useCatalogStore'
+export type {
+  CreateResourcePayload,
+  ResourceListResult,
+  ResourceSummary as CatalogItemSummary,
+  ResourceStatus
+} from '@/modules/Catalog/models/resource'
 export { useCatalogStore as default } from '@/store/useCatalogStore'

@@ -18,7 +18,4 @@ const validatorMaxCountFunction = (errorMsg = '最多三个', count = 3) => {
   }
 }
 
-export {
-  validatorPositiveInteger,
-  validatorMaxCountFunction
-}
+export { validatorPositiveInteger, validatorMaxCountFunction }

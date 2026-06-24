@@ -1,7 +1,6 @@
 import globals from 'globals'
 import { defineConfig } from 'eslint/config'
 
-
 import * as parserTypeScript from '@typescript-eslint/parser'
 import pluginTypeScript from '@typescript-eslint/eslint-plugin'
 
@@ -9,13 +8,11 @@ import * as parserVue from 'vue-eslint-parser'
 import pluginVue from 'eslint-plugin-vue'
 import js from '@eslint/js'
 
-import stylistic from '@stylistic/eslint-plugin'
-
 function renameRules(rules, map) {
   return Object.fromEntries(
     Object.entries(rules).map(([key, value]) => {
       for (const [from, to] of Object.entries(map)) {
-        if (key.startsWith(`${ from }/`))
+        if (key.startsWith(`${from}/`))
           return [to + key.slice(from.length), value]
       }
       return [key, value]
@@ -33,52 +30,6 @@ export default defineConfig([
       'coverage',
       'src/assets/**'
     ]
-  },
-  {
-    plugins: {
-      '@stylistic': stylistic
-    },
-    rules: {
-      '@stylistic/semi': ['error', 'never'],
-      '@stylistic/no-extra-semi': 'error',
-      '@stylistic/template-curly-spacing': ['error', 'always'],
-      '@stylistic/space-before-blocks': ['error', 'always'],
-      '@stylistic/indent': ['error', 2],
-      '@stylistic/object-curly-newline': ['error', {
-        'ObjectExpression': {
-          // 如果对象有属性，则要求换行。空对象则忽略
-          'minProperties': 1,
-          // 保持一致性
-          'consistent': true
-        }
-      }],
-      '@stylistic/object-property-newline': 'error',
-      '@stylistic/key-spacing': ['error', {
-        'beforeColon': false,
-        'afterColon': true
-      }],
-      '@stylistic/type-annotation-spacing': ['error', {
-        'before': true,
-        'after': true,
-        'overrides': {
-          'colon': {
-            'before': false,
-            'after': true
-          }
-        }
-      }],
-      '@stylistic/no-trailing-spaces': ['error'],
-      '@stylistic/member-delimiter-style': ['error', {
-        multiline: {
-          delimiter: 'none',
-          requireLast: false
-        },
-        singleline: {
-          delimiter: 'semi',
-          requireLast: true
-        }
-      }]
-    }
   },
   {
     ...js.configs.recommended,
@@ -102,27 +53,32 @@ export default defineConfig([
       sourceType: 'module'
     },
     rules: {
-      'accessor-pairs': ['error', {
-        enforceForClassMembers: true,
-        setWithoutGet: true
-      }],
+      'accessor-pairs': [
+        'error',
+        {
+          enforceForClassMembers: true,
+          setWithoutGet: true
+        }
+      ],
       'array-callback-return': 'error',
       'block-scoped-var': 'error',
-      'comma-spacing': ['error', {
-        after: true,
-        before: false
-      }],
       'constructor-super': 'error',
       'default-case-last': 'error',
-      'dot-notation': ['error', {
-        allowKeywords: true
-      }],
-      'eqeqeq': ['error', 'always'],
-      'new-cap': ['error', {
-        capIsNew: false,
-        newIsCap: true,
-        properties: true
-      }],
+      'dot-notation': [
+        'error',
+        {
+          allowKeywords: true
+        }
+      ],
+      eqeqeq: ['error', 'always'],
+      'new-cap': [
+        'error',
+        {
+          capIsNew: false,
+          newIsCap: true,
+          properties: true
+        }
+      ],
       'no-alert': 'error',
       'no-array-constructor': 'error',
       'no-async-promise-executor': 'error',
@@ -131,9 +87,12 @@ export default defineConfig([
       'no-class-assign': 'error',
       'no-compare-neg-zero': 'error',
       'no-cond-assign': ['error', 'always'],
-      'no-console': ['error', {
-        allow: ['log', 'dir', 'warn', 'error']
-      }],
+      'no-console': [
+        'error',
+        {
+          allow: ['log', 'dir', 'warn', 'error']
+        }
+      ],
       'no-const-assign': 'error',
       'no-control-regex': 'error',
       'no-debugger': 'error',
@@ -142,9 +101,12 @@ export default defineConfig([
       'no-dupe-class-members': 'error',
       'no-dupe-keys': 'error',
       'no-duplicate-case': 'error',
-      'no-empty': ['error', {
-        allowEmptyCatch: true
-      }],
+      'no-empty': [
+        'error',
+        {
+          allowEmptyCatch: true
+        }
+      ],
       'no-empty-character-class': 'error',
       'no-empty-pattern': 'error',
       'no-eval': 'error',
@@ -160,10 +122,13 @@ export default defineConfig([
       'no-invalid-regexp': 'error',
       'no-irregular-whitespace': 'error',
       'no-iterator': 'error',
-      'no-labels': ['error', {
-        allowLoop: false,
-        allowSwitch: false
-      }],
+      'no-labels': [
+        'error',
+        {
+          allowLoop: false,
+          allowSwitch: false
+        }
+      ],
       'no-lone-blocks': 'error',
       'no-loss-of-precision': 'error',
       'no-misleading-character-class': 'error',
@@ -177,9 +142,12 @@ export default defineConfig([
       'no-octal-escape': 'error',
       'no-proto': 'error',
       'no-prototype-builtins': 'error',
-      'no-redeclare': ['error', {
-        builtinGlobals: false
-      }],
+      'no-redeclare': [
+        'error',
+        {
+          builtinGlobals: false
+        }
+      ],
       'no-regex-spaces': 'error',
       'no-restricted-globals': [
         'error',
@@ -195,7 +163,8 @@ export default defineConfig([
       'no-restricted-properties': [
         'error',
         {
-          message: 'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.',
+          message:
+            'Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.',
           property: '__proto__'
         },
         {
@@ -223,9 +192,12 @@ export default defineConfig([
         'TSEnumDeclaration[const=true]',
         'TSExportAssignment'
       ],
-      'no-self-assign': ['error', {
-        props: true
-      }],
+      'no-self-assign': [
+        'error',
+        {
+          props: true
+        }
+      ],
       'no-self-compare': 'error',
       'no-sequences': 'error',
       'no-shadow-restricted-names': 'error',
@@ -237,29 +209,41 @@ export default defineConfig([
       'no-undef-init': 'error',
       'no-unexpected-multiline': 'error',
       'no-unmodified-loop-condition': 'error',
-      'no-unneeded-ternary': ['error', {
-        defaultAssignment: false
-      }],
+      'no-unneeded-ternary': [
+        'error',
+        {
+          defaultAssignment: false
+        }
+      ],
       'no-unreachable': 'error',
       'no-unreachable-loop': 'error',
       'no-unsafe-finally': 'error',
       'no-unsafe-negation': 'error',
-      'no-unused-expressions': ['error', {
-        allowShortCircuit: true,
-        allowTaggedTemplates: true,
-        allowTernary: true
-      }],
-      'no-unused-vars': ['error', {
-        args: 'none',
-        caughtErrors: 'none',
-        ignoreRestSiblings: true,
-        vars: 'all'
-      }],
-      'no-use-before-define': ['error', {
-        classes: false,
-        functions: false,
-        variables: false
-      }],
+      'no-unused-expressions': [
+        'error',
+        {
+          allowShortCircuit: true,
+          allowTaggedTemplates: true,
+          allowTernary: true
+        }
+      ],
+      'no-unused-vars': [
+        'error',
+        {
+          args: 'none',
+          caughtErrors: 'none',
+          ignoreRestSiblings: true,
+          vars: 'all'
+        }
+      ],
+      'no-use-before-define': [
+        'error',
+        {
+          classes: false,
+          functions: false,
+          variables: false
+        }
+      ],
       'no-useless-backreference': 'error',
       'no-useless-call': 'error',
       'no-useless-catch': 'error',
@@ -269,8 +253,6 @@ export default defineConfig([
       'no-useless-return': 'error',
       'no-var': 'error',
       'no-with': 'error',
-      'space-infix-ops': 'error',
-      'object-curly-spacing': ['error', 'always'],
       'object-shorthand': [
         'error',
         'always',
@@ -279,9 +261,12 @@ export default defineConfig([
           ignoreConstructors: false
         }
       ],
-      'one-var': ['error', {
-        initialized: 'never'
-      }],
+      'one-var': [
+        'error',
+        {
+          initialized: 'never'
+        }
+      ],
       'prefer-arrow-callback': [
         'error',
         {
@@ -298,9 +283,12 @@ export default defineConfig([
       ],
       'prefer-exponentiation-operator': 'error',
       'prefer-promise-reject-errors': 'error',
-      'prefer-regex-literals': ['error', {
-        disallowRedundantWrapping: true
-      }],
+      'prefer-regex-literals': [
+        'error',
+        {
+          disallowRedundantWrapping: true
+        }
+      ],
       'prefer-rest-params': 'error',
       'prefer-spread': 'error',
       'prefer-template': 'error',
@@ -316,26 +304,15 @@ export default defineConfig([
       ],
 
       // https://cn.eslint.org/docs/rules/no-trailing-spaces
-      'no-trailing-spaces': 2, // 禁用行尾空白
-      'comma-style': ['error', 'last'],
-      'comma-dangle': ['error', 'never'],
-      'no-multi-spaces': 1,
-      'no-multiple-empty-lines': [
-        2,
-        {
-          max: 2
-        }
-      ],
-      // https://cn.eslint.org/docs/rules/eol-last
-      'eol-last': 2,
-      'quotes': [
-        'error',
-        'single',
-        {
-          avoidEscape: true,
-          allowTemplateLiterals: true
-        }
-      ]
+      'no-trailing-spaces': 'off',
+      'comma-style': 'off',
+      'comma-dangle': 'off',
+      'no-multi-spaces': 'off',
+      'no-multiple-empty-lines': 'off',
+      'eol-last': 'off',
+      quotes: 'off',
+      'object-curly-spacing': 'off',
+      'space-infix-ops': 'off'
     }
   },
   {
@@ -351,9 +328,7 @@ export default defineConfig([
       }
     },
     settings: {
-      'import/core-modules': [
-        'uno.css'
-      ]
+      'import/core-modules': ['uno.css']
     },
     plugins: {
       '@typescript-eslint': pluginTypeScript
@@ -371,10 +346,13 @@ export default defineConfig([
       '@typescript-eslint/no-unused-vars': 1,
       '@typescript-eslint/no-empty-function': 0,
       '@typescript-eslint/no-non-null-assertion': 0,
-      '@typescript-eslint/consistent-type-imports': ['error', {
-        fixStyle: 'separate-type-imports',
-        disallowTypeAnnotations: false
-      }]
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          fixStyle: 'separate-type-imports',
+          disallowTypeAnnotations: false
+        }
+      ]
     }
   },
   {
@@ -414,25 +392,24 @@ export default defineConfig([
       'vue/multi-word-component-names': 0,
       'vue/singleline-html-element-content-newline': 'off',
       'vue/require-default-prop': 'off',
-      'vue/html-closing-bracket-spacing': 'error',
+      'vue/html-closing-bracket-spacing': 'off',
       'vue/no-unused-components': 1,
       'vue/no-mutating-props': 0,
-      'vue/v-on-event-hyphenation': ['warn', 'always', {
-        autofix: true
-      }],
-      'vue/block-order': ['error', {
-        'order': ['script', 'template', 'style']
-      }],
+      'vue/v-on-event-hyphenation': [
+        'warn',
+        'always',
+        {
+          autofix: true
+        }
+      ],
+      'vue/block-order': [
+        'error',
+        {
+          order: ['script', 'template', 'style']
+        }
+      ],
       'vue/padding-line-between-blocks': ['error', 'always'],
-      'vue/html-self-closing': ['error', {
-        html: {
-          void: 'never',
-          normal: 'never',
-          component: 'always'
-        },
-        svg: 'always',
-        math: 'always'
-      }]
+      'vue/html-self-closing': 'off'
     }
   }
 ])

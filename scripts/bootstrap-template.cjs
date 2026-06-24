@@ -67,13 +67,13 @@ function normalizeRepoUrl(rawRepo) {
     .replace(/\/$/, '')
 
   if (/^git@github\.com:/i.test(repoValue)) {
-    return `https://github.com/${ repoValue.replace(/^git@github\.com:/i, '') }`
+    return `https://github.com/${repoValue.replace(/^git@github\.com:/i, '')}`
       .replace(/\.git$/, '')
       .replace(/\/$/, '')
   }
 
   if (/^ssh:\/\/git@github\.com\//i.test(repoValue)) {
-    return `https://github.com/${ repoValue.replace(/^ssh:\/\/git@github\.com\//i, '') }`
+    return `https://github.com/${repoValue.replace(/^ssh:\/\/git@github\.com\//i, '')}`
       .replace(/\.git$/, '')
       .replace(/\/$/, '')
   }
@@ -82,7 +82,7 @@ function normalizeRepoUrl(rawRepo) {
 }
 
 function toGitRepoUrl(repoUrl) {
-  return repoUrl.startsWith('git+') ? repoUrl : `git+${ repoUrl }`
+  return repoUrl.startsWith('git+') ? repoUrl : `git+${repoUrl}`
 }
 
 function updatePackageJson(config) {
@@ -98,12 +98,12 @@ function updatePackageJson(config) {
     url: toGitRepoUrl(config.repoUrl)
   }
   packageJson.bugs = {
-    url: `${ config.repoUrl }/issues`
+    url: `${config.repoUrl}/issues`
   }
 
   fs.writeFileSync(
     packagePath,
-    `${ JSON.stringify(packageJson, null, 2) }\n`,
+    `${JSON.stringify(packageJson, null, 2)}\n`,
     'utf8'
   )
 }
@@ -112,7 +112,7 @@ function replaceOrThrow(relativePath, pattern, replacement, label) {
   const content = readTextFile(relativePath)
 
   if (!pattern.test(content)) {
-    throw new Error(`Unable to update ${ label } in ${ relativePath }`)
+    throw new Error(`Unable to update ${label} in ${relativePath}`)
   }
 
   writeTextFile(relativePath, content.replace(pattern, replacement))
@@ -146,38 +146,38 @@ function main() {
   replaceOrThrow(
     'src/locales/data/index.ts',
     /export const systemTitle = '.*'/,
-    `export const systemTitle = '${ escapeSingleQuotes(config.title) }'`,
+    `export const systemTitle = '${escapeSingleQuotes(config.title)}'`,
     'system title constant'
   )
 
   replaceOrThrow(
     'src/locales/lang/zh-hans.ts',
     /systemTitle: '.*'/,
-    `systemTitle: '${ escapeSingleQuotes(config.zhTitle) }'`,
+    `systemTitle: '${escapeSingleQuotes(config.zhTitle)}'`,
     'Chinese system title'
   )
 
   replaceOrThrow(
     'src/components/FooterCustom/index.vue',
     /const link = ref\('.*'\)/,
-    `const link = ref('${ escapeSingleQuotes(config.repoUrl) }')`,
+    `const link = ref('${escapeSingleQuotes(config.repoUrl)}')`,
     'footer repository link'
   )
 
   replaceOrThrow(
     'src/components/FooterCustom/octocat.vue',
     /const link = ref\('.*'\)/,
-    `const link = ref('${ escapeSingleQuotes(config.repoUrl) }')`,
+    `const link = ref('${escapeSingleQuotes(config.repoUrl)}')`,
     'octocat repository link'
   )
 
-  replaceOrThrow('README.md', /^# .+$/m, `# ${ config.title }`, 'README title')
+  replaceOrThrow('README.md', /^# .+$/m, `# ${config.title}`, 'README title')
 
   console.log('Template bootstrap completed.')
-  console.log(`- name: ${ config.name }`)
-  console.log(`- title: ${ config.title }`)
-  console.log(`- zh-title: ${ config.zhTitle }`)
-  console.log(`- repo: ${ config.repoUrl }`)
+  console.log(`- name: ${config.name}`)
+  console.log(`- title: ${config.title}`)
+  console.log(`- zh-title: ${config.zhTitle}`)
+  console.log(`- repo: ${config.repoUrl}`)
 }
 
 main()

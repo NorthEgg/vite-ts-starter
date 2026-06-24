@@ -200,7 +200,6 @@ export default defineComponent({
   }
 
   &:deep() {
-
     .el-input__prefix-inner {
       margin-left: -4px;
       align-items: center;
@@ -235,7 +234,6 @@ export default defineComponent({
       margin-right: 10px;
 
       &:deep() {
-
         & > * {
           width: inherit;
           font-size: 32px;
@@ -267,7 +265,6 @@ export default defineComponent({
 }
 
 @screen lt-sm {
-
   .auth-container-layout {
     width: 95%;
     margin: auto;

@@ -2,7 +2,7 @@
 import { localesMapping } from '@/locales'
 
 import LogoIcon from '@/locales/LogoIcon.vue'
-import { useSessionStore } from '@/hooks/useBaseStore'
+import { useSessionStore } from '@/composables/useBaseStore'
 
 export default defineComponent({
   name: 'TranslationsBox',

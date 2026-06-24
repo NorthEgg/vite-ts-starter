@@ -9,7 +9,7 @@ import {
 } from '@/utils/type'
 
 // camelize('hello_world') -> 'helloWorld'
-export function camelize (string: string) {
+export function camelize(string: string) {
   if (isNumberical(string)) {
     return string
   }
@@ -22,13 +22,15 @@ export function camelize (string: string) {
 }
 
 // pascalize('hello_world') -> 'HelloWorld'
-export function pascalize (string: any) {
+export function pascalize(string: any) {
   const camelized = camelize(string)
   return camelized.substr(0, 1).toUpperCase() + camelized.substr(1)
 }
 
-function seperateWords (string: string, options?: { separator?: any
-  split?: any }) {
+function seperateWords(
+  string: string,
+  options?: { separator?: any; split?: any }
+) {
   options = options || {}
   const separator = options.separator || '_'
   const split = options.split || /(?=[A-Z])/
@@ -41,19 +43,21 @@ function seperateWords (string: string, options?: { separator?: any
  * decamelize('HelloWorld') -> 'hello_world'
  * decamelize('helloWorld', { separator: '-' }) -> 'hello-world'
  */
-export function decamelize (string: any, options?: any) {
+export function decamelize(string: any, options?: any) {
   return seperateWords(string, options).toLowerCase()
 }
 
 function processor(
-  convert: { (string: any): any
+  convert: {
+    (string: any): any
     (string: any, options: any): any
-    (string: any): any },
-  options: { process: any; }
+    (string: any): any
+  },
+  options: { process: any }
 ) {
   const callback = options && 'process' in options ? options.process : options
 
-  if (typeof (callback) !== 'function') {
+  if (typeof callback !== 'function') {
     return convert
   }
 
@@ -63,10 +67,17 @@ function processor(
 }
 
 function processKeys(
-  convert: (arg0: string, arg1: any) => string | number, obj: any[],
+  convert: (arg0: string, arg1: any) => string | number,
+  obj: any[],
   options?: undefined
 ): any {
-  if (!isObject(obj) || isDate(obj) || isRegExp(obj) || isBoolean(obj) || isFunction(obj)) {
+  if (
+    !isObject(obj) ||
+    isDate(obj) ||
+    isRegExp(obj) ||
+    isBoolean(obj) ||
+    isFunction(obj)
+  ) {
     return obj
   }
 
@@ -97,7 +108,7 @@ function processKeys(
  * camelizeKeys([{ attr_one: 'foo' }, { attr_one: 'bar' }]) ->
  * [{ attrOne: 'foo' }, { attrOne: 'bar' }]
  */
-export function camelizeKeys (object: any, options?: any) {
+export function camelizeKeys(object: any, options?: any) {
   return processKeys(processor(camelize, options), object)
 }
 
@@ -105,7 +116,7 @@ export function camelizeKeys (object: any, options?: any) {
  * decamelizeKeys({ attrOne: 'foo', attrTwo: 'bar' }) ->
  * { attr_one: 'foo', attr_two: 'bar' }
  */
-export function decamelizeKeys (object: any, options?: any) {
+export function decamelizeKeys(object: any, options?: any) {
   return processKeys(processor(decamelize, options), object, options)
 }
 
@@ -113,7 +124,7 @@ export function decamelizeKeys (object: any, options?: any) {
  * pascalizeKeys({ attr_one: 'foo', attr_two: 'bar' }) ->
  * { AttrOne: 'foo', AttrTwo: 'bar' }
  */
-export function pascalizeKeys (object: any, options: any) {
+export function pascalizeKeys(object: any, options: any) {
   return processKeys(processor(pascalize, options), object)
 }
 
@@ -121,6 +132,6 @@ export function pascalizeKeys (object: any, options: any) {
  * pascalizeKeys({ AttrOne: 'foo', AttrTwo: 'bar' }) ->
  * { attr_one: 'foo', attr_two: 'bar' }
  */
-export function depascalizeKeys (this: any, ...args: any) {
+export function depascalizeKeys(this: any, ...args: any) {
   return decamelizeKeys.apply(this, args)
 }

@@ -1,8 +1,10 @@
 import Modal from '@/widgets/ModalDialog/modal.vue'
 
-const extractData = (options: { renderComponent: any; }) => {
-  const extractSlotComponents = (renderComponent: { component?: any
-    data?: any }) => {
+const extractData = (options: { renderComponent: any }) => {
+  const extractSlotComponents = (renderComponent: {
+    component?: any
+    data?: any
+  }) => {
     const component: any = {}
     let componantData = {}
 
@@ -18,7 +20,9 @@ const extractData = (options: { renderComponent: any; }) => {
     }
   }
 
-  const { component, componantData } = extractSlotComponents(options.renderComponent)
+  const { component, componantData } = extractSlotComponents(
+    options.renderComponent
+  )
   return {
     component,
     componantData
@@ -26,21 +30,15 @@ const extractData = (options: { renderComponent: any; }) => {
 }
 
 export default {
-  install (app: App<any>) {
+  install(app: App<any>) {
     app.config.globalProperties.$ModalDialog = function (options: any) {
-      const {
-        component,
-        componantData
-      } = extractData(options)
+      const { component, componantData } = extractData(options)
 
-      let vm: VNode | null = createVNode(
-        Modal,
-        {
-          ...options,
-          componantData,
-          components: component
-        }
-      )
+      let vm: VNode | null = createVNode(Modal, {
+        ...options,
+        componantData,
+        components: component
+      })
       for (const name in component) {
         app.component(name, component[name])
       }
@@ -68,7 +66,7 @@ export default {
         if (!vm) return
 
         if (vm.component && vm.component.proxy) {
-          (
+          ;(
             vm.component.proxy as ComponentPublicInstance<{
               visible: boolean
             }>

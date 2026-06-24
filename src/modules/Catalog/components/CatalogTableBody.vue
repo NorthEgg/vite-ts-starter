@@ -1,7 +1,7 @@
 <script lang="ts">
 import CatalogItem from '@/modules/Catalog/components/CatalogItem.vue'
 import { storeToRefs } from 'pinia'
-import { useCatalogStore } from '@/hooks/useBaseStore'
+import { useCatalogStore } from '@/composables/useBaseStore'
 
 export default defineComponent({
   name: 'CatalogTableBody',
@@ -27,7 +27,7 @@ export default defineComponent({
         :dataset="resourceItem"
       />
       <div v-if="!resourceList.length" class="catalog-empty-box">
-        <img src="@/assets/images/catalog-empty.svg" alt="Empty">
+        <img src="@/assets/images/catalog-empty.svg" alt="Empty" />
         <span>{{ _t('base.empty') }}</span>
       </div>
     </div>

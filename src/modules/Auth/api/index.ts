@@ -1,26 +1,20 @@
 import { createSuccessResponse } from '@/api/core/helpers'
-import type { ApiResponse, AuthUser } from '@/api/core/types'
+import type { ApiResponse } from '@/api/core/types'
+import type { LoginPayload } from '@/modules/Auth/models/session'
+import type {
+  LocalePreferenceDTO,
+  SessionDTO
+} from '@/modules/Auth/mappers/session'
 
-interface SessionPayload {
-  locale: string
-  token: string
-  user: AuthUser
-}
-
-type LocalePreferencePayload = {
-  locale: string
-}
-
-const starterUser: AuthUser = {
+const starterUser = {
   id: 'starter-user',
   name: 'Starter User',
   email: 'starter@example.com'
 }
 
-export async function signIn(payload: {
-  email: string
-  password: string
-}): Promise<ApiResponse<SessionPayload>> {
+export async function signIn(
+  payload: LoginPayload
+): Promise<ApiResponse<SessionDTO>> {
   return createSuccessResponse({
     user: {
       ...starterUser,
@@ -35,7 +29,7 @@ export async function signOut(): Promise<ApiResponse<null>> {
   return createSuccessResponse(null)
 }
 
-export async function getCurrentUser(): Promise<ApiResponse<SessionPayload>> {
+export async function getCurrentUser(): Promise<ApiResponse<SessionDTO>> {
   return createSuccessResponse({
     user: starterUser,
     token: 'starter-token',
@@ -44,8 +38,8 @@ export async function getCurrentUser(): Promise<ApiResponse<SessionPayload>> {
 }
 
 export async function changeLanguagePreference(
-  payload: LocalePreferencePayload
-): Promise<ApiResponse<LocalePreferencePayload>> {
+  payload: LocalePreferenceDTO
+): Promise<ApiResponse<LocalePreferenceDTO>> {
   return createSuccessResponse({
     locale: payload.locale
   })

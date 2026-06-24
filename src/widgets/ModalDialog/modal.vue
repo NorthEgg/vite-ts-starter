@@ -1,5 +1,4 @@
 <script lang="ts">
-
 import { WarningFilled } from '@element-plus/icons-vue'
 
 export default defineComponent({
@@ -39,12 +38,12 @@ export default defineComponent({
     },
     componantData: {
       type: Object,
-      default () {
+      default() {
         return {}
       }
     }
   },
-  setup (props, { attrs }: { attrs: any; }) {
+  setup(props, { attrs }: { attrs: any }) {
     const { proxy } = useCurrentInstance()
     const visible = ref(false)
 
@@ -90,13 +89,10 @@ export default defineComponent({
       ]
       const resultAttrs = reactive({})
       Object.keys(attrs)
-        .filter(
-          (attrKey) => !filterList.includes(attrKey)
-        ).forEach(
-          (attrKey) => {
-            resultAttrs[attrKey] = attrs[attrKey]
-          }
-        )
+        .filter((attrKey) => !filterList.includes(attrKey))
+        .forEach((attrKey) => {
+          resultAttrs[attrKey] = attrs[attrKey]
+        })
       return resultAttrs
     }
 
@@ -126,17 +122,13 @@ export default defineComponent({
     v-bind="getOriginAttrs()"
     @closed="handleRealClosed"
   >
-    <template
-      #header
-    >
+    <template #header>
       <IconFont
         v-if="headerIcon"
         :icon="headerIcon"
         class="modal-header__icon"
       />
-      <span
-        class="modal-header__title"
-      >{{ title }}</span>
+      <span class="modal-header__title">{{ title }}</span>
       <span
         v-if="headerDescText"
         class="header-desc"
@@ -147,38 +139,24 @@ export default defineComponent({
       >
         <WarningFilled
           :style="{
-            paddingRight: '6px',
+            paddingRight: '6px'
           }"
         />
         <span>{{ headerDescText }}</span>
       </span>
     </template>
-    <div
-      v-loading="fullLoading"
-      class="modal-container__body"
-    >
+    <div v-loading="fullLoading" class="modal-container__body">
       <component
         :is="getComponent"
         ref="refComponent"
         v-model="componantData"
         class="modal-container__component"
       />
-      <div
-        v-if="!hideFooter"
-        class="modal-container__footer"
-      >
-        <el-button
-          plain
-          round
-          @click="handleCancel()"
-        >
+      <div v-if="!hideFooter" class="modal-container__footer">
+        <el-button plain round @click="handleCancel()">
           {{ _t('base.btnCancel') }}
         </el-button>
-        <el-button
-          type="primary"
-          round
-          @click="handleConfirm()"
-        >
+        <el-button type="primary" round @click="handleConfirm()">
           {{ confirmText || _t('base.btnConfirm') }}
         </el-button>
       </div>
@@ -188,7 +166,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 :deep() {
-
   .modal-container__component {
     padding: 24px;
 

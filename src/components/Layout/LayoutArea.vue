@@ -14,19 +14,14 @@ export default defineComponent({
     </div>
     <div class="layout-area-container__bottom">
       <div class="layout-area-container__bottom__inner">
-        <aside
-          v-if="$slots.side"
-          class="side-layout-area-menu-bar"
-        >
+        <aside v-if="$slots.side" class="side-layout-area-menu-bar">
           <div class="layout-area-menu-bar__inner">
             <slot name="side"></slot>
           </div>
         </aside>
         <section class="content-section-container">
           <main class="main-content-box">
-            <div
-              class="inner-content"
-            >
+            <div class="inner-content">
               <slot name="content"></slot>
             </div>
           </main>
@@ -50,7 +45,6 @@ $headerHeight: 48px;
   background: #f0f2f5;
 
   .layout-area-container__top {
-
   }
 
   .layout-area-container__bottom {
