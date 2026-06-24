@@ -15,5 +15,8 @@
   "less.validate": false,
 
   "files.autoSaveDelay": 500,
-  "oxc.enable": true
+  "oxc.enable": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  }
 }
