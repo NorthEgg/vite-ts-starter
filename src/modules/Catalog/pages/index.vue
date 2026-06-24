@@ -1,14 +1,13 @@
 <script lang="ts">
-import { useLocale } from 'element-plus'
-import { useCatalogStore } from '@/composables/useBaseStore'
-import { useCatalogList } from '@/modules/Catalog/composables/useCatalogList'
+import { useLocale } from 'element-plus';
 
-import NavigationSideLogo from '@/components/Navigation/Side/SideLogo.vue'
-import NavigationNavBar from '@/components/Navigation/NavBar.vue'
-
-import ResourceForm from '@/modules/Catalog/components/ResourceForm.vue'
-import CatalogTableHeader from '@/modules/Catalog/components/CatalogTableHeader.vue'
-import CatalogTableBody from '@/modules/Catalog/components/CatalogTableBody.vue'
+import NavigationNavBar from '@/components/Navigation/NavBar.vue';
+import NavigationSideLogo from '@/components/Navigation/Side/SideLogo.vue';
+import { useCatalogStore } from '@/composables/useBaseStore';
+import CatalogTableBody from '@/modules/Catalog/components/CatalogTableBody.vue';
+import CatalogTableHeader from '@/modules/Catalog/components/CatalogTableHeader.vue';
+import ResourceForm from '@/modules/Catalog/components/ResourceForm.vue';
+import { useCatalogList } from '@/modules/Catalog/composables/useCatalogList';
 
 export default defineComponent({
   name: 'CatalogListPage',
@@ -16,24 +15,24 @@ export default defineComponent({
     NavigationNavBar,
     NavigationSideLogo,
     CatalogTableHeader,
-    CatalogTableBody
+    CatalogTableBody,
   },
   // https://github.com/vuejs/vue-next/issues/3649
   setup() {
-    const { proxy } = useCurrentInstance()
-    const catalogStore = useCatalogStore()
-    const localeInject = useLocale()
+    const { proxy } = useCurrentInstance();
+    const catalogStore = useCatalogStore();
+    const localeInject = useLocale();
     const {
       handleCreateResource,
       handleSelectSearch,
       loadingContent,
-      testI18nDate
+      testI18nDate,
     } = useCatalogList({
       catalogStore,
       localeInject,
       openDialog: proxy.$ModalDialog,
-      resourceFormComponent: ResourceForm
-    })
+      resourceFormComponent: ResourceForm,
+    });
 
     return {
       localeInject,
@@ -41,10 +40,10 @@ export default defineComponent({
       testI18nDate,
 
       handleCreateResource,
-      handleSelectSearch
-    }
-  }
-})
+      handleSelectSearch,
+    };
+  },
+});
 </script>
 
 <template>

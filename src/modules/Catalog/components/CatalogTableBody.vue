@@ -1,21 +1,22 @@
 <script lang="ts">
-import CatalogItem from '@/modules/Catalog/components/CatalogItem.vue'
-import { storeToRefs } from 'pinia'
-import { useCatalogStore } from '@/composables/useBaseStore'
+import { storeToRefs } from 'pinia';
+
+import { useCatalogStore } from '@/composables/useBaseStore';
+import CatalogItem from '@/modules/Catalog/components/CatalogItem.vue';
 
 export default defineComponent({
   name: 'CatalogTableBody',
   components: {
-    CatalogItem
+    CatalogItem,
   },
   setup() {
-    const catalogStore = useCatalogStore()
-    const { items: resourceList } = storeToRefs(catalogStore)
+    const catalogStore = useCatalogStore();
+    const { items: resourceList } = storeToRefs(catalogStore);
     return {
-      resourceList
-    }
-  }
-})
+      resourceList,
+    };
+  },
+});
 </script>
 
 <template>

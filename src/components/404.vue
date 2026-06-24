@@ -1,7 +1,7 @@
 <script lang="ts">
 export default defineComponent({
-  name: 'NotFound'
-})
+  name: 'NotFound',
+});
 </script>
 
 <template>

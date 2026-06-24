@@ -1,15 +1,15 @@
 <script lang="ts" setup>
-import type { Placement } from 'element-plus'
+import type { Placement } from 'element-plus';
 
 interface Props {
-  content: string
-  placement?: Placement
+  content: string;
+  placement?: Placement;
 }
 
 withDefaults(defineProps<Props>(), {
   content: '',
-  placement: 'top'
-})
+  placement: 'top',
+});
 </script>
 
 <template>

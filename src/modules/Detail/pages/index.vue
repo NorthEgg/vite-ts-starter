@@ -1,18 +1,18 @@
 <script lang="ts">
-import { useDetailStore } from '@/composables/useBaseStore'
-import { useDetailOverview } from '@/modules/Detail/composables/useDetailOverview'
+import { useDetailStore } from '@/composables/useBaseStore';
+import { useDetailOverview } from '@/modules/Detail/composables/useDetailOverview';
 
 export default defineComponent({
   name: 'DetailOverviewPage',
   setup() {
-    const detailStore = useDetailStore()
-    const { overviewData } = useDetailOverview(detailStore)
+    const detailStore = useDetailStore();
+    const { overviewData } = useDetailOverview(detailStore);
 
     return {
-      overviewData
-    }
-  }
-})
+      overviewData,
+    };
+  },
+});
 </script>
 
 <template>

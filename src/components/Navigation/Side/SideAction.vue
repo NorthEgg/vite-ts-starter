@@ -1,26 +1,26 @@
 <script lang="ts">
-import { useLocale } from 'element-plus'
+import { useLocale } from 'element-plus';
 
 export default defineComponent({
   name: 'NavigationSideAction',
   emits: ['click'],
   setup() {
-    const { proxy } = useCurrentInstance()
-    const localeInject = useLocale()
+    const { proxy } = useCurrentInstance();
+    const localeInject = useLocale();
 
     function handleClick() {
-      proxy.$emit('click')
+      proxy.$emit('click');
     }
 
-    const title = computed(() => localeInject.t('base.systemTitle'))
+    const title = computed(() => localeInject.t('base.systemTitle'));
 
     return {
       title,
 
-      handleClick
-    }
-  }
-})
+      handleClick,
+    };
+  },
+});
 </script>
 
 <template>

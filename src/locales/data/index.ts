@@ -1,1 +1,1 @@
-export const systemTitle = 'Vite TS Starter'
+export const systemTitle = 'Vite TS Starter';

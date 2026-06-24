@@ -1,52 +1,52 @@
-import type { CreateResourcePayload } from '@/modules/Catalog/models/resource'
-import type useCatalogStore from '@/modules/Catalog/store'
+import type { CreateResourcePayload } from '@/modules/Catalog/models/resource';
+import type useCatalogStore from '@/modules/Catalog/store';
 
-type CatalogStore = ReturnType<typeof useCatalogStore>
+type CatalogStore = ReturnType<typeof useCatalogStore>;
 
 interface CatalogDialogInstance {
-  validateRules: () => Promise<boolean>
+  validateRules: () => Promise<boolean>;
 }
 
 interface CatalogDialogContext {
-  fullLoading: boolean
+  fullLoading: boolean;
 }
 
 interface UseCatalogListOptions {
-  catalogStore: CatalogStore
-  localeInject: ReturnType<(typeof import('element-plus'))['useLocale']>
+  catalogStore: CatalogStore;
+  localeInject: ReturnType<(typeof import('element-plus'))['useLocale']>;
   openDialog: (options: {
-    title: string
-    top: string
-    width: string
-    showClose: boolean
-    closeOnClickModal: boolean
-    closeOnPressEscape: boolean
+    title: string;
+    top: string;
+    width: string;
+    showClose: boolean;
+    closeOnClickModal: boolean;
+    closeOnPressEscape: boolean;
     renderComponent: {
-      data: CreateResourcePayload
-      component: unknown
-    }
+      data: CreateResourcePayload;
+      component: unknown;
+    };
     onConfirm: (
       instance: CatalogDialogInstance,
-      context: CatalogDialogContext
-    ) => Promise<void>
-  }) => void
-  resourceFormComponent: unknown
+      context: CatalogDialogContext,
+    ) => Promise<void>;
+  }) => void;
+  resourceFormComponent: unknown;
 }
 
 export function useCatalogList(options: UseCatalogListOptions) {
   const { catalogStore, localeInject, openDialog, resourceFormComponent } =
-    options
+    options;
 
-  const loadingContent = ref(true)
-  const testI18nDate = ref()
+  const loadingContent = ref(true);
+  const testI18nDate = ref();
 
   async function load(keyword?: string) {
-    loadingContent.value = true
+    loadingContent.value = true;
 
     try {
-      await catalogStore.loadItems(keyword)
+      await catalogStore.loadItems(keyword);
     } finally {
-      loadingContent.value = false
+      loadingContent.value = false;
     }
   }
 
@@ -54,8 +54,8 @@ export function useCatalogList(options: UseCatalogListOptions) {
     const formData = reactive<CreateResourcePayload>({
       title: '',
       subtitle: '',
-      description: ''
-    })
+      description: '',
+    });
 
     openDialog({
       title: localeInject.t('catalog.create'),
@@ -66,36 +66,36 @@ export function useCatalogList(options: UseCatalogListOptions) {
       closeOnPressEscape: false,
       renderComponent: {
         data: formData,
-        component: resourceFormComponent
+        component: resourceFormComponent,
       },
       async onConfirm(instance, context) {
-        const isValid = await instance.validateRules()
+        const isValid = await instance.validateRules();
 
         if (!isValid) {
-          return Promise.reject(new Error('error'))
+          return Promise.reject(new Error('error'));
         }
 
-        context.fullLoading = true
-        const { error } = await catalogStore.createItem(formData)
-        context.fullLoading = false
+        context.fullLoading = true;
+        const { error } = await catalogStore.createItem(formData);
+        context.fullLoading = false;
 
         if (error) {
-          return Promise.reject(new Error('error'))
+          return Promise.reject(new Error('error'));
         }
 
-        await load()
-      }
-    })
+        await load();
+      },
+    });
   }
 
   onMounted(() => {
-    void load()
-  })
+    void load();
+  });
 
   return {
     handleCreateResource,
     handleSelectSearch: load,
     loadingContent,
-    testI18nDate
-  }
+    testI18nDate,
+  };
 }

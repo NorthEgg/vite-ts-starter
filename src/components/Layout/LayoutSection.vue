@@ -7,22 +7,22 @@ export default defineComponent({
   props: {
     hasDivider: {
       type: Boolean,
-      default: false
+      default: false,
     },
     flexContent: {
       type: Boolean,
-      default: false
+      default: false,
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     loading: {
       type: Boolean,
-      default: false
-    }
-  }
-})
+      default: false,
+    },
+  },
+});
 </script>
 
 <template>
@@ -47,7 +47,7 @@ export default defineComponent({
       <div
         class="layout-section-container__content-inner"
         :class="{
-          'is-flex': flexContent
+          'is-flex': flexContent,
         }"
       >
         <slot name="default"></slot>

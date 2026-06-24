@@ -1,10 +1,10 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest';
 
 import {
   toAuthUserModel,
   toLocalePreferenceModel,
-  toSessionModel
-} from '@/modules/Auth/mappers/session'
+  toSessionModel,
+} from '@/modules/Auth/mappers/session';
 
 describe('auth session mapper', () => {
   it('maps auth user dto to model', () => {
@@ -12,14 +12,14 @@ describe('auth session mapper', () => {
       toAuthUserModel({
         id: 'starter-user',
         name: 'Starter User',
-        email: 'starter@example.com'
-      })
+        email: 'starter@example.com',
+      }),
     ).toEqual({
       id: 'starter-user',
       name: 'Starter User',
-      email: 'starter@example.com'
-    })
-  })
+      email: 'starter@example.com',
+    });
+  });
 
   it('maps session and locale preference dto to model', () => {
     expect(
@@ -29,25 +29,25 @@ describe('auth session mapper', () => {
         user: {
           id: 'starter-user',
           name: 'Starter User',
-          email: 'starter@example.com'
-        }
-      })
+          email: 'starter@example.com',
+        },
+      }),
     ).toEqual({
       locale: 'zh-hans',
       token: 'starter-token',
       user: {
         id: 'starter-user',
         name: 'Starter User',
-        email: 'starter@example.com'
-      }
-    })
+        email: 'starter@example.com',
+      },
+    });
 
     expect(
       toLocalePreferenceModel({
-        locale: 'en'
-      })
+        locale: 'en',
+      }),
     ).toEqual({
-      locale: 'en'
-    })
-  })
-})
+      locale: 'en',
+    });
+  });
+});

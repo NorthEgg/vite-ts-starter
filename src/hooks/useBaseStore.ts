@@ -1,1 +1,1 @@
-export * from '@/composables/useBaseStore'
+export * from '@/composables/useBaseStore';

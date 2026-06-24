@@ -19,12 +19,12 @@
 - `UnoCSS`
 - `Axios`
 - `Vitest`
-- `ESLint + Stylelint + Prettier`
+- `Oxlint + Oxfmt + Stylelint`
 - `Husky + lint-staged + commitlint`
 
 ## 模板特性
 
-- 内置基础工程规范：`eslint`、`stylelint`、`prettier`、提交信息校验
+- 内置基础工程规范：`oxlint`、`oxfmt`、`stylelint`、提交信息校验
 - 内置类型检查和单元测试能力
 - 支持 `Element Plus` 组件自动导入
 - 支持 `UnoCSS` 原子化样式
@@ -202,7 +202,7 @@ chore: refine template docs
 
 在当前仓库版本上，以下检查已通过：
 
-- `eslint .`
+- `oxlint --vue-plugin .`
 - `vue-tsc --noEmit`
 - `vitest --run`
 - `vite build --mode prod`

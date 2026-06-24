@@ -2,12 +2,12 @@
 export default defineComponent({
   name: 'Octocat',
   setup() {
-    const link = ref('https://github.com/NorthEgg/vite-ts-starter')
+    const link = ref('https://github.com/NorthEgg/vite-ts-starter');
     return {
-      link
-    }
-  }
-})
+      link,
+    };
+  },
+});
 </script>
 
 <template>

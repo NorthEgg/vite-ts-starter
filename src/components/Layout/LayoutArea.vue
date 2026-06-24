@@ -3,8 +3,8 @@
  * 上下左右布局，顶部导航 + (底部左侧侧边栏 + 底部右侧内容区域)
  */
 export default defineComponent({
-  name: 'LayoutArea'
-})
+  name: 'LayoutArea',
+});
 </script>
 
 <template>

@@ -5,31 +5,31 @@ export default defineComponent({
     modelValue: {
       type: Object,
       default() {
-        return {}
-      }
-    }
+        return {};
+      },
+    },
   },
   setup() {
-    const refForm = ref()
+    const refForm = ref();
 
     const validateRules = async () => {
       return new Promise((resolve) => {
         refForm.value.validate((valid: boolean) => {
           if (valid) {
-            resolve(true)
+            resolve(true);
           } else {
-            resolve(false)
+            resolve(false);
           }
-        })
-      })
-    }
+        });
+      });
+    };
 
     return {
       refForm,
-      validateRules
-    }
-  }
-})
+      validateRules,
+    };
+  },
+});
 </script>
 
 <template>
@@ -46,7 +46,7 @@ export default defineComponent({
         :rules="
           getRequiredRules({
             trigger: 'change',
-            message: _t('base.pleaseInput')
+            message: _t('base.pleaseInput'),
           })
         "
       >
@@ -63,7 +63,7 @@ export default defineComponent({
         :rules="
           getRequiredRules({
             trigger: 'change',
-            message: _t('base.pleaseInput')
+            message: _t('base.pleaseInput'),
           })
         "
       >

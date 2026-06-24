@@ -1,100 +1,100 @@
 <script lang="ts">
-import { WarningFilled } from '@element-plus/icons-vue'
+import { WarningFilled } from '@element-plus/icons-vue';
 
 export default defineComponent({
   name: 'ModalDialog',
   components: {
-    WarningFilled
+    WarningFilled,
   },
   inheritAttrs: false,
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     headerDescText: {
       type: String,
-      default: ''
+      default: '',
     },
     headerIcon: {
       type: String,
-      default: ''
+      default: '',
     },
     confirmText: {
       type: String,
-      default: ''
+      default: '',
     },
     dialogWidth: {
       type: String,
-      default: '500px'
+      default: '500px',
     },
     disabledConfirmButton: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideFooter: {
       type: Boolean,
-      default: false
+      default: false,
     },
     componantData: {
       type: Object,
       default() {
-        return {}
-      }
-    }
+        return {};
+      },
+    },
   },
   setup(props, { attrs }: { attrs: any }) {
-    const { proxy } = useCurrentInstance()
-    const visible = ref(false)
+    const { proxy } = useCurrentInstance();
+    const visible = ref(false);
 
     const getDialogClassName = computed(() => {
-      const classNames = 'modal-wrapper-containers-dialog'
-      return classNames
-    })
+      const classNames = 'modal-wrapper-containers-dialog';
+      return classNames;
+    });
 
     const getComponent = computed(() => {
-      const keys = Object.keys(attrs.components)
-      const name = keys[0]
-      return name
-    })
+      const keys = Object.keys(attrs.components);
+      const name = keys[0];
+      return name;
+    });
 
-    const refComponent = ref(null)
+    const refComponent = ref(null);
     const handleCancel = () => {
-      visible.value = false
-    }
+      visible.value = false;
+    };
     const handleConfirm = async () => {
-      const instance = refComponent.value
+      const instance = refComponent.value;
       try {
-        await attrs.onConfirm(instance, proxy)
-        visible.value = false
+        await attrs.onConfirm(instance, proxy);
+        visible.value = false;
       } catch (error) {
         if (process.env.NODE_ENV === 'development') {
-          console.dir(error)
+          console.dir(error);
         }
       }
-    }
+    };
 
     const handleRealClosed = () => {
-      proxy.$.vnode.destroy()
-    }
+      proxy.$.vnode.destroy();
+    };
 
-    const fullLoading = ref(false)
+    const fullLoading = ref(false);
 
     const getOriginAttrs = () => {
       const filterList = [
         'onConfirm',
         'onCancel',
         'renderComponent',
-        'components'
-      ]
-      const resultAttrs = reactive({})
+        'components',
+      ];
+      const resultAttrs = reactive({});
       Object.keys(attrs)
         .filter((attrKey) => !filterList.includes(attrKey))
         .forEach((attrKey) => {
-          resultAttrs[attrKey] = attrs[attrKey]
-        })
-      return resultAttrs
-    }
+          resultAttrs[attrKey] = attrs[attrKey];
+        });
+      return resultAttrs;
+    };
 
     return {
       visible,
@@ -106,10 +106,10 @@ export default defineComponent({
       handleConfirm,
       getOriginAttrs,
 
-      handleRealClosed
-    }
-  }
-})
+      handleRealClosed,
+    };
+  },
+});
 </script>
 
 <template>
@@ -134,12 +134,12 @@ export default defineComponent({
         class="header-desc"
         :style="{
           paddingLeft: '16px',
-          color: '#606266'
+          color: '#606266',
         }"
       >
         <WarningFilled
           :style="{
-            paddingRight: '6px'
+            paddingRight: '6px',
           }"
         />
         <span>{{ headerDescText }}</span>

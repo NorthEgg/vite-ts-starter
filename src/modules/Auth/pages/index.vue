@@ -1,39 +1,38 @@
 <script lang="ts">
-import { ElMessage, useLocale } from 'element-plus'
-import { Promotion } from '@element-plus/icons-vue'
+import { Promotion } from '@element-plus/icons-vue';
+import { ElMessage, useLocale } from 'element-plus';
 
-import AuthContainerLayout from '@/modules/Auth/components/AuthContainerLayout.vue'
-import { useAuthLogin } from '@/modules/Auth/composables/useAuthLogin'
-
-import Translations from '@/locales/Translations.vue'
-import { useSessionStore } from '@/composables/useBaseStore'
+import { useSessionStore } from '@/composables/useBaseStore';
+import Translations from '@/locales/Translations.vue';
+import AuthContainerLayout from '@/modules/Auth/components/AuthContainerLayout.vue';
+import { useAuthLogin } from '@/modules/Auth/composables/useAuthLogin';
 
 export default defineComponent({
   name: 'AuthLoginPage',
   components: {
     AuthContainerLayout,
     Promotion,
-    Translations
+    Translations,
   },
   setup() {
-    const { proxy } = useCurrentInstance()
-    const sessionStore = useSessionStore()
-    const route = useRoute()
-    const router = useRouter()
-    const localeInject = useLocale()
+    const { proxy } = useCurrentInstance();
+    const sessionStore = useSessionStore();
+    const route = useRoute();
+    const router = useRouter();
+    const localeInject = useLocale();
     const {
       formData,
       inputErrorEmail,
       inputErrorPassword,
       isLoading,
       onSubmit,
-      setLoading
+      setLoading,
     } = useAuthLogin({
       sessionStore,
       localeInject,
       route,
-      router
-    })
+      router,
+    });
 
     const configAuth = computed(() => {
       return {
@@ -43,15 +42,15 @@ export default defineComponent({
             attrs: {
               type: 'primary',
               loading: isLoading.value,
-              size: 'large'
+              size: 'large',
             },
             text: localeInject.t('auth.signin'),
             on: {
               click(refForm: any) {
-                onSubmit(refForm)
-              }
-            }
-          }
+                onSubmit(refForm);
+              },
+            },
+          },
         ],
         formConfig: [
           {
@@ -62,20 +61,20 @@ export default defineComponent({
                 return [
                   proxy.getRequiredRules({
                     trigger: 'change',
-                    message: localeInject.t('auth.emailRequired')
+                    message: localeInject.t('auth.emailRequired'),
                   }),
                   proxy.getValidatorRules('', 'blur', {
                     type: 'email',
-                    message: localeInject.t('auth.emailInvalid')
-                  })
-                ]
-              }
+                    message: localeInject.t('auth.emailInvalid'),
+                  }),
+                ];
+              },
             },
             label: localeInject.t('auth.email'),
             prefixIcon: h('span', {
-              class: 'text-16px i-ic:baseline-mail-lock'
+              class: 'text-16px i-ic:baseline-mail-lock',
             }),
-            placeholder: localeInject.t('auth.emailRequired')
+            placeholder: localeInject.t('auth.emailRequired'),
           },
           {
             attrs: {
@@ -84,28 +83,28 @@ export default defineComponent({
               rules() {
                 return proxy.getRequiredRules({
                   trigger: 'change',
-                  message: localeInject.t('auth.passwordRequired')
-                })
-              }
+                  message: localeInject.t('auth.passwordRequired'),
+                });
+              },
             },
             link: {
               text: localeInject.t('auth.forgotPassword'),
               click() {
                 ElMessage.info({
-                  message: `😄 ${localeInject.t('auth.forgotPassword')}`
-                })
-              }
+                  message: `😄 ${localeInject.t('auth.forgotPassword')}`,
+                });
+              },
             },
             type: 'password',
             label: localeInject.t('auth.password'),
             prefixIcon: h('span', {
-              class: 'text-16px i-ri:lock-password-fill'
+              class: 'text-16px i-ri:lock-password-fill',
             }),
-            placeholder: localeInject.t('auth.passwordRequired')
-          }
-        ]
-      }
-    })
+            placeholder: localeInject.t('auth.passwordRequired'),
+          },
+        ],
+      };
+    });
 
     return {
       isLoading,
@@ -115,10 +114,10 @@ export default defineComponent({
       configAuth,
 
       setLoading,
-      onSubmit
-    }
-  }
-})
+      onSubmit,
+    };
+  },
+});
 </script>
 
 <template>
@@ -126,7 +125,7 @@ export default defineComponent({
     class="auth-login"
     :class="[
       'bgimage-images-logo-background-jpg',
-      'bg-cover bg-no-repeat bg-center'
+      'bg-cover bg-no-repeat bg-center',
     ]"
   >
     <div class="auth-login__nav">
@@ -135,7 +134,7 @@ export default defineComponent({
           class="nav-logo"
           :class="[
             'bgimage-images-logo-svg',
-            'bg-contain bg-no-repeat bg-center'
+            'bg-contain bg-no-repeat bg-center',
           ]"
         ></div>
         <div class="nav-circle"></div>

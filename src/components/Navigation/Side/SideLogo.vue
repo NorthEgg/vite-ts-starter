@@ -1,18 +1,18 @@
 <script lang="ts">
-import { useLocale } from 'element-plus'
+import { useLocale } from 'element-plus';
 
 export default defineComponent({
   name: 'NavigationSideLogo',
   setup() {
-    const localeInject = useLocale()
+    const localeInject = useLocale();
 
-    const title = computed(() => localeInject.t('base.systemTitle'))
+    const title = computed(() => localeInject.t('base.systemTitle'));
 
     return {
-      title
-    }
-  }
-})
+      title,
+    };
+  },
+});
 </script>
 
 <template>

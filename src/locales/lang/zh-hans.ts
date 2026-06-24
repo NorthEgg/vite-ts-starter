@@ -9,10 +9,10 @@ export default {
     rangeEnd: '结束时间',
     pleaseInput: '请输入',
     btnCancel: '取消',
-    btnConfirm: '确定'
+    btnConfirm: '确定',
   },
   nav: {
-    action: '操作'
+    action: '操作',
   },
   auth: {
     welcome: '欢迎登录',
@@ -24,7 +24,7 @@ export default {
     emailInvalid: '请输入正确的邮箱地址',
     passwordRequired: '请填写密码',
     signout: '退出登录',
-    loginSuccess: '登录成功'
+    loginSuccess: '登录成功',
   },
   catalog: {
     manageTitle: '资源目录',
@@ -37,9 +37,9 @@ export default {
     publish: '启用',
     stop: '停用',
     activated: '资源已启用',
-    deactivated: '资源已停用'
+    deactivated: '资源已停用',
   },
   detail: {
-    title: '详情面板'
-  }
-}
+    title: '详情面板',
+  },
+};

@@ -1,22 +1,22 @@
-import { currentLocaleMap } from '@/locales'
-import { useSessionStore } from '@/composables/useBaseStore'
+import { useSessionStore } from '@/composables/useBaseStore';
+import { currentLocaleMap } from '@/locales';
 
 export const useLanguage = () => {
-  const sessionStore = useSessionStore()
+  const sessionStore = useSessionStore();
 
   const currentLocaleLang = computed(() => {
-    let locale: any = null
+    let locale: any = null;
 
-    const targetLocaleItem = currentLocaleMap(sessionStore.locale)
+    const targetLocaleItem = currentLocaleMap(sessionStore.locale);
 
     if (targetLocaleItem) {
-      locale = targetLocaleItem.localeLang
+      locale = targetLocaleItem.localeLang;
     }
 
-    return locale
-  })
+    return locale;
+  });
 
   return {
-    currentLocaleLang
-  }
-}
+    currentLocaleLang,
+  };
+};

@@ -1,39 +1,39 @@
 <script lang="ts">
-import { useLocale } from 'element-plus'
+import { useLocale } from 'element-plus';
 
 export default defineComponent({
   name: 'CatalogTableHeader',
   setup() {
-    const localeInject = useLocale()
+    const localeInject = useLocale();
     const list = computed(() => [
       {
-        name: localeInject.t('catalog.name')
+        name: localeInject.t('catalog.name'),
       },
       {
         name: localeInject.t('catalog.updatedAt'),
-        width: '18%'
+        width: '18%',
       },
       {
         name: localeInject.t('catalog.state'),
-        width: '19%'
-      }
-    ])
+        width: '19%',
+      },
+    ]);
 
     function getHeadItem(head) {
       return {
         width: head.width,
-        flex: head.width ? 'initial' : 1
-      }
+        flex: head.width ? 'initial' : 1,
+      };
     }
     return {
       localeInject,
 
       list,
 
-      getHeadItem
-    }
-  }
-})
+      getHeadItem,
+    };
+  },
+});
 </script>
 
 <template>

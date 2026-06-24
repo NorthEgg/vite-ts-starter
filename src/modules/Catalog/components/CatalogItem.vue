@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { Loading } from '@element-plus/icons-vue'
+import { Loading } from '@element-plus/icons-vue';
+import { ElMessage, useLocale } from 'element-plus';
 
-import { sleep } from '@/api/request'
-import { ElMessage, useLocale } from 'element-plus'
-import { useCatalogStore } from '@/composables/useBaseStore'
-import type { ResourceSummary } from '@/modules/Catalog/models/resource'
+import { sleep } from '@/api/request';
+import { useCatalogStore } from '@/composables/useBaseStore';
+import type { ResourceSummary } from '@/modules/Catalog/models/resource';
 
 defineOptions({
-  name: 'CatalogItem'
-})
+  name: 'CatalogItem',
+});
 
 const props = defineProps({
   dataset: {
@@ -20,34 +20,34 @@ const props = defineProps({
         subtitle: '',
         description: '',
         status: 'draft',
-        updatedAt: ''
-      }
-    }
-  }
-})
+        updatedAt: '',
+      };
+    },
+  },
+});
 
-const localeInject = useLocale()
-const catalogStore = useCatalogStore()
-const isLoading = ref(false)
+const localeInject = useLocale();
+const catalogStore = useCatalogStore();
+const isLoading = ref(false);
 const getActionIcon = computed(() => {
-  return props.dataset.status === 'active' ? 'iconstop' : 'iconplay'
-})
+  return props.dataset.status === 'active' ? 'iconstop' : 'iconplay';
+});
 
 async function handleToggleStatus() {
-  if (isLoading.value) return
+  if (isLoading.value) return;
 
-  const previousStatus = props.dataset.status
-  isLoading.value = true
+  const previousStatus = props.dataset.status;
+  isLoading.value = true;
 
-  await sleep(300)
-  await catalogStore.toggleItemStatus(props.dataset.id)
+  await sleep(300);
+  await catalogStore.toggleItemStatus(props.dataset.id);
 
-  isLoading.value = false
+  isLoading.value = false;
 
   if (previousStatus === 'active') {
-    ElMessage.info(localeInject.t('catalog.deactivated'))
+    ElMessage.info(localeInject.t('catalog.deactivated'));
   } else {
-    ElMessage.success(localeInject.t('catalog.activated'))
+    ElMessage.success(localeInject.t('catalog.activated'));
   }
 }
 </script>
@@ -91,7 +91,7 @@ async function handleToggleStatus() {
         class="catalog-item-action text_nowrap"
         :class="{
           active: dataset.status === 'active',
-          loading: isLoading
+          loading: isLoading,
         }"
         @click.prevent="handleToggleStatus()"
       >

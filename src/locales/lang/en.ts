@@ -1,4 +1,4 @@
-import { systemTitle } from '@/locales/data'
+import { systemTitle } from '@/locales/data';
 
 /* English namespaced */
 export default {
@@ -11,10 +11,10 @@ export default {
     rangeEnd: 'End time',
     pleaseInput: 'Please Input',
     btnCancel: 'Cancel',
-    btnConfirm: 'Confirm'
+    btnConfirm: 'Confirm',
   },
   nav: {
-    action: 'Action'
+    action: 'Action',
   },
   auth: {
     welcome: 'Hi, Welcome',
@@ -26,7 +26,7 @@ export default {
     emailInvalid: 'Please enter the correct email',
     passwordRequired: 'Please enter a password',
     signout: 'Sign out',
-    loginSuccess: 'Login successfully'
+    loginSuccess: 'Login successfully',
   },
   catalog: {
     manageTitle: 'Resource catalog',
@@ -39,9 +39,9 @@ export default {
     publish: 'Activate',
     stop: 'Deactivate',
     activated: 'Resource activated',
-    deactivated: 'Resource deactivated'
+    deactivated: 'Resource deactivated',
   },
   detail: {
-    title: 'Detail panel'
-  }
-}
+    title: 'Detail panel',
+  },
+};

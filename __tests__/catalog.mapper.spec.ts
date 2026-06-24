@@ -1,11 +1,11 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest';
 
 import {
   toCreateResourcePayloadDTO,
   toResourceListResult,
   toResourceSummary,
-  toToggleResourceStatusResult
-} from '@/modules/Catalog/mappers/resource'
+  toToggleResourceStatusResult,
+} from '@/modules/Catalog/mappers/resource';
 
 describe('catalog resource mapper', () => {
   it('maps resource dto to model', () => {
@@ -15,8 +15,8 @@ describe('catalog resource mapper', () => {
       resource_subtitle: 'Starter resource card',
       resource_description: 'Starter description',
       resource_status: 'active',
-      updated_at: '2026-05-29'
-    })
+      updated_at: '2026-05-29',
+    });
 
     expect(model).toEqual({
       id: 'resource-001',
@@ -24,9 +24,9 @@ describe('catalog resource mapper', () => {
       subtitle: 'Starter resource card',
       description: 'Starter description',
       status: 'active',
-      updatedAt: '2026-05-29'
-    })
-  })
+      updatedAt: '2026-05-29',
+    });
+  });
 
   it('maps list and command payloads consistently', () => {
     const list = toResourceListResult({
@@ -37,33 +37,33 @@ describe('catalog resource mapper', () => {
           resource_subtitle: 'Starter resource card',
           resource_description: 'Starter description',
           resource_status: 'active',
-          updated_at: '2026-05-29'
-        }
+          updated_at: '2026-05-29',
+        },
       ],
       next_cursor: null,
-      total: 1
-    })
+      total: 1,
+    });
 
     const createPayload = toCreateResourcePayloadDTO({
       title: 'New title',
       subtitle: 'New subtitle',
-      description: 'New description'
-    })
+      description: 'New description',
+    });
 
     const toggleResult = toToggleResourceStatusResult({
       resource_id: 'resource-001',
-      resource_status: 'draft'
-    })
+      resource_status: 'draft',
+    });
 
-    expect(list.items).toHaveLength(1)
+    expect(list.items).toHaveLength(1);
     expect(createPayload).toEqual({
       resource_title: 'New title',
       resource_subtitle: 'New subtitle',
-      resource_description: 'New description'
-    })
+      resource_description: 'New description',
+    });
     expect(toggleResult).toEqual({
       id: 'resource-001',
-      status: 'draft'
-    })
-  })
-})
+      status: 'draft',
+    });
+  });
+});

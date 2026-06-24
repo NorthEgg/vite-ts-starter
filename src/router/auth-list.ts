@@ -1,1 +1,1 @@
-export const allowlist = ['404', 'AuthLogin']
+export const allowlist = ['404', 'AuthLogin'];

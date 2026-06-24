@@ -1,71 +1,68 @@
-import path from 'path'
-import { defineConfig } from 'vitest/config'
-import vue from '@vitejs/plugin-vue'
+import path from 'path';
 
-import UnoCSS from 'unocss/vite'
-
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-
-import UnpluginIcons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue';
+import UnoCSS from 'unocss/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import IconsResolver from 'unplugin-icons/resolver';
+import UnpluginIcons from 'unplugin-icons/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
+import { loadEnv } from 'vite';
+import { defineConfig } from 'vitest/config';
 
 const vendorChunkGroups: Record<string, string[]> = {
   'vendor-core': ['vue', 'vue-router', 'vuex'],
   'vendor-ui': ['element-plus', '@element-plus/icons-vue'],
   'vendor-utils': ['axios', 'lodash-es', 'nprogress'],
-  'vendor-visualization': ['echarts']
-}
+  'vendor-visualization': ['echarts'],
+};
 
 function getPackageName(id: string) {
-  const normalized = id.replace(/\\/g, '/')
+  const normalized = id.replace(/\\/g, '/');
   const match = normalized.match(
-    /(?:\.pnpm\/[^/]+\/node_modules\/|node_modules\/)((?:@[^/]+\/)?[^/]+)/
-  )
-  return match?.[1]
+    /(?:\.pnpm\/[^/]+\/node_modules\/|node_modules\/)((?:@[^/]+\/)?[^/]+)/,
+  );
+  return match?.[1];
 }
 
 function matchesPackage(packageName: string | undefined, target: string) {
-  if (!packageName) return false
-  return packageName === target || packageName.startsWith(`${target}/`)
+  if (!packageName) return false;
+  return packageName === target || packageName.startsWith(`${target}/`);
 }
 
 function getManualChunk(id: string) {
-  if (!id.includes('node_modules')) return undefined
+  if (!id.includes('node_modules')) return undefined;
 
-  const packageName = getPackageName(id)
+  const packageName = getPackageName(id);
 
   for (const [chunkName, packages] of Object.entries(vendorChunkGroups)) {
     if (packages.some((pkg) => matchesPackage(packageName, pkg))) {
-      return chunkName
+      return chunkName;
     }
   }
 
-  return 'vendor-misc'
+  return 'vendor-misc';
 }
 
 function getAssetFileName(assetInfo: { name?: string }) {
-  const assetName = assetInfo.name ?? ''
-  const ext = path.extname(assetName).slice(1)
+  const assetName = assetInfo.name ?? '';
+  const ext = path.extname(assetName).slice(1);
 
   if (['css', 'scss'].includes(ext)) {
-    return 'css/[name]-[hash][extname]'
+    return 'css/[name]-[hash][extname]';
   }
 
   if (
     ['png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'avif', 'ico'].includes(ext)
   ) {
-    return 'img/[name]-[hash][extname]'
+    return 'img/[name]-[hash][extname]';
   }
 
   if (['woff', 'woff2', 'ttf', 'otf', 'eot'].includes(ext)) {
-    return 'fonts/[name]-[hash][extname]'
+    return 'fonts/[name]-[hash][extname]';
   }
 
-  return 'assets/[name]-[hash][extname]'
+  return 'assets/[name]-[hash][extname]';
 }
 
 const htmlPlugin = () => {
@@ -74,14 +71,14 @@ const htmlPlugin = () => {
     transformIndexHtml(html) {
       return html.replace(
         /<title>(.*?)<\/title>/,
-        '<title>Vite TS Starter</title>'
-      )
-    }
-  }
-}
+        '<title>Vite TS Starter</title>',
+      );
+    },
+  };
+};
 
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd())
+  const env = loadEnv(mode, process.cwd());
 
   return {
     base: env.VITE_ROUTER_MODE === 'hash' ? '' : '/',
@@ -101,14 +98,14 @@ export default defineConfig(({ mode }) => {
               'createWebHistory',
               'createWebHashHistory',
               'useRouter',
-              'useRoute'
+              'useRoute',
             ],
             uuid: [['v4', 'uuidv4']],
             // 全局使用 _.xxxx()
             'lodash-es': [
               // default imports
-              ['*', '_'] // import { * as _ } from 'lodash-es',
-            ]
+              ['*', '_'], // import { * as _ } from 'lodash-es',
+            ],
           },
           // type import
           {
@@ -118,9 +115,9 @@ export default defineConfig(({ mode }) => {
               'VNode',
               'ComponentPublicInstance',
               'ComponentPublicInstanceCostom',
-              'ComponentInternalInstance'
+              'ComponentInternalInstance',
             ],
-            type: true
+            type: true,
           },
           {
             from: 'vue-router',
@@ -131,30 +128,27 @@ export default defineConfig(({ mode }) => {
               'RouteParams',
               'RouteLocationNormalizedLoaded',
               'RouteRecordName',
-              'NavigationGuard'
+              'NavigationGuard',
             ],
-            type: true
-          }
+            type: true,
+          },
         ],
         resolvers: mode === 'development' ? [] : [ElementPlusResolver()],
         dirs: ['./src/composables'],
         dts: './auto-imports.d.ts',
-        eslintrc: {
-          enabled: true
-        },
-        vueTemplate: true
+        vueTemplate: true,
       }),
       Components({
         directoryAsNamespace: true,
         collapseSamePrefixes: true,
         resolvers: [
           IconsResolver({
-            prefix: 'AutoIcon'
+            prefix: 'AutoIcon',
           }),
           ElementPlusResolver({
-            importStyle: 'sass'
-          })
-        ]
+            importStyle: 'sass',
+          }),
+        ],
       }),
       // Auto use Iconify icon
       UnpluginIcons({
@@ -162,9 +156,9 @@ export default defineConfig(({ mode }) => {
         compiler: 'vue3',
         scale: 1.2,
         defaultStyle: '',
-        defaultClass: 'unplugin-icon'
+        defaultClass: 'unplugin-icon',
       }),
-      htmlPlugin()
+      htmlPlugin(),
     ],
     // https://esbuild.github.io/api/#drop
     // https://github.com/vitejs/vite/discussions/7920#discussioncomment-2709119
@@ -174,7 +168,7 @@ export default defineConfig(({ mode }) => {
      * 用 esbuild.drop 替换 rollup-plugin-terser
      */
     esbuild: {
-      drop: ['console', 'debugger']
+      drop: ['console', 'debugger'],
     },
     // According to the need to open proxy
     // server: {
@@ -190,16 +184,16 @@ export default defineConfig(({ mode }) => {
       alias: [
         {
           find: 'vue-i18n',
-          replacement: 'vue-i18n/dist/vue-i18n.cjs.js'
+          replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
         },
         {
           find: '@',
-          replacement: path.resolve(__dirname, 'src')
-        }
-      ]
+          replacement: path.resolve(__dirname, 'src'),
+        },
+      ],
     },
     define: {
-      'process.env.VITE_ROUTER_MODE': JSON.stringify(env.VITE_ROUTER_MODE)
+      'process.env.VITE_ROUTER_MODE': JSON.stringify(env.VITE_ROUTER_MODE),
     },
     build: {
       minify: true,
@@ -210,17 +204,17 @@ export default defineConfig(({ mode }) => {
           manualChunks: getManualChunk,
           entryFileNames: 'js/[name]-[hash].js',
           chunkFileNames: 'js/[name]-[hash].js',
-          assetFileNames: getAssetFileName
-        }
-      }
+          assetFileNames: getAssetFileName,
+        },
+      },
     },
     css: {
       preprocessorOptions: {
         scss: {
           api: 'modern',
-          additionalData: `@use '@/styles/element-variables.scss' as *;`
-        }
-      }
+          additionalData: `@use '@/styles/element-variables.scss' as *;`,
+        },
+      },
     },
     test: {
       globals: true,
@@ -229,13 +223,13 @@ export default defineConfig(({ mode }) => {
       alias: [
         {
           find: 'vue-i18n',
-          replacement: 'vue-i18n/dist/vue-i18n.cjs.js'
+          replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
         },
         {
           find: '@',
-          replacement: path.resolve(__dirname, 'src')
-        }
-      ]
-    }
-  }
-})
+          replacement: path.resolve(__dirname, 'src'),
+        },
+      ],
+    },
+  };
+});

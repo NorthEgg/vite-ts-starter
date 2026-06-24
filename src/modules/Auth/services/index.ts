@@ -1,42 +1,42 @@
-import { mapApiResponse } from '@/api/core/helpers'
-import type { ApiResponse } from '@/api/core/types'
-import type {
-  LocalePreferenceModel,
-  LoginPayload,
-  SessionModel
-} from '@/modules/Auth/models/session'
+import { mapApiResponse } from '@/api/core/helpers';
+import type { ApiResponse } from '@/api/core/types';
 import {
   changeLanguagePreference,
   getCurrentUser,
   signIn,
-  signOut
-} from '@/modules/Auth/api'
+  signOut,
+} from '@/modules/Auth/api';
 import {
   toLocalePreferenceModel,
-  toSessionModel
-} from '@/modules/Auth/mappers/session'
+  toSessionModel,
+} from '@/modules/Auth/mappers/session';
+import type {
+  LocalePreferenceModel,
+  LoginPayload,
+  SessionModel,
+} from '@/modules/Auth/models/session';
 
 export async function loginSession(
-  payload: LoginPayload
+  payload: LoginPayload,
 ): Promise<ApiResponse<SessionModel>> {
-  const response = await signIn(payload)
-  return mapApiResponse(response, toSessionModel)
+  const response = await signIn(payload);
+  return mapApiResponse(response, toSessionModel);
 }
 
 export async function logoutSession(): Promise<ApiResponse<null>> {
-  return signOut()
+  return signOut();
 }
 
 export async function getCurrentSession(): Promise<ApiResponse<SessionModel>> {
-  const response = await getCurrentUser()
-  return mapApiResponse(response, toSessionModel)
+  const response = await getCurrentUser();
+  return mapApiResponse(response, toSessionModel);
 }
 
 export async function updateLanguagePreference(
-  locale: string
+  locale: string,
 ): Promise<ApiResponse<LocalePreferenceModel>> {
   const response = await changeLanguagePreference({
-    locale
-  })
-  return mapApiResponse(response, toLocalePreferenceModel)
+    locale,
+  });
+  return mapApiResponse(response, toLocalePreferenceModel);
 }

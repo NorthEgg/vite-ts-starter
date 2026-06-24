@@ -1,1 +1,1 @@
-export { useLanguage } from '@/composables/useLanguage'
+export { useLanguage } from '@/composables/useLanguage';

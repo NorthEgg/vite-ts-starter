@@ -9,7 +9,6 @@
   "include": [
     "vite.config.ts",
     "uno.config.ts",
-    "eslint.config.js",
     "lint-staged.config.js",
     "commitlint.config.js"
   ]

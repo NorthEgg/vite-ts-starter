@@ -1,23 +1,23 @@
 <script lang="ts" setup>
-import Octocat from './octocat.vue'
+import Octocat from './octocat.vue';
 
 withDefaults(
   defineProps<{
-    showBorder?: boolean
+    showBorder?: boolean;
   }>(),
   {
-    showBorder: false
-  }
-)
+    showBorder: false,
+  },
+);
 
-const link = ref('https://github.com/NorthEgg')
+const link = ref('https://github.com/NorthEgg');
 </script>
 
 <template>
   <footer
     class="footer"
     :class="{
-      border: showBorder
+      border: showBorder,
     }"
   >
     <div class="footer-container">

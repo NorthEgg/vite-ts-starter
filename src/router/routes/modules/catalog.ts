@@ -1,4 +1,4 @@
-const catalogPage = () => import('@/modules/Catalog/pages/index.vue')
+const catalogPage = () => import('@/modules/Catalog/pages/index.vue');
 
 export const catalogRoutes: RouteRecordRaw[] = [
   {
@@ -7,10 +7,10 @@ export const catalogRoutes: RouteRecordRaw[] = [
     meta: {
       title: '资源列表',
       requiresAuth: true,
-      permission: 'catalog:list'
+      permission: 'catalog:list',
     },
     redirect: {
-      name: 'CatalogList'
+      name: 'CatalogList',
     },
     children: [
       {
@@ -20,8 +20,8 @@ export const catalogRoutes: RouteRecordRaw[] = [
         meta: {
           title: '资源列表',
           requiresAuth: true,
-          permission: 'catalog:list'
-        }
+          permission: 'catalog:list',
+        },
       },
       {
         path: 'list',
@@ -30,9 +30,9 @@ export const catalogRoutes: RouteRecordRaw[] = [
         meta: {
           title: '资源目录',
           requiresAuth: true,
-          permission: 'catalog:list'
-        }
-      }
-    ]
-  }
-]
+          permission: 'catalog:list',
+        },
+      },
+    ],
+  },
+];

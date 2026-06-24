@@ -1,10 +1,16 @@
 export default {
-  '*.{js,cjs,mjs,ts,tsx}': ['prettier --write', 'eslint --quiet --fix'],
-  '*.vue': [
-    'prettier --write',
-    'eslint --quiet --fix',
-    'stylelint --fix --allow-empty-input'
+  '*.{js,cjs,mjs,ts,tsx}': [
+    'oxfmt --write --no-error-on-unmatched-pattern',
+    'oxlint --fix --no-error-on-unmatched-pattern',
   ],
-  '*.{css,scss}': ['prettier --write', 'stylelint --fix --allow-empty-input'],
-  '*.{json,md,html,yml,yaml}': 'prettier --write'
-}
+  '*.vue': [
+    'oxfmt --write --no-error-on-unmatched-pattern',
+    'oxlint --vue-plugin --fix --no-error-on-unmatched-pattern',
+    'stylelint --fix --allow-empty-input',
+  ],
+  '*.{css,scss}': [
+    'oxfmt --write --no-error-on-unmatched-pattern',
+    'stylelint --fix --allow-empty-input',
+  ],
+  '*.{json,md,html,yml,yaml}': 'oxfmt --write --no-error-on-unmatched-pattern',
+};

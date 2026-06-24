@@ -1,14 +1,14 @@
 <script lang="ts">
-import NavigationSideGoBack from '@/components/Navigation/Side/SideGoBack.vue'
-import NavigationNavBar from '@/components/Navigation/NavBar.vue'
+import NavigationNavBar from '@/components/Navigation/NavBar.vue';
+import NavigationSideGoBack from '@/components/Navigation/Side/SideGoBack.vue';
 
 export default defineComponent({
   name: 'LayoutView',
   components: {
     NavigationNavBar,
-    NavigationSideGoBack
-  }
-})
+    NavigationSideGoBack,
+  },
+});
 </script>
 
 <template>

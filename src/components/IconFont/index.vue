@@ -4,63 +4,63 @@ export default defineComponent({
   props: {
     icon: {
       type: String,
-      default: ''
+      default: '',
     },
     shadow: {
       type: Boolean,
-      default: false
+      default: false,
     },
     verticalCenter: {
       type: Boolean,
-      default: false
+      default: false,
     },
     cursor: {
       type: Boolean,
-      default: false
+      default: false,
     },
     disabled: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   emits: ['click'],
   setup(props, { emit }) {
     const getClassName = computed(() => {
-      const className: string[] = []
+      const className: string[] = [];
       if (props.verticalCenter) {
-        className.push('middle')
+        className.push('middle');
       }
       if (props.cursor) {
-        className.push('cursor')
+        className.push('cursor');
       }
       if (props.disabled) {
-        className.push('disabled')
+        className.push('disabled');
       }
-      return className
-    })
+      return className;
+    });
 
     const handleClick = () => {
       if (!props.disabled) {
-        emit('click')
+        emit('click');
       }
-    }
+    };
 
     const getAttrs = () => {
-      const attrs: any = {}
+      const attrs: any = {};
 
       if (props.shadow) {
-        attrs.filter = 'url(#drop-shadow)'
+        attrs.filter = 'url(#drop-shadow)';
       }
-      return attrs
-    }
+      return attrs;
+    };
     return {
       getClassName,
 
       handleClick,
-      getAttrs
-    }
-  }
-})
+      getAttrs,
+    };
+  },
+});
 </script>
 
 <template>

@@ -3,33 +3,33 @@ import type {
   ResourceListResult,
   ResourceStatus,
   ResourceSummary,
-  ToggleResourceStatusResult
-} from '@/modules/Catalog/models/resource'
+  ToggleResourceStatusResult,
+} from '@/modules/Catalog/models/resource';
 
 export interface ResourceSummaryDTO {
-  resource_id: string
-  resource_title: string
-  resource_subtitle: string
-  resource_description: string
-  resource_status: ResourceStatus
-  updated_at: string
+  resource_id: string;
+  resource_title: string;
+  resource_subtitle: string;
+  resource_description: string;
+  resource_status: ResourceStatus;
+  updated_at: string;
 }
 
 export interface ResourceListResultDTO {
-  items: ResourceSummaryDTO[]
-  next_cursor: string | null
-  total: number
+  items: ResourceSummaryDTO[];
+  next_cursor: string | null;
+  total: number;
 }
 
 export interface CreateResourcePayloadDTO {
-  resource_title: string
-  resource_subtitle: string
-  resource_description: string
+  resource_title: string;
+  resource_subtitle: string;
+  resource_description: string;
 }
 
 export interface ToggleResourceStatusResultDTO {
-  resource_id: string
-  resource_status: ResourceStatus
+  resource_id: string;
+  resource_status: ResourceStatus;
 }
 
 export function toResourceSummary(dto: ResourceSummaryDTO): ResourceSummary {
@@ -39,35 +39,35 @@ export function toResourceSummary(dto: ResourceSummaryDTO): ResourceSummary {
     subtitle: dto.resource_subtitle,
     description: dto.resource_description,
     status: dto.resource_status,
-    updatedAt: dto.updated_at
-  }
+    updatedAt: dto.updated_at,
+  };
 }
 
 export function toResourceListResult(
-  dto: ResourceListResultDTO
+  dto: ResourceListResultDTO,
 ): ResourceListResult {
   return {
     items: dto.items.map(toResourceSummary),
     nextCursor: dto.next_cursor,
-    total: dto.total
-  }
+    total: dto.total,
+  };
 }
 
 export function toCreateResourcePayloadDTO(
-  payload: CreateResourcePayload
+  payload: CreateResourcePayload,
 ): CreateResourcePayloadDTO {
   return {
     resource_title: payload.title,
     resource_subtitle: payload.subtitle,
-    resource_description: payload.description
-  }
+    resource_description: payload.description,
+  };
 }
 
 export function toToggleResourceStatusResult(
-  dto: ToggleResourceStatusResultDTO
+  dto: ToggleResourceStatusResultDTO,
 ): ToggleResourceStatusResult {
   return {
     id: dto.resource_id,
-    status: dto.resource_status
-  }
+    status: dto.resource_status,
+  };
 }

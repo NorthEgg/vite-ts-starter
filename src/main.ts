@@ -1,28 +1,25 @@
-import 'virtual:uno.css'
+import 'virtual:uno.css';
+import Mixin from '@/mixins';
+import { setupRouter } from '@/router';
+import { setupStore } from '@/store';
+import '@/assets/fonts';
+import Widgets from '@/widgets';
 
-import { setupRouter } from '@/router'
-import { setupStore } from '@/store'
+import App from './App.vue';
 
-import App from './App.vue'
-
-import '@/assets/fonts'
-
-import Mixin from '@/mixins'
-import Widgets from '@/widgets'
-
-const app = createApp(App)
+const app = createApp(App);
 
 function setupPlugins() {
-  app.use(Widgets).mixin(Mixin)
+  app.use(Widgets).mixin(Mixin);
 }
 
 async function setupApp() {
-  setupRouter(app)
-  setupStore(app)
-  app.mount('#app')
+  setupRouter(app);
+  setupStore(app);
+  app.mount('#app');
 }
 
-setupPlugins()
-setupApp()
+setupPlugins();
+setupApp();
 
-export default app
+export default app;

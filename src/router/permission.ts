@@ -1,1 +1,1 @@
-export { setupRouterGuards as createRouterGuards } from './guards/auth.guard'
+export { setupRouterGuards as createRouterGuards } from './guards/auth.guard';

@@ -1,1 +1,1 @@
-import '@/assets/fonts/iconfont'
+import '@/assets/fonts/iconfont';

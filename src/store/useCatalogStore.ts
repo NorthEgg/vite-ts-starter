@@ -1,69 +1,69 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-import { handleApiResponse } from '@/api/core/helpers'
-import type { ApiResponse } from '@/api/core/types'
-import {
-  createCatalogResource,
-  getCatalogList,
-  updateCatalogResourceStatus
-} from '@/modules/Catalog/services'
+import { handleApiResponse } from '@/api/core/helpers';
+import type { ApiResponse } from '@/api/core/types';
 import type {
   CreateResourcePayload,
   ResourceListResult,
-  ResourceSummary
-} from '@/modules/Catalog/models/resource'
+  ResourceSummary,
+} from '@/modules/Catalog/models/resource';
+import {
+  createCatalogResource,
+  getCatalogList,
+  updateCatalogResourceStatus,
+} from '@/modules/Catalog/services';
 
 export const useCatalogStore = defineStore('catalog', {
   state: () => ({
     items: [] as ResourceSummary[],
-    selectedId: null as string | null
+    selectedId: null as string | null,
   }),
   actions: {
     async loadItems(keyword?: string) {
       const response = await getCatalogList({
-        keyword
-      })
+        keyword,
+      });
 
       await handleApiResponse(response, {
         onSuccess: (data) => {
-          this.items = data.items
-        }
-      })
+          this.items = data.items;
+        },
+      });
 
-      return response
+      return response;
     },
     async toggleItemStatus(id: string) {
       const response = await updateCatalogResourceStatus({
-        id
-      })
+        id,
+      });
 
       await handleApiResponse(response, {
         onSuccess: (data) => {
-          const target = this.items.find((item) => item.id === id)
+          const target = this.items.find((item) => item.id === id);
 
           if (target) {
-            target.status = data.status
+            target.status = data.status;
           }
-        }
-      })
+        },
+      });
 
-      return response
+      return response;
     },
     seedItems(items: ResourceSummary[]) {
-      this.items = items
+      this.items = items;
     },
     async createItem(payload: CreateResourcePayload) {
-      const response = await createCatalogResource(payload)
+      const response = await createCatalogResource(payload);
 
       await handleApiResponse(response, {
         onSuccess: (createdItem) => {
-          this.items = [createdItem, ...this.items]
-        }
-      })
+          this.items = [createdItem, ...this.items];
+        },
+      });
 
-      return response
-    }
-  }
-})
+      return response;
+    },
+  },
+});
 
-export type CatalogListResponse = ApiResponse<ResourceListResult>
+export type CatalogListResponse = ApiResponse<ResourceListResult>;

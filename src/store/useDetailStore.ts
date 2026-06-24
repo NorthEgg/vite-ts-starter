@@ -1,28 +1,28 @@
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
 
-import { handleApiResponse } from '@/api/core/helpers'
-import { getDetailOverview } from '@/modules/Detail/services'
-import type { DetailPanelModel } from '@/modules/Detail/models/detail'
+import { handleApiResponse } from '@/api/core/helpers';
+import type { DetailPanelModel } from '@/modules/Detail/models/detail';
+import { getDetailOverview } from '@/modules/Detail/services';
 
 export const useDetailStore = defineStore('detail', {
   state: () => ({
     panel: {
       title: '',
       summary: '',
-      sections: []
-    } as DetailPanelModel
+      sections: [],
+    } as DetailPanelModel,
   }),
   actions: {
     async loadDetail(resourceId: string) {
-      const response = await getDetailOverview(resourceId)
+      const response = await getDetailOverview(resourceId);
 
       await handleApiResponse(response, {
         onSuccess: (data) => {
-          this.panel = data
-        }
-      })
+          this.panel = data;
+        },
+      });
 
-      return response
-    }
-  }
-})
+      return response;
+    },
+  },
+});

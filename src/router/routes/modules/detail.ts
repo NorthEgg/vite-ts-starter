@@ -1,15 +1,15 @@
-const detailPage = () => import('@/modules/Detail/pages/index.vue')
-const layoutView = () => import('@/components/Layout/LayoutView.vue')
+const detailPage = () => import('@/modules/Detail/pages/index.vue');
+const layoutView = () => import('@/components/Layout/LayoutView.vue');
 
 export const detailRoutes: RouteRecordRaw[] = [
   {
     path: 'detail',
     redirect: {
-      name: 'CatalogList'
+      name: 'CatalogList',
     },
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
   },
   {
     path: 'detail/:resourceId',
@@ -18,10 +18,10 @@ export const detailRoutes: RouteRecordRaw[] = [
     meta: {
       title: '详情页',
       requiresAuth: true,
-      permission: 'catalog:detail'
+      permission: 'catalog:detail',
     },
     redirect: {
-      name: 'DetailOverview'
+      name: 'DetailOverview',
     },
     children: [
       {
@@ -31,9 +31,9 @@ export const detailRoutes: RouteRecordRaw[] = [
         meta: {
           title: '详情页',
           requiresAuth: true,
-          permission: 'catalog:detail'
-        }
-      }
-    ]
-  }
-]
+          permission: 'catalog:detail',
+        },
+      },
+    ],
+  },
+];

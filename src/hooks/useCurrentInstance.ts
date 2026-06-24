@@ -1,1 +1,1 @@
-export { default } from '@/composables/useCurrentInstance'
+export { default } from '@/composables/useCurrentInstance';

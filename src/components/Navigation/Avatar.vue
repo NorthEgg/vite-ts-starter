@@ -1,37 +1,36 @@
 <script lang="ts">
-import Cookie from 'js-cookie'
-import { useLocale } from 'element-plus'
-
-import { SwitchButton } from '@element-plus/icons-vue'
+import { SwitchButton } from '@element-plus/icons-vue';
+import { useLocale } from 'element-plus';
+import Cookie from 'js-cookie';
 
 export default defineComponent({
   name: 'NavigationAvatar',
   components: {
-    SwitchButton
+    SwitchButton,
   },
   setup() {
-    const localeInject = useLocale()
+    const localeInject = useLocale();
     const commandList = computed(() => [
       {
         label: localeInject.t('auth.signout'),
         icon: 'switch-button',
         click: () => {
-          Cookie.remove('token')
-          window.location.reload()
-        }
-      }
-    ])
+          Cookie.remove('token');
+          window.location.reload();
+        },
+      },
+    ]);
 
     const handleCommand = (cmdItem: { click?: () => void }) => {
-      cmdItem.click?.()
-    }
+      cmdItem.click?.();
+    };
     return {
       commandList,
 
-      handleCommand
-    }
-  }
-})
+      handleCommand,
+    };
+  },
+});
 </script>
 
 <template>

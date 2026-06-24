@@ -1,22 +1,22 @@
 <script lang="ts">
-import Translations from '@/locales/Translations.vue'
-import NavigationSideAction from '@/components/Navigation/Side/SideAction.vue'
-import NavigationAvatar from '@/components/Navigation/Avatar.vue'
+import NavigationAvatar from '@/components/Navigation/Avatar.vue';
+import NavigationSideAction from '@/components/Navigation/Side/SideAction.vue';
+import Translations from '@/locales/Translations.vue';
 
 export default defineComponent({
   name: 'NavigationNavBar',
   components: {
     Translations,
     NavigationSideAction,
-    NavigationAvatar
+    NavigationAvatar,
   },
   props: {
     fixed: {
       type: Boolean,
-      default: true
-    }
-  }
-})
+      default: true,
+    },
+  },
+});
 </script>
 
 <template>
@@ -24,7 +24,7 @@ export default defineComponent({
     <header
       class="navigation-navbar-header-container"
       :class="{
-        'fixed-header': fixed
+        'fixed-header': fixed,
       }"
     >
       <div class="navbar-header-box">

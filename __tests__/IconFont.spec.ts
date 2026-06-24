@@ -1,82 +1,83 @@
-import { describe, expect, it } from 'vitest'
-import { mount } from '@vue/test-utils'
-import IconFontComponent from '@/components/IconFont/index.vue'
+import { mount } from '@vue/test-utils';
+import { describe, expect, it } from 'vitest';
+
+import IconFontComponent from '@/components/IconFont/index.vue';
 
 describe('Test IconFontComponent', () => {
   it('works', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
-        icon: 'iconfile'
-      }
-    })
+        icon: 'iconfile',
+      },
+    });
 
-    expect(wrapper.find('g').find('use').attributes('href')).toBe('#iconfile')
-  })
+    expect(wrapper.find('g').find('use').attributes('href')).toBe('#iconfile');
+  });
 
   it('empty IconFontComponent', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
-        icon: ''
-      }
-    })
+        icon: '',
+      },
+    });
 
-    expect(wrapper.find('g').find('use').attributes('href')).toBe('#')
-  })
+    expect(wrapper.find('g').find('use').attributes('href')).toBe('#');
+  });
 
   it('the position of icon is vertically centered', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
         icon: 'iconfile',
-        verticalCenter: true
-      }
-    })
+        verticalCenter: true,
+      },
+    });
 
-    expect(wrapper.classes()).toContain('middle')
-  })
+    expect(wrapper.classes()).toContain('middle');
+  });
 
   it('cursor pointer', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
         icon: 'iconfile',
-        cursor: true
-      }
-    })
+        cursor: true,
+      },
+    });
 
-    expect(wrapper.classes()).toContain('cursor')
-  })
+    expect(wrapper.classes()).toContain('cursor');
+  });
 
   it('handle handleClick', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
         icon: 'iconfile',
-        disabled: false
-      }
-    })
+        disabled: false,
+      },
+    });
 
-    wrapper.vm.handleClick()
-    expect(wrapper.emitted().click).toBeTruthy()
-  })
+    wrapper.vm.handleClick();
+    expect(wrapper.emitted().click).toBeTruthy();
+  });
 
   it('does not handle handleClick', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
         icon: 'iconfile',
-        disabled: true
-      }
-    })
+        disabled: true,
+      },
+    });
 
-    wrapper.vm.handleClick()
-    expect(wrapper.emitted().click).toBeUndefined()
-  })
+    wrapper.vm.handleClick();
+    expect(wrapper.emitted().click).toBeUndefined();
+  });
 
   it('has shadow', () => {
     const wrapper = mount(IconFontComponent, {
       props: {
         icon: 'iconfile',
-        shadow: true
-      }
-    })
+        shadow: true,
+      },
+    });
 
-    expect(wrapper.find('g').attributes('filter')).toBeTruthy()
-  })
-})
+    expect(wrapper.find('g').attributes('filter')).toBeTruthy();
+  });
+});

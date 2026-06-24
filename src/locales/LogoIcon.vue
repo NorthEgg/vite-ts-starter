@@ -4,17 +4,17 @@ export default defineComponent({
   props: {
     dark: {
       type: Boolean,
-      default: false
-    }
-  }
-})
+      default: false,
+    },
+  },
+});
 </script>
 
 <template>
   <span
     class="locales-logo-icon"
     :class="{
-      'is-dark': dark
+      'is-dark': dark,
     }"
   >
     <svg viewBox="0 0 512 512">

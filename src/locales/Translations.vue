@@ -1,46 +1,45 @@
 <script lang="ts">
-import { localesMapping } from '@/locales'
-
-import LogoIcon from '@/locales/LogoIcon.vue'
-import { useSessionStore } from '@/composables/useBaseStore'
+import { useSessionStore } from '@/composables/useBaseStore';
+import { localesMapping } from '@/locales';
+import LogoIcon from '@/locales/LogoIcon.vue';
 
 export default defineComponent({
   name: 'TranslationsBox',
   components: {
-    LogoIcon
+    LogoIcon,
   },
   props: {
     dark: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup() {
-    const route = useRoute()
-    const router = useRouter()
-    const sessionStore = useSessionStore()
-    const localesList = ref(localesMapping)
-    const currentLocale = computed(() => sessionStore.locale)
+    const route = useRoute();
+    const router = useRouter();
+    const sessionStore = useSessionStore();
+    const localesList = ref(localesMapping);
+    const currentLocale = computed(() => sessionStore.locale);
 
     const handleChange = (targetLocaleItem) => {
       setTimeout(() => {
-        const { localeCode } = targetLocaleItem
+        const { localeCode } = targetLocaleItem;
         router.replace({
           params: {
             ...route.params,
-            locale: localeCode
-          }
-        })
-        sessionStore.setLocale(localeCode)
-      })
-    }
+            locale: localeCode,
+          },
+        });
+        sessionStore.setLocale(localeCode);
+      });
+    };
     return {
       localesList,
       currentLocale,
-      handleChange
-    }
-  }
-})
+      handleChange,
+    };
+  },
+});
 </script>
 
 <template>
@@ -48,7 +47,7 @@ export default defineComponent({
     class="translations-box"
     popper-class="translations-box"
     :class="{
-      'is-dark': dark
+      'is-dark': dark,
     }"
     trigger="hover"
     @command="handleChange"

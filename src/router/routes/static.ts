@@ -1,20 +1,20 @@
-import { currentLocaleMap, localesMapping } from '@/locales'
-import { isUndefined } from '@/utils/type'
+import { currentLocaleMap, localesMapping } from '@/locales';
+import { isUndefined } from '@/utils/type';
 
-const layout = () => import('@/components/Layout/index.vue')
-import { authRoutes } from '@/router/routes/modules/auth'
-import { catalogRoutes } from '@/router/routes/modules/catalog'
-import { detailRoutes } from '@/router/routes/modules/detail'
+const layout = () => import('@/components/Layout/index.vue');
+import { authRoutes } from '@/router/routes/modules/auth';
+import { catalogRoutes } from '@/router/routes/modules/catalog';
+import { detailRoutes } from '@/router/routes/modules/detail';
 
 function getLocaleRegex() {
-  let reg = ''
+  let reg = '';
 
   localesMapping.forEach((localeItem, index) => {
-    const line = index !== localesMapping.length - 1 ? '|' : ''
-    reg = `${reg}${localeItem.localeCode}${line}`
-  })
+    const line = index !== localesMapping.length - 1 ? '|' : '';
+    reg = `${reg}${localeItem.localeCode}${line}`;
+  });
 
-  return `(${reg})`
+  return `(${reg})`;
 }
 
 export const staticRoutes: RouteRecordRaw[] = [
@@ -22,42 +22,42 @@ export const staticRoutes: RouteRecordRaw[] = [
     path: '/',
     name: 'Root',
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
     },
-    redirect: '/catalog'
+    redirect: '/catalog',
   },
   {
     path: `/:locale${getLocaleRegex()}?`,
     component: layout,
     meta: {
-      requiresAuth: false
+      requiresAuth: false,
     },
     beforeEnter(to, _from, next) {
       if (
         currentLocaleMap(to.params.locale) &&
         !isUndefined(to.params.pathMatch)
       ) {
-        next(`/${to.params.locale}/catalog`)
-        return
+        next(`/${to.params.locale}/catalog`);
+        return;
       }
 
-      next()
+      next();
     },
     children: [
       {
         path: '',
         name: 'LangRoot',
         meta: {
-          requiresAuth: false
+          requiresAuth: false,
         },
         redirect: {
-          name: 'Catalog'
-        }
+          name: 'Catalog',
+        },
       },
       ...authRoutes,
       ...catalogRoutes,
-      ...detailRoutes
-    ]
+      ...detailRoutes,
+    ],
   },
   {
     path: '/:pathMatch(.*)',
@@ -65,7 +65,7 @@ export const staticRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/404.vue'),
     meta: {
       title: '404',
-      requiresAuth: false
-    }
-  }
-]
+      requiresAuth: false,
+    },
+  },
+];

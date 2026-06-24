@@ -1,6 +1,7 @@
 <script lang="ts">
-import { isFunction } from '@/utils/type'
-import type { PropType } from 'vue'
+import type { PropType } from 'vue';
+
+import { isFunction } from '@/utils/type';
 
 export default defineComponent({
   name: 'AuthContainerLayout',
@@ -8,86 +9,86 @@ export default defineComponent({
     title: {
       type: String,
       default: '',
-      required: true
+      required: true,
     },
     titleIcon: {
       type: String,
-      default: ''
+      default: '',
     },
     desc: {
       type: String,
-      default: ''
+      default: '',
     },
     actionList: {
       type: Array as PropType<Array<any>>,
       default() {
-        return []
+        return [];
       },
-      required: true
+      required: true,
     },
     formData: {
       type: Object,
       default() {
-        return {}
+        return {};
       },
-      required: true
+      required: true,
     },
     formConfig: {
       type: Array as PropType<Array<any>>,
       default() {
-        return []
+        return [];
       },
-      required: true
-    }
+      required: true,
+    },
   },
   emits: ['on-submit'],
   setup() {
-    const { proxy } = useCurrentInstance()
-    const showPassword = ref(false)
-    const boxForm = ref()
+    const { proxy } = useCurrentInstance();
+    const showPassword = ref(false);
+    const boxForm = ref();
 
     function tooglePassword() {
-      showPassword.value = !showPassword.value
+      showPassword.value = !showPassword.value;
     }
     function getInputItemAttrs(formItem: any) {
-      const attrs: any = {}
-      const isPassword = formItem.type === 'password'
+      const attrs: any = {};
+      const isPassword = formItem.type === 'password';
       if (isPassword) {
-        attrs.type = showPassword.value ? 'text' : 'password'
+        attrs.type = showPassword.value ? 'text' : 'password';
       } else {
-        attrs.type = 'text'
+        attrs.type = 'text';
       }
 
       return {
         clearable: !isPassword,
         placeholder: formItem.placeholder,
-        ...attrs
-      }
+        ...attrs,
+      };
     }
 
     function getFormItemAttrs(attrs: any) {
-      const rules = isFunction(attrs.rules) ? attrs.rules.call(proxy) : ''
+      const rules = isFunction(attrs.rules) ? attrs.rules.call(proxy) : '';
 
       return {
         rules,
-        ..._.omit(attrs, ['rules'])
-      }
+        ..._.omit(attrs, ['rules']),
+      };
     }
 
     function getActionItemEvent(on: any) {
-      const onEvent: any = {}
+      const onEvent: any = {};
       Object.keys(on).forEach((onItem) => {
-        onEvent[onItem] = on[onItem].bind(proxy.$parent, boxForm.value)
-      })
-      return onEvent
+        onEvent[onItem] = on[onItem].bind(proxy.$parent, boxForm.value);
+      });
+      return onEvent;
     }
 
     function handleClickLink(link: any) {
-      link.click.call(proxy.$parent, boxForm.value)
+      link.click.call(proxy.$parent, boxForm.value);
     }
 
     function onSubmit() {
-      proxy.$emit('on-submit', boxForm.value)
+      proxy.$emit('on-submit', boxForm.value);
     }
 
     return {
@@ -99,10 +100,10 @@ export default defineComponent({
       getFormItemAttrs,
       getActionItemEvent,
       handleClickLink,
-      onSubmit
-    }
-  }
-})
+      onSubmit,
+    };
+  },
+});
 </script>
 
 <template>

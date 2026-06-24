@@ -3,7 +3,7 @@ export default {
     'stylelint-config-standard',
     'stylelint-config-standard-scss',
     'stylelint-config-recommended-vue',
-    'stylelint-config-recommended-vue/scss'
+    'stylelint-config-recommended-vue/scss',
   ],
   ignoreFiles: ['**/*.js', '**/*.ts'],
   defaultSeverity: 'error',
@@ -23,8 +23,8 @@ export default {
     'selector-pseudo-class-no-unknown': [
       true,
       {
-        ignorePseudoClasses: ['export', 'deep']
-      }
+        ignorePseudoClasses: ['export', 'deep'],
+      },
     ],
     'property-no-unknown': null,
     'scss/at-rule-no-unknown': null,
@@ -35,8 +35,8 @@ export default {
     'property-no-vendor-prefix': [
       true,
       {
-        ignoreProperties: ['box-shadow']
-      }
-    ]
-  }
-}
+        ignoreProperties: ['box-shadow'],
+      },
+    ],
+  },
+};

@@ -51,7 +51,8 @@ modules/<Domain>/
   .husky/
   docs/
     frontend-architecture-checklist.md
-  eslint.config.js
+  .oxlintrc.json
+  .oxfmtrc.json
   lint-staged.config.js
   package.json
   stylelint.config.mjs
@@ -259,8 +260,8 @@ Meta 约定：
 ### 6.1 已完成
 
 - [x] 已配置 `@/` 路径别名
-- [x] 已配置 `ESLint`
-- [x] 已配置 `Prettier`
+- [x] 已配置 `Oxlint`
+- [x] 已配置 `Oxfmt`
 - [x] 已配置 `Stylelint`
 - [x] 已接入 `husky + lint-staged`
 - [x] 已接入 `UnoCSS`

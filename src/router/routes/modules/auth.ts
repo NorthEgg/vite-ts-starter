@@ -1,4 +1,4 @@
-const authPage = () => import('@/modules/Auth/pages/index.vue')
+const authPage = () => import('@/modules/Auth/pages/index.vue');
 
 export const authRoutes: RouteRecordRaw[] = [
   {
@@ -6,10 +6,10 @@ export const authRoutes: RouteRecordRaw[] = [
     name: 'Auth',
     meta: {
       title: '认证',
-      requiresAuth: false
+      requiresAuth: false,
     },
     redirect: {
-      name: 'AuthLogin'
+      name: 'AuthLogin',
     },
     children: [
       {
@@ -18,9 +18,9 @@ export const authRoutes: RouteRecordRaw[] = [
         component: authPage,
         meta: {
           title: '登录',
-          requiresAuth: false
-        }
-      }
-    ]
-  }
-]
+          requiresAuth: false,
+        },
+      },
+    ],
+  },
+];
