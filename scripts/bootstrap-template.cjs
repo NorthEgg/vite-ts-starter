@@ -2,8 +2,11 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const { URL } = require('node:url');
 
-const root = process.cwd();
+function getRoot() {
+  return process.cwd();
+}
 
 function parseArgs(argv) {
   const args = {};
@@ -48,11 +51,11 @@ Optional:
 }
 
 function readTextFile(relativePath) {
-  return fs.readFileSync(path.join(root, relativePath), 'utf8');
+  return fs.readFileSync(path.join(getRoot(), relativePath), 'utf8');
 }
 
 function writeTextFile(relativePath, content) {
-  fs.writeFileSync(path.join(root, relativePath), content, 'utf8');
+  fs.writeFileSync(path.join(getRoot(), relativePath), content, 'utf8');
 }
 
 function escapeSingleQuotes(value) {
@@ -66,6 +69,14 @@ function normalizeRepoUrl(rawRepo) {
     .replace(/\.git$/, '')
     .replace(/\/$/, '');
 
+  const sshMatch = repoValue.match(/^git@([^:]+):(.+)$/i);
+  if (sshMatch) {
+    const [, host, repoPath] = sshMatch;
+    return `https://${host}/${repoPath}`
+      .replace(/\.git$/, '')
+      .replace(/\/$/, '');
+  }
+
   if (/^git@github\.com:/i.test(repoValue)) {
     return `https://github.com/${repoValue.replace(/^git@github\.com:/i, '')}`
       .replace(/\.git$/, '')
@@ -78,6 +89,13 @@ function normalizeRepoUrl(rawRepo) {
       .replace(/\/$/, '');
   }
 
+  if (/^ssh:\/\/git@/i.test(repoValue)) {
+    const sshUrl = new URL(repoValue);
+    return `https://${sshUrl.hostname}${sshUrl.pathname}`
+      .replace(/\.git$/, '')
+      .replace(/\/$/, '');
+  }
+
   return repoValue;
 }
 
@@ -86,7 +104,7 @@ function toGitRepoUrl(repoUrl) {
 }
 
 function updatePackageJson(config) {
-  const packagePath = path.join(root, 'package.json');
+  const packagePath = path.join(getRoot(), 'package.json');
   const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 
   packageJson.name = config.name;
@@ -180,4 +198,16 @@ function main() {
   console.log(`- repo: ${config.repoUrl}`);
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  escapeSingleQuotes,
+  main,
+  normalizeRepoUrl,
+  parseArgs,
+  replaceOrThrow,
+  toGitRepoUrl,
+  updatePackageJson,
+};

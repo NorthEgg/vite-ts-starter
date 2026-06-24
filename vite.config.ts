@@ -11,7 +11,7 @@ import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 const vendorChunkGroups: Record<string, string[]> = {
-  'vendor-core': ['vue', 'vue-router', 'vuex'],
+  'vendor-core': ['vue', 'vue-router'],
   'vendor-ui': ['element-plus', '@element-plus/icons-vue'],
   'vendor-utils': ['axios', 'lodash-es', 'nprogress'],
   'vendor-visualization': ['echarts'],
@@ -90,7 +90,6 @@ export default defineConfig(({ mode }) => {
         imports: [
           'vue',
           'vue-router',
-          'vuex',
           {
             vue: ['createVNode', 'render'],
             'vue-router': [

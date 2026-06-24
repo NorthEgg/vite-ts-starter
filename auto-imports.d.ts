@@ -110,10 +110,7 @@ declare module 'vue' {
     readonly _: UnwrapRef<typeof import('lodash-es')>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
-    readonly createLogger: UnwrapRef<typeof import('vuex')['createLogger']>
-    readonly createNamespacedHelpers: UnwrapRef<typeof import('vuex')['createNamespacedHelpers']>
     readonly createRouter: UnwrapRef<typeof import('vue-router')['createRouter']>
-    readonly createStore: UnwrapRef<typeof import('vuex')['createStore']>
     readonly createVNode: UnwrapRef<typeof import('vue')['createVNode']>
     readonly createWebHashHistory: UnwrapRef<typeof import('vue-router')['createWebHashHistory']>
     readonly createWebHistory: UnwrapRef<typeof import('vue-router')['createWebHistory']>
@@ -131,10 +128,6 @@ declare module 'vue' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly isShallow: UnwrapRef<typeof import('vue')['isShallow']>
-    readonly mapActions: UnwrapRef<typeof import('vuex')['mapActions']>
-    readonly mapGetters: UnwrapRef<typeof import('vuex')['mapGetters']>
-    readonly mapMutations: UnwrapRef<typeof import('vuex')['mapMutations']>
-    readonly mapState: UnwrapRef<typeof import('vuex')['mapState']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
@@ -183,7 +176,6 @@ declare module 'vue' {
     readonly useRouter: UnwrapRef<typeof import('vue-router')['useRouter']>
     readonly useSessionStore: UnwrapRef<typeof import('./src/composables/useBaseStore')['useSessionStore']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
-    readonly useStore: UnwrapRef<typeof import('vuex')['useStore']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly uuidv4: UnwrapRef<typeof import('uuid')['v4']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

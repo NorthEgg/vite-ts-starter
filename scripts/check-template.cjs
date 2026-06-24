@@ -3,7 +3,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const root = process.cwd();
+function getRoot() {
+  return process.cwd();
+}
 
 const requiredFiles = [
   'README.md',
@@ -17,20 +19,17 @@ const requiredFiles = [
 
 const forbiddenPatterns = [/demo_test/i, /test-layout/i, /vuex/i];
 
-const failures = [];
-
-for (const relativePath of requiredFiles) {
-  const absolutePath = path.join(root, relativePath);
-
-  if (!fs.existsSync(absolutePath)) {
-    failures.push(`Missing required file: ${relativePath}`);
-  }
-}
-
-const scanFiles = ['src', 'README.md', 'package.json'];
+const scanFiles = [
+  'src',
+  'README.md',
+  'package.json',
+  'vite.config.ts',
+  'docs',
+  '.github/workflows',
+];
 
 function collectFiles(targetPath) {
-  const absolutePath = path.join(root, targetPath);
+  const absolutePath = path.join(getRoot(), targetPath);
 
   if (!fs.existsSync(absolutePath)) {
     return [];
@@ -50,30 +49,61 @@ function collectFiles(targetPath) {
       const nextRelative = path.join(targetPath, entry.name);
       return entry.isDirectory()
         ? collectFiles(nextRelative)
-        : [path.join(root, nextRelative)];
+        : [path.join(getRoot(), nextRelative)];
     });
 }
 
-const filesToCheck = scanFiles.flatMap(collectFiles);
+function runTemplateCheck() {
+  const failures = [];
 
-for (const file of filesToCheck) {
-  const content = fs.readFileSync(file, 'utf8');
+  for (const relativePath of requiredFiles) {
+    const absolutePath = path.join(getRoot(), relativePath);
 
-  for (const pattern of forbiddenPatterns) {
-    if (pattern.test(content)) {
-      failures.push(
-        `Forbidden placeholder found in ${path.relative(root, file)}: ${pattern}`,
-      );
+    if (!fs.existsSync(absolutePath)) {
+      failures.push(`Missing required file: ${relativePath}`);
     }
   }
-}
 
-if (failures.length) {
-  console.error('Template check failed:');
-  for (const failure of failures) {
-    console.error(`- ${failure}`);
+  const filesToCheck = scanFiles.flatMap(collectFiles);
+
+  for (const file of filesToCheck) {
+    const content = fs.readFileSync(file, 'utf8');
+
+    for (const pattern of forbiddenPatterns) {
+      if (pattern.test(content)) {
+        failures.push(
+          `Forbidden placeholder found in ${path.relative(getRoot(), file)}: ${pattern}`,
+        );
+      }
+    }
   }
-  process.exit(1);
+
+  return failures;
 }
 
-console.log('Template check passed.');
+function main() {
+  const failures = runTemplateCheck();
+
+  if (failures.length) {
+    console.error('Template check failed:');
+    for (const failure of failures) {
+      console.error(`- ${failure}`);
+    }
+    process.exit(1);
+  }
+
+  console.log('Template check passed.');
+}
+
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  collectFiles,
+  forbiddenPatterns,
+  main,
+  requiredFiles,
+  runTemplateCheck,
+  scanFiles,
+};
