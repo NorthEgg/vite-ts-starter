@@ -15,7 +15,6 @@ src/
   api/
   composables/
   components/
-  hooks/
   modules/
     Auth/
     Catalog/
@@ -67,9 +66,6 @@ src/
     useCurrentInstance.ts
     useLanguage.ts
   components/
-  hooks/
-    useBaseStore.ts
-    useLanguage.ts
   modules/
     Auth/
       api/
@@ -118,9 +114,7 @@ src/
 
 补充说明：
 
-- `src/utils/request.ts` 目前作为兼容层保留，真实请求层已迁到 `src/api/request.ts`
 - `src/composables/` 现在是全局通用组合能力的正式落点
-- `src/hooks/` 暂时保留为兼容壳，避免一次性改动历史引用
 - 页面目录当前沿用 `pages/`，不强制改名为 `views/`
 
 ## 3. 分层职责约定
@@ -272,13 +266,7 @@ Meta 约定：
 - [x] 已在现有模块中补齐 `mappers`
 - [x] 已在现有模块中补齐 `models`
 
-### 6.2 保留的兼容层
-
-- [x] `src/utils/request.ts` 作为兼容导出保留
-- [x] `src/router/permission.ts`、`src/router/routes.ts`、`src/router/child-routes.ts` 继续保留兼容导出
-- [x] `src/hooks/useBaseStore.ts` 继续保留，避免一次性改动所有引用
-
-### 6.3 仍可继续增强
+### 6.2 仍可继续增强
 
 - [x] 将更多通用 hook 从 `hooks/` 迁到更明确的 `composables/`
 - [x] 为 `service` / `mapper` / `router meta` 增加更有针对性的测试

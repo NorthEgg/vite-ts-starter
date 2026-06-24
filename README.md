@@ -40,8 +40,8 @@
 ```text
 src/
   assets/        静态资源
+  composables/   全局组合式能力
   components/    通用组件
-  hooks/         组合式 hooks
   locales/       多语言配置
   modules/       业务模块
   router/        路由与守卫
@@ -154,7 +154,7 @@ pnpm test:coverage
 - `src/locales/lang/*` 中的文案
 - `src/router/*` 中的业务路由
 - `src/modules/*` 中的示例模块骨架
-- `src/utils/request.ts` 中的请求策略
+- `src/api/request.ts` 中的请求策略
 - `src/styles/*` 中的主题变量
 - `public/` 与 `src/assets/` 中的品牌资源
 
