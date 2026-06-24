@@ -24,7 +24,7 @@
     "prepare": "husky"
   },
   "engines": {
-    "node": ">=22.12.x",
+    "node": ">=22.13.x",
     "pnpm": ">= 9.x"
   },
   "keywords": [
