@@ -28,8 +28,8 @@ export default defineComponent({
         :dataset="resourceItem"
       />
       <div v-if="!resourceList.length" class="catalog-empty-box">
-        <img src="@/assets/images/catalog-empty.svg" alt="Empty" />
-        <span>{{ _t('base.empty') }}</span>
+        <img src="@/assets/images/catalog-empty.svg" alt="" />
+        <span>{{ $t('base.empty') }}</span>
       </div>
     </div>
   </div>

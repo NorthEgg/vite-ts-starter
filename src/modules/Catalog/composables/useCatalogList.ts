@@ -1,3 +1,5 @@
+import { useI18n } from 'vue-i18n';
+
 import type { CreateResourcePayload } from '@/modules/Catalog/models/resource';
 import type useCatalogStore from '@/modules/Catalog/store';
 
@@ -13,7 +15,6 @@ interface CatalogDialogContext {
 
 interface UseCatalogListOptions {
   catalogStore: CatalogStore;
-  localeInject: ReturnType<(typeof import('element-plus'))['useLocale']>;
   openDialog: (options: {
     title: string;
     top: string;
@@ -34,8 +35,8 @@ interface UseCatalogListOptions {
 }
 
 export function useCatalogList(options: UseCatalogListOptions) {
-  const { catalogStore, localeInject, openDialog, resourceFormComponent } =
-    options;
+  const { catalogStore, openDialog, resourceFormComponent } = options;
+  const { t } = useI18n();
 
   const loadingContent = ref(true);
   const testI18nDate = ref();
@@ -58,7 +59,7 @@ export function useCatalogList(options: UseCatalogListOptions) {
     });
 
     openDialog({
-      title: localeInject.t('catalog.create'),
+      title: t('catalog.create'),
       top: '10vh',
       width: '50vw',
       showClose: true,

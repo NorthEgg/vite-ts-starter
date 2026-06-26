@@ -1,0 +1,91 @@
+{
+  "base": {
+    "systemTitle": "Vite TS Starter",
+    "goback": "Back to the previous page",
+    "empty": "No data available",
+    "i18nTest": "Test internationalization",
+    "rangeStart": "Start time",
+    "rangeEnd": "End time",
+    "pleaseInput": "Please Input",
+    "btnCancel": "Cancel",
+    "btnConfirm": "Confirm",
+    "notFound": "Page not found"
+  },
+  "nav": {
+    "action": "Action"
+  },
+  "auth": {
+    "welcome": "Hi, Welcome",
+    "signin": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "emailRequired": "Please enter an email",
+    "emailInvalid": "Please enter the correct email",
+    "passwordRequired": "Please enter a password",
+    "signout": "Sign out",
+    "loginSuccess": "Login successfully"
+  },
+  "catalog": {
+    "manageTitle": "Resource catalog",
+    "create": "Create resource",
+    "name": "Resource title",
+    "subtitle": "Subtitle",
+    "description": "Description",
+    "updatedAt": "Updated at",
+    "state": "Status",
+    "publish": "Activate",
+    "stop": "Deactivate",
+    "activated": "Resource activated",
+    "deactivated": "Resource deactivated"
+  },
+  "page": {
+    "auth": "Authentication",
+    "authLogin": "Sign in",
+    "catalogList": "Resource list",
+    "catalogDirectory": "Resource catalog",
+    "detail": "Resource detail",
+    "authSetting": "Account settings"
+  },
+  "validation": {
+    "required": "This field is required",
+    "imageIncomplete": "Please upload all images",
+    "imageSingle": "Please select an image",
+    "positiveInteger": "Please enter a positive integer",
+    "maxCount": "Up to {count} items allowed"
+  },
+  "request": {
+    "networkUnavailable": "The request is unavailable. Please try again or check your network.",
+    "http": {
+      "200": "The server successfully returned the requested data.",
+      "201": "Create or modify data successfully.",
+      "202": "A request has entered the background queue (asynchronous task).",
+      "204": "Data deleted successfully.",
+      "206": "Successful range request.",
+      "400": "Bad error request, and the server did not create or modify the data.",
+      "401": "User does not have permission (invalid username, password, security token).",
+      "403": "User is authorized, but access is forbidden.",
+      "404": "The requested record does not exist, and the server did not process it.",
+      "405": "Request denied.",
+      "406": "Requested format not available.",
+      "410": "The requested resource is permanently deleted and will no longer be available.",
+      "422": "A validation error occurred while creating the object.",
+      "500": "An error occurred on the server. Please check the server.",
+      "502": "Bad Gateway Error.",
+      "503": "The server is temporarily unable to service your request due to maintenance or capacity issues.",
+      "504": "Gateway Timeout."
+    }
+  },
+  "detail": {
+    "title": "Detail panel",
+    "sidePlaceholder": "Replace this side panel with module-specific navigation, filters, or auxiliary content.",
+    "panelTitle": "Resource Detail",
+    "panelSummary": "This detail page is ready for resource {resourceId}. Replace the summary, sections, and widgets with your own domain content.",
+    "sectionOverviewTitle": "Overview",
+    "sectionOverviewDescription": "A concise snapshot section for key information.",
+    "sectionTimelineTitle": "Timeline",
+    "sectionTimelineDescription": "A flexible slot for events, audit history, or progress.",
+    "sectionNotesTitle": "Notes",
+    "sectionNotesDescription": "A placeholder for annotations, remarks, or next actions."
+  }
+}

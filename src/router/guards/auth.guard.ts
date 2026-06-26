@@ -2,7 +2,12 @@ import Cookie from 'js-cookie';
 import NProgress from 'nprogress';
 import type { Router } from 'vue-router';
 
-import { systemTitle } from '@/locales/data';
+import {
+  defaultLanguageLocale,
+  i18n,
+  normalizeLocale,
+  setI18nLanguage,
+} from '@/locales';
 import { pinia } from '@/store';
 import { useSessionStore } from '@/store/useSessionStore';
 
@@ -16,14 +21,25 @@ export function setupRouterGuards(router: Router) {
   router.beforeEach(async (to, _from, next) => {
     NProgress.start();
 
-    document.title = `${to.meta.title || ''} - ${systemTitle}`;
-
     const currentRouteLocale = Array.isArray(to.params.locale)
       ? to.params.locale[0]
       : to.params.locale;
+    const resolvedLocale = normalizeLocale(
+      currentRouteLocale || sessionStore.locale || defaultLanguageLocale,
+    );
     const requiresAuth = to.matched.some((record) => {
       return record.meta.requiresAuth === true;
     });
+
+    setI18nLanguage(resolvedLocale);
+
+    const appTitle = i18n.global.t('base.systemTitle');
+    const pageTitle =
+      typeof to.meta.titleKey === 'string'
+        ? i18n.global.t(to.meta.titleKey)
+        : String(to.meta.title || '');
+
+    document.title = pageTitle ? `${pageTitle} - ${appTitle}` : appTitle;
 
     if (!requiresAuth) {
       next();
@@ -31,7 +47,7 @@ export function setupRouterGuards(router: Router) {
     }
 
     if (!Cookie.get('token')) {
-      next(`/${currentRouteLocale || sessionStore.locale}/auth/login`);
+      next(`/${resolvedLocale}/auth/login`);
       return;
     }
 
@@ -39,11 +55,11 @@ export function setupRouterGuards(router: Router) {
 
     if (error) {
       Cookie.remove('token');
-      next(`/${currentRouteLocale || sessionStore.locale}/auth/login`);
+      next(`/${resolvedLocale}/auth/login`);
       return;
     }
 
-    sessionStore.setLocale(currentRouteLocale || sessionStore.locale);
+    sessionStore.setLocale(resolvedLocale);
     next();
   });
 

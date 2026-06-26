@@ -1,3 +1,4 @@
+import { i18n } from '@/locales';
 // import {
 //   regexExtraSpace
 // } from '@/utils/regularExpression'
@@ -22,7 +23,7 @@ function requiredRules(params = {}) {
     {},
     {
       trigger: 'blur',
-      message: '不能为空',
+      message: i18n.global.t('validation.required'),
     },
     params,
   );
@@ -50,7 +51,7 @@ function requiredRadioRules(params = {}) {
     {},
     {
       trigger: 'change',
-      message: '不能为空',
+      message: i18n.global.t('validation.required'),
     },
     params,
   );
@@ -65,8 +66,8 @@ function requiredRadioRules(params = {}) {
     }
   }, trigger);
 }
-function imageListRules(errMsg = '请上传全部图片') {
-  const errSingle = '请选择一张图片';
+function imageListRules(errMsg = i18n.global.t('validation.imageIncomplete')) {
+  const errSingle = i18n.global.t('validation.imageSingle');
   const validator = (rule: any, value: any[], callback: any) => {
     if (!value) {
       callback(new Error(errSingle));

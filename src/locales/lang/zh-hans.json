@@ -1,0 +1,91 @@
+{
+  "base": {
+    "systemTitle": "Vite TS 启动项目",
+    "goback": "返回",
+    "empty": "无可用数据",
+    "i18nTest": "测试国际化",
+    "rangeStart": "开始时间",
+    "rangeEnd": "结束时间",
+    "pleaseInput": "请输入",
+    "btnCancel": "取消",
+    "btnConfirm": "确定",
+    "notFound": "页面不存在"
+  },
+  "nav": {
+    "action": "操作"
+  },
+  "auth": {
+    "welcome": "欢迎登录",
+    "signin": "登录",
+    "email": "邮箱",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "emailRequired": "请填写邮箱",
+    "emailInvalid": "请输入正确的邮箱地址",
+    "passwordRequired": "请填写密码",
+    "signout": "退出登录",
+    "loginSuccess": "登录成功"
+  },
+  "catalog": {
+    "manageTitle": "资源目录",
+    "create": "创建资源",
+    "name": "资源标题",
+    "subtitle": "副标题",
+    "description": "描述",
+    "updatedAt": "更新时间",
+    "state": "状态",
+    "publish": "启用",
+    "stop": "停用",
+    "activated": "资源已启用",
+    "deactivated": "资源已停用"
+  },
+  "page": {
+    "auth": "认证",
+    "authLogin": "登录",
+    "catalogList": "资源列表",
+    "catalogDirectory": "资源目录",
+    "detail": "详情页",
+    "authSetting": "账号设置"
+  },
+  "validation": {
+    "required": "不能为空",
+    "imageIncomplete": "请上传全部图片",
+    "imageSingle": "请选择一张图片",
+    "positiveInteger": "请输入正整数",
+    "maxCount": "最多 {count} 个"
+  },
+  "request": {
+    "networkUnavailable": "服务请求不可用，请重试或检查您的网络。",
+    "http": {
+      "200": "服务器成功返回请求的数据。",
+      "201": "数据创建或修改成功。",
+      "202": "请求已进入后台队列（异步任务）。",
+      "204": "数据删除成功。",
+      "206": "范围请求成功。",
+      "400": "请求有误，服务器未创建或修改数据。",
+      "401": "用户没有权限（用户名、密码或令牌无效）。",
+      "403": "用户已授权，但访问被禁止。",
+      "404": "请求的记录不存在，服务器未进行处理。",
+      "405": "请求被拒绝。",
+      "406": "请求的格式不可用。",
+      "410": "请求的资源已被永久删除，无法再访问。",
+      "422": "创建对象时发生校验错误。",
+      "500": "服务器发生错误，请检查服务器。",
+      "502": "网关错误。",
+      "503": "服务器暂时无法处理请求，请稍后再试。",
+      "504": "网关超时。"
+    }
+  },
+  "detail": {
+    "title": "详情面板",
+    "sidePlaceholder": "这里可以替换为当前模块专属的导航、筛选器或辅助信息。",
+    "panelTitle": "资源详情",
+    "panelSummary": "资源 {resourceId} 的详情页已经准备就绪。你可以将这里的摘要、分区和组件替换成自己的业务内容。",
+    "sectionOverviewTitle": "概览",
+    "sectionOverviewDescription": "用于展示关键信息的简洁概览区域。",
+    "sectionTimelineTitle": "时间线",
+    "sectionTimelineDescription": "可用于放置事件、审计历史或进度信息。",
+    "sectionNotesTitle": "备注",
+    "sectionNotesDescription": "用于承载批注、说明或后续动作的占位区域。"
+  }
+}

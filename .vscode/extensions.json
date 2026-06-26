@@ -3,6 +3,7 @@
     "vue.volar",
     "antfu.iconify",
     "oxc.oxc-vscode",
-    "stylelint.vscode-stylelint"
+    "stylelint.vscode-stylelint",
+    "lokalise.i18n-ally"
   ]
 }

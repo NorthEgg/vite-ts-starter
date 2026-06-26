@@ -65,6 +65,7 @@ export const staticRoutes: RouteRecordRaw[] = [
     component: () => import('@/components/404.vue'),
     meta: {
       title: '404',
+      titleKey: 'base.notFound',
       requiresAuth: false,
     },
   },

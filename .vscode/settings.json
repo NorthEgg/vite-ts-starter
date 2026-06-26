@@ -18,5 +18,9 @@
   "oxc.enable": true,
   "[typescript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
-  }
+  },
+  "i18n-ally.localesPaths": ["src/locales/lang"],
+  "i18n-ally.pathMatcher": "{locale}.json",
+  "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.enabledFrameworks": ["vue"]
 }

@@ -1,4 +1,5 @@
 import 'virtual:uno.css';
+import { i18n } from '@/locales';
 import Mixin from '@/mixins';
 import { setupRouter } from '@/router';
 import { setupStore } from '@/store';
@@ -10,7 +11,7 @@ import App from './App.vue';
 const app = createApp(App);
 
 function setupPlugins() {
-  app.use(Widgets).mixin(Mixin);
+  app.use(i18n).use(Widgets).mixin(Mixin);
 }
 
 async function setupApp() {

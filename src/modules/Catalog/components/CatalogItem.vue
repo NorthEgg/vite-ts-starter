@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { Loading } from '@element-plus/icons-vue';
-import { ElMessage, useLocale } from 'element-plus';
+import { ElMessage } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 import { sleep } from '@/api/request';
 import { useCatalogStore } from '@/composables/useBaseStore';
@@ -26,7 +27,7 @@ const props = defineProps({
   },
 });
 
-const localeInject = useLocale();
+const { t } = useI18n();
 const catalogStore = useCatalogStore();
 const isLoading = ref(false);
 const getActionIcon = computed(() => {
@@ -45,9 +46,9 @@ async function handleToggleStatus() {
   isLoading.value = false;
 
   if (previousStatus === 'active') {
-    ElMessage.info(localeInject.t('catalog.deactivated'));
+    ElMessage.info(t('catalog.deactivated'));
   } else {
-    ElMessage.success(localeInject.t('catalog.activated'));
+    ElMessage.success(t('catalog.activated'));
   }
 }
 </script>
@@ -102,8 +103,8 @@ async function handleToggleStatus() {
         <span class="catalog-item-action__status">
           {{
             dataset.status === 'active'
-              ? _t('catalog.stop')
-              : _t('catalog.publish')
+              ? $t('catalog.stop')
+              : $t('catalog.publish')
           }}
         </span>
       </li>

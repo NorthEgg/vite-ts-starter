@@ -6,6 +6,7 @@ export const authRoutes: RouteRecordRaw[] = [
     name: 'Auth',
     meta: {
       title: '认证',
+      titleKey: 'page.auth',
       requiresAuth: false,
     },
     redirect: {
@@ -18,6 +19,7 @@ export const authRoutes: RouteRecordRaw[] = [
         component: authPage,
         meta: {
           title: '登录',
+          titleKey: 'page.authLogin',
           requiresAuth: false,
         },
       },

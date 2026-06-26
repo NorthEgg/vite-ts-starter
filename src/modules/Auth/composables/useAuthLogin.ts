@@ -1,4 +1,5 @@
 import { ElMessage } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 import type { LoginPayload } from '@/modules/Auth/models/session';
 import type useSessionStore from '@/modules/Auth/store';
@@ -7,13 +8,13 @@ type SessionStore = ReturnType<typeof useSessionStore>;
 
 interface UseAuthLoginOptions {
   sessionStore: SessionStore;
-  localeInject: ReturnType<(typeof import('element-plus'))['useLocale']>;
   route: ReturnType<typeof useRoute>;
   router: ReturnType<typeof useRouter>;
 }
 
 export function useAuthLogin(options: UseAuthLoginOptions) {
-  const { sessionStore, localeInject, route, router } = options;
+  const { sessionStore, route, router } = options;
+  const { t } = useI18n();
 
   const isLoading = ref(true);
   const inputErrorEmail = ref('');
@@ -60,7 +61,7 @@ export function useAuthLogin(options: UseAuthLoginOptions) {
         .replace(`/${route.params.locale || ''}`)
         .then(() => {
           ElMessage.success({
-            message: localeInject.t('auth.loginSuccess'),
+            message: t('auth.loginSuccess'),
           });
         })
         .catch(() => {});

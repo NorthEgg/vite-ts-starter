@@ -42,11 +42,11 @@ export default defineComponent({
     >
       <el-form-item
         prop="name"
-        :label="_t('catalog.name')"
+        :label="$t('catalog.name')"
         :rules="
           getRequiredRules({
             trigger: 'change',
-            message: _t('base.pleaseInput'),
+            message: $t('base.pleaseInput'),
           })
         "
       >
@@ -54,16 +54,16 @@ export default defineComponent({
           v-model="modelValue.title"
           maxlength="30"
           show-word-limit
-          :placeholder="_t('catalog.name')"
+          :placeholder="$t('catalog.name')"
         />
       </el-form-item>
       <el-form-item
         prop="subtitle"
-        :label="_t('catalog.subtitle')"
+        :label="$t('catalog.subtitle')"
         :rules="
           getRequiredRules({
             trigger: 'change',
-            message: _t('base.pleaseInput'),
+            message: $t('base.pleaseInput'),
           })
         "
       >
@@ -71,14 +71,14 @@ export default defineComponent({
           v-model="modelValue.subtitle"
           maxlength="30"
           show-word-limit
-          :placeholder="_t('catalog.subtitle')"
+          :placeholder="$t('catalog.subtitle')"
         />
       </el-form-item>
-      <el-form-item prop="description" :label="_t('catalog.description')">
+      <el-form-item prop="description" :label="$t('catalog.description')">
         <el-input
           v-model="modelValue.description"
           type="textarea"
-          :placeholder="_t('catalog.description')"
+          :placeholder="$t('catalog.description')"
           maxlength="200"
           :autosize="{ minRows: 2 }"
           show-word-limit

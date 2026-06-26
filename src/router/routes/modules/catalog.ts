@@ -6,6 +6,7 @@ export const catalogRoutes: RouteRecordRaw[] = [
     name: 'Catalog',
     meta: {
       title: '资源列表',
+      titleKey: 'page.catalogList',
       requiresAuth: true,
       permission: 'catalog:list',
     },
@@ -19,6 +20,7 @@ export const catalogRoutes: RouteRecordRaw[] = [
         component: catalogPage,
         meta: {
           title: '资源列表',
+          titleKey: 'page.catalogList',
           requiresAuth: true,
           permission: 'catalog:list',
         },
@@ -29,6 +31,7 @@ export const catalogRoutes: RouteRecordRaw[] = [
         component: catalogPage,
         meta: {
           title: '资源目录',
+          titleKey: 'page.catalogDirectory',
           requiresAuth: true,
           permission: 'catalog:list',
         },

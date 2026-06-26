@@ -15,14 +15,13 @@ export default defineComponent({
   <LayoutArea>
     <template #top>
       <NavigationNavBar :fixed="false">
-        <NavigationSideGoBack :title="_t('base.goback')" />
+        <NavigationSideGoBack :title="$t('base.goback')" />
       </NavigationNavBar>
     </template>
     <template #side>
-      <LayoutSection has-divider :title="_t('detail.title')">
+      <LayoutSection has-divider :title="$t('detail.title')">
         <p class="layout-view__placeholder">
-          Replace this side panel with module-specific navigation, filters, or
-          auxiliary content.
+          {{ $t('detail.sidePlaceholder') }}
         </p>
       </LayoutSection>
     </template>

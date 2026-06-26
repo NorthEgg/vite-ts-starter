@@ -1,6 +1,7 @@
 <script lang="ts">
 import { Promotion } from '@element-plus/icons-vue';
-import { ElMessage, useLocale } from 'element-plus';
+import { ElMessage } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 import { useSessionStore } from '@/composables/useBaseStore';
 import Translations from '@/locales/Translations.vue';
@@ -19,7 +20,7 @@ export default defineComponent({
     const sessionStore = useSessionStore();
     const route = useRoute();
     const router = useRouter();
-    const localeInject = useLocale();
+    const { t } = useI18n();
     const {
       formData,
       inputErrorEmail,
@@ -29,14 +30,13 @@ export default defineComponent({
       setLoading,
     } = useAuthLogin({
       sessionStore,
-      localeInject,
       route,
       router,
     });
 
     const configAuth = computed(() => {
       return {
-        title: localeInject.t('auth.welcome'),
+        title: t('auth.welcome'),
         actionList: [
           {
             attrs: {
@@ -44,7 +44,7 @@ export default defineComponent({
               loading: isLoading.value,
               size: 'large',
             },
-            text: localeInject.t('auth.signin'),
+            text: t('auth.signin'),
             on: {
               click(refForm: any) {
                 onSubmit(refForm);
@@ -61,20 +61,20 @@ export default defineComponent({
                 return [
                   proxy.getRequiredRules({
                     trigger: 'change',
-                    message: localeInject.t('auth.emailRequired'),
+                    message: t('auth.emailRequired'),
                   }),
                   proxy.getValidatorRules('', 'blur', {
                     type: 'email',
-                    message: localeInject.t('auth.emailInvalid'),
+                    message: t('auth.emailInvalid'),
                   }),
                 ];
               },
             },
-            label: localeInject.t('auth.email'),
+            label: t('auth.email'),
             prefixIcon: h('span', {
               class: 'text-16px i-ic:baseline-mail-lock',
             }),
-            placeholder: localeInject.t('auth.emailRequired'),
+            placeholder: t('auth.emailRequired'),
           },
           {
             attrs: {
@@ -83,24 +83,24 @@ export default defineComponent({
               rules() {
                 return proxy.getRequiredRules({
                   trigger: 'change',
-                  message: localeInject.t('auth.passwordRequired'),
+                  message: t('auth.passwordRequired'),
                 });
               },
             },
             link: {
-              text: localeInject.t('auth.forgotPassword'),
+              text: t('auth.forgotPassword'),
               click() {
                 ElMessage.info({
-                  message: `😄 ${localeInject.t('auth.forgotPassword')}`,
+                  message: `😄 ${t('auth.forgotPassword')}`,
                 });
               },
             },
             type: 'password',
-            label: localeInject.t('auth.password'),
+            label: t('auth.password'),
             prefixIcon: h('span', {
               class: 'text-16px i-ri:lock-password-fill',
             }),
-            placeholder: localeInject.t('auth.passwordRequired'),
+            placeholder: t('auth.passwordRequired'),
           },
         ],
       };
@@ -139,7 +139,7 @@ export default defineComponent({
         ></div>
         <div class="nav-circle"></div>
         <div class="nav-title">
-          {{ _t('base.systemTitle') }}
+          {{ $t('base.systemTitle') }}
         </div>
       </div>
       <div class="nav-right">

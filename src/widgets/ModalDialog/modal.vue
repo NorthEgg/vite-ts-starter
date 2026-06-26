@@ -154,10 +154,10 @@ export default defineComponent({
       />
       <div v-if="!hideFooter" class="modal-container__footer">
         <el-button plain round @click="handleCancel()">
-          {{ _t('base.btnCancel') }}
+          {{ $t('base.btnCancel') }}
         </el-button>
         <el-button type="primary" round @click="handleConfirm()">
-          {{ confirmText || _t('base.btnConfirm') }}
+          {{ confirmText || $t('base.btnConfirm') }}
         </el-button>
       </div>
     </div>

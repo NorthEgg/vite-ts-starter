@@ -1,17 +1,21 @@
+import { i18n } from '@/locales';
+
 const validatorPositiveInteger = (rule, value, callback) => {
   if (/(^[1-9]\d*$)/.test(value)) {
     callback();
   } else {
-    callback(new Error('请输入正整数'));
+    callback(new Error(i18n.global.t('validation.positiveInteger')));
   }
 };
 
-const validatorMaxCountFunction = (errorMsg = '最多三个', count = 3) => {
+const validatorMaxCountFunction = (errorMsg = '', count = 3) => {
+  const message = errorMsg || i18n.global.t('validation.maxCount', { count });
+
   return (rule, value, callback) => {
     if (!value || !value.length) {
-      callback(new Error('不能为空'));
+      callback(new Error(i18n.global.t('validation.required')));
     } else if (value.length > count) {
-      callback(new Error(errorMsg));
+      callback(new Error(message));
     } else {
       callback();
     }

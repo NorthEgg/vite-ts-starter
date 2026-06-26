@@ -2,6 +2,8 @@ import Cookie from 'js-cookie';
 import { defineStore } from 'pinia';
 
 import { handleApiResponse } from '@/api/core/helpers';
+import { normalizeLocale } from '@/locales';
+import type { LangTypes } from '@/locales';
 import type {
   AuthUserModel,
   LoginPayload,
@@ -15,22 +17,22 @@ import {
 
 export const useSessionStore = defineStore('session', {
   state: () => ({
-    locale: 'en',
+    locale: 'en' as LangTypes,
     currentUser: null as AuthUserModel | null,
   }),
   getters: {
     isAuthenticated: (state) => Boolean(state.currentUser),
   },
   actions: {
-    setLocale(locale: string) {
+    setLocale(locale: LangTypes) {
       this.locale = locale;
     },
-    async changeLanguage(locale: string) {
+    async changeLanguage(locale: LangTypes) {
       const response = await updateLanguagePreference(locale);
 
       await handleApiResponse(response, {
         onSuccess: (data) => {
-          this.locale = data.locale;
+          this.locale = normalizeLocale(data.locale);
         },
       });
 
@@ -43,7 +45,7 @@ export const useSessionStore = defineStore('session', {
         onSuccess: (data) => {
           Cookie.set('token', data.token);
           this.currentUser = data.user;
-          this.locale = data.locale;
+          this.locale = normalizeLocale(data.locale);
         },
         silent: true,
       });
@@ -69,7 +71,7 @@ export const useSessionStore = defineStore('session', {
       await handleApiResponse(response, {
         onSuccess: (data) => {
           this.currentUser = data.user;
-          this.locale = data.locale;
+          this.locale = normalizeLocale(data.locale);
         },
         silent: true,
       });

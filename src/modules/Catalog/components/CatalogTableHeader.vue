@@ -1,20 +1,21 @@
 <script lang="ts">
-import { useLocale } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'CatalogTableHeader',
   setup() {
-    const localeInject = useLocale();
+    const { t } = useI18n();
+
     const list = computed(() => [
       {
-        name: localeInject.t('catalog.name'),
+        name: t('catalog.name'),
       },
       {
-        name: localeInject.t('catalog.updatedAt'),
+        name: t('catalog.updatedAt'),
         width: '18%',
       },
       {
-        name: localeInject.t('catalog.state'),
+        name: t('catalog.state'),
         width: '19%',
       },
     ]);
@@ -25,9 +26,8 @@ export default defineComponent({
         flex: head.width ? 'initial' : 1,
       };
     }
-    return {
-      localeInject,
 
+    return {
       list,
 
       getHeadItem,

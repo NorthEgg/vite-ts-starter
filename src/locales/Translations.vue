@@ -1,5 +1,6 @@
 <script lang="ts">
 import { useSessionStore } from '@/composables/useBaseStore';
+import type { LangTypes } from '@/locales';
 import { localesMapping } from '@/locales';
 import LogoIcon from '@/locales/LogoIcon.vue';
 
@@ -21,18 +22,31 @@ export default defineComponent({
     const localesList = ref(localesMapping);
     const currentLocale = computed(() => sessionStore.locale);
 
-    const handleChange = (targetLocaleItem) => {
-      setTimeout(() => {
-        const { localeCode } = targetLocaleItem;
-        router.replace({
-          params: {
-            ...route.params,
-            locale: localeCode,
-          },
-        });
-        sessionStore.setLocale(localeCode);
+    const handleChange = async (targetLocaleItem: {
+      localeCode: LangTypes;
+    }) => {
+      const previousLocale = currentLocale.value;
+      const { localeCode } = targetLocaleItem;
+
+      sessionStore.setLocale(localeCode);
+
+      if (sessionStore.isAuthenticated) {
+        const { error } = await sessionStore.changeLanguage(localeCode);
+
+        if (error) {
+          sessionStore.setLocale(previousLocale);
+          return;
+        }
+      }
+
+      await router.replace({
+        params: {
+          ...route.params,
+          locale: localeCode,
+        },
       });
     };
+
     return {
       localesList,
       currentLocale,

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { SwitchButton } from '@element-plus/icons-vue';
-import { useLocale } from 'element-plus';
 import Cookie from 'js-cookie';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'NavigationAvatar',
@@ -9,10 +9,11 @@ export default defineComponent({
     SwitchButton,
   },
   setup() {
-    const localeInject = useLocale();
+    const { t } = useI18n();
+
     const commandList = computed(() => [
       {
-        label: localeInject.t('auth.signout'),
+        label: t('auth.signout'),
         icon: 'switch-button',
         click: () => {
           Cookie.remove('token');

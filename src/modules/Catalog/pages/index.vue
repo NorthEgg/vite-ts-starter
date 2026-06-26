@@ -1,5 +1,5 @@
 <script lang="ts">
-import { useLocale } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 import NavigationNavBar from '@/components/Navigation/NavBar.vue';
 import NavigationSideLogo from '@/components/Navigation/Side/SideLogo.vue';
@@ -21,7 +21,7 @@ export default defineComponent({
   setup() {
     const { proxy } = useCurrentInstance();
     const catalogStore = useCatalogStore();
-    const localeInject = useLocale();
+    const { t } = useI18n();
     const {
       handleCreateResource,
       handleSelectSearch,
@@ -29,13 +29,12 @@ export default defineComponent({
       testI18nDate,
     } = useCatalogList({
       catalogStore,
-      localeInject,
       openDialog: proxy.$ModalDialog,
       resourceFormComponent: ResourceForm,
     });
 
     return {
-      localeInject,
+      t,
       loadingContent,
       testI18nDate,
 
@@ -55,14 +54,14 @@ export default defineComponent({
     </template>
 
     <template #side>
-      <LayoutSection :title="localeInject.t('catalog.manageTitle')">
+      <LayoutSection :title="t('catalog.manageTitle')">
         <el-button
           type="primary"
           class="create-action"
           @click="handleCreateResource()"
         >
           <IconFont icon="iconestablish" class="mr-2" />
-          {{ _t('catalog.create') }}
+          {{ $t('catalog.create') }}
         </el-button>
       </LayoutSection>
     </template>
@@ -72,8 +71,8 @@ export default defineComponent({
         <template #head>
           <el-date-picker
             v-model="testI18nDate"
-            :start-placeholder="_t('base.rangeStart')"
-            :end-placeholder="_t('base.rangeEnd')"
+            :start-placeholder="$t('base.rangeStart')"
+            :end-placeholder="$t('base.rangeEnd')"
             type="datetimerange"
           />
         </template>

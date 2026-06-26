@@ -1,27 +1,41 @@
 <script lang="ts" setup>
 import { useSessionStore } from '@/composables/useBaseStore';
-import { useLanguage } from '@/composables/useLanguage';
-import { defaultLanguageLocale } from '@/locales';
+import {
+  defaultLanguageLocale,
+  getElementLocale,
+  normalizeLocale,
+  setI18nLanguage,
+} from '@/locales';
 
 const sessionStore = useSessionStore();
 const route = useRoute();
-
-const { currentLocaleLang } = useLanguage();
+const currentElementLocale = computed(() => {
+  return getElementLocale(sessionStore.locale);
+});
 
 watch(
-  () => route.params,
-  () => {
-    if (route.name === '404') return;
+  () => [route.name, route.params.locale, sessionStore.locale] as const,
+  ([routeName, routeLocale, storeLocale]) => {
+    if (routeName === '404') return;
 
-    sessionStore.setLocale(
-      String(route.params.locale || defaultLanguageLocale),
+    const nextLocale = normalizeLocale(
+      routeLocale || storeLocale || defaultLanguageLocale,
     );
+
+    if (sessionStore.locale !== nextLocale) {
+      sessionStore.setLocale(nextLocale);
+    }
+
+    setI18nLanguage(nextLocale);
+  },
+  {
+    immediate: true,
   },
 );
 </script>
 
 <template>
-  <ElConfigProvider :locale="currentLocaleLang">
+  <ElConfigProvider :locale="currentElementLocale">
     <router-view />
   </ElConfigProvider>
 </template>

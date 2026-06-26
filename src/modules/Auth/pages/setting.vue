@@ -5,7 +5,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="wrap-user-setting">账号设置</div>
+  <div class="wrap-user-setting">{{ $t('page.authSetting') }}</div>
 </template>
 
 <style lang="scss" scoped>

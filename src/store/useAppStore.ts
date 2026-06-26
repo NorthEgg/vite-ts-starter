@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
 
+import type { LangTypes } from '@/locales';
+
 export const useAppStore = defineStore('app', {
   state: () => ({
-    locale: 'en',
+    locale: 'en' as LangTypes,
     user: null as null | {
       email: string;
       id: string;
@@ -11,7 +13,7 @@ export const useAppStore = defineStore('app', {
     isAuthenticated: false,
   }),
   actions: {
-    setLocale(locale: string) {
+    setLocale(locale: LangTypes) {
       this.locale = locale;
     },
     setUser(

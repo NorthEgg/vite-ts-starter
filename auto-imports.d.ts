@@ -11,11 +11,8 @@ declare global {
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp
-  const createLogger: typeof import('vuex').createLogger
-  const createNamespacedHelpers: typeof import('vuex').createNamespacedHelpers
   const createPinia: typeof import('pinia').createPinia
   const createRouter: typeof import('vue-router').createRouter
-  const createStore: typeof import('vuex').createStore
   const createVNode: typeof import('vue').createVNode
   const createWebHashHistory: typeof import('vue-router').createWebHashHistory
   const createWebHistory: typeof import('vue-router').createWebHistory
@@ -37,7 +34,6 @@ declare global {
   const isShallow: typeof import('vue').isShallow
   const mapActions: typeof import('pinia').mapActions
   const mapGetters: typeof import('pinia').mapGetters
-  const mapMutations: typeof import('vuex').mapMutations
   const mapState: typeof import('pinia').mapState
   const mapStores: typeof import('pinia').mapStores
   const mapWritableState: typeof import('pinia').mapWritableState
@@ -85,14 +81,12 @@ declare global {
   const useCurrentInstance: typeof import('./src/composables/useCurrentInstance').default
   const useDetailStore: typeof import('./src/composables/useBaseStore').useDetailStore
   const useId: typeof import('vue').useId
-  const useLanguage: typeof import('./src/composables/useLanguage').useLanguage
   const useLink: typeof import('vue-router').useLink
   const useModel: typeof import('vue').useModel
   const useRoute: typeof import('vue-router').useRoute
   const useRouter: typeof import('vue-router').useRouter
   const useSessionStore: typeof import('./src/composables/useBaseStore').useSessionStore
   const useSlots: typeof import('vue').useSlots
-  const useStore: typeof import('vuex').useStore
   const useTemplateRef: typeof import('vue').useTemplateRef
   const uuidv4: typeof import('uuid').v4
   const watch: typeof import('vue').watch
@@ -190,7 +184,6 @@ declare module 'vue' {
     readonly useCurrentInstance: UnwrapRef<typeof import('./src/composables/useCurrentInstance')['default']>
     readonly useDetailStore: UnwrapRef<typeof import('./src/composables/useBaseStore')['useDetailStore']>
     readonly useId: UnwrapRef<typeof import('vue')['useId']>
-    readonly useLanguage: UnwrapRef<typeof import('./src/composables/useLanguage')['useLanguage']>
     readonly useLink: UnwrapRef<typeof import('vue-router')['useLink']>
     readonly useModel: UnwrapRef<typeof import('vue')['useModel']>
     readonly useRoute: UnwrapRef<typeof import('vue-router')['useRoute']>

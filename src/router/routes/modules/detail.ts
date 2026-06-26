@@ -17,6 +17,7 @@ export const detailRoutes: RouteRecordRaw[] = [
     name: 'Detail',
     meta: {
       title: '详情页',
+      titleKey: 'page.detail',
       requiresAuth: true,
       permission: 'catalog:detail',
     },
@@ -30,6 +31,7 @@ export const detailRoutes: RouteRecordRaw[] = [
         component: detailPage,
         meta: {
           title: '详情页',
+          titleKey: 'page.detail',
           requiresAuth: true,
           permission: 'catalog:detail',
         },

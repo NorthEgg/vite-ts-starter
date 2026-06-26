@@ -12,7 +12,7 @@ import { loadEnv } from 'vite';
 import { defineConfig } from 'vitest/config';
 
 const vendorChunkGroups: Record<string, string[]> = {
-  'vendor-core': ['vue', 'vue-router', 'pinia'],
+  'vendor-core': ['vue', 'vue-router', 'pinia', 'vue-i18n'],
   'vendor-ui': ['element-plus', '@element-plus/icons-vue'],
   'vendor-utils': ['axios', 'lodash-es', 'nprogress'],
   'vendor-visualization': ['echarts'],

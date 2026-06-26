@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookie from 'js-cookie';
 
 import type { ApiErrorShape, ApiResponse } from '@/api/core/types';
+import { i18n } from '@/locales';
 import { camelizeKeys, decamelizeKeys } from '@/utils/camelCase';
 
 function errorRedirect(url: string) {
@@ -10,25 +11,15 @@ function errorRedirect(url: string) {
   // Router.push(`/${url}`)
 }
 
-export const codeMessage: Record<number, string> = {
-  200: 'The server successfully returned the requested data.',
-  201: 'Create or modify data successfully.',
-  202: 'A request has entered the background queue (asynchronous task).',
-  204: 'Data deleted successfully.',
-  206: 'Successful range request.',
-  400: 'Bad error request, and the server did not create or modify the data.',
-  401: 'User does not have permission (invalid username, password, security token).',
-  403: 'User is authorized, but access is forbidden.',
-  404: 'The request sent is for a record that does not exist, and the server does not operate.',
-  405: 'Request denied.',
-  406: 'Requested format not available.',
-  410: 'The requested resource is permanently deleted and will no longer be available.',
-  422: 'When creating an object, a validation error occurrs.',
-  500: 'An error occurred in the server, please check the server.',
-  502: 'Bad Gateway Error.',
-  503: 'The server is temporarily unable to service your request due to maintenance downtime or capacity problems.',
-  504: 'Gateway Timeout.',
-};
+function getCodeMessage(status: number) {
+  const key = `request.http.${status}`;
+
+  if (!i18n.global.te(key)) {
+    return '';
+  }
+
+  return i18n.global.t(key);
+}
 
 function normalizeError(
   error: unknown,
@@ -133,24 +124,27 @@ request.interceptors.response.use(
     }
 
     if (error.response) {
+      const message =
+        getCodeMessage(error.response.status) || error.response.data.message;
+
       return {
         success: false,
         data: null,
-        message:
-          codeMessage[error.response.status] || error.response.data.message,
+        message,
         error: {
           code: `http_${error.response.status}`,
-          message:
-            codeMessage[error.response.status] || error.response.data.message,
+          message,
         },
       } satisfies ApiResponse<null>;
     }
 
+    const fallbackMessage = i18n.global.t('request.networkUnavailable');
+
     return {
       success: false,
       data: null,
-      message: '服务请求不可用，请重试或检查您的网络。',
-      error: normalizeError(error, '服务请求不可用，请重试或检查您的网络。'),
+      message: fallbackMessage,
+      error: normalizeError(error, fallbackMessage),
     } satisfies ApiResponse<null>;
   },
 );

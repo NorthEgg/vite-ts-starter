@@ -1,12 +1,12 @@
 <script lang="ts">
-import { useLocale } from 'element-plus';
+import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
   name: 'NavigationSideLogo',
   setup() {
-    const localeInject = useLocale();
+    const { t } = useI18n();
 
-    const title = computed(() => localeInject.t('base.systemTitle'));
+    const title = computed(() => t('base.systemTitle'));
 
     return {
       title,
@@ -18,7 +18,7 @@ export default defineComponent({
 <template>
   <div class="side-logo-container">
     <router-link :to="`/${$route.params.locale || ''}`">
-      <img class="side-logo-img" src="@/assets/images/logo.svg" alt="商标" />
+      <img class="side-logo-img" src="@/assets/images/logo.svg" :alt="title" />
       <h1 class="side-logo-title">
         {{ title }}
       </h1>
