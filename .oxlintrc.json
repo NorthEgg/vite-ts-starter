@@ -19,7 +19,7 @@
   "jsPlugins": [
     {
       "name": "vue-local",
-      "specifier": "./scripts/oxlint-vue-template-casing-plugin.cjs"
+      "specifier": "./scripts/oxlint-vue-template-casing-plugin.js"
     }
   ],
   "rules": {

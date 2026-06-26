@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
-const bootstrapTemplate = require('../scripts/bootstrap-template.cjs');
+import * as bootstrapTemplate from '../scripts/bootstrap-template';
 
 const tempDirs: string[] = [];
 

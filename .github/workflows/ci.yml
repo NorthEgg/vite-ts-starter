@@ -55,4 +55,4 @@ jobs:
         run: pnpm build
 
       - name: Template check
-        run: node scripts/check-template.cjs
+        run: node --experimental-strip-types scripts/check-template.ts

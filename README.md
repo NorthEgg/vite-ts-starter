@@ -86,6 +86,18 @@ src/
 - `Node >= 22.13`
 - `pnpm >= 9`
 
+模板脚本运行方式说明：
+
+- `scripts/bootstrap-template.ts`
+- `scripts/check-template.ts`
+- `scripts/oxlint-vue-template-casing-plugin.js`
+
+其中模板初始化和模板检查脚本使用 Node 原生执行 TypeScript：
+
+```bash
+node --experimental-strip-types scripts/check-template.ts
+```
+
 ### 安装依赖
 
 ```bash
@@ -144,6 +156,7 @@ pnpm format:check
 pnpm type-check
 pnpm test
 pnpm test:coverage
+pnpm template:check
 ```
 
 ## 开发约定
@@ -205,6 +218,7 @@ chore: refine template docs
 - `oxlint --vue-plugin .`
 - `vue-tsc --noEmit`
 - `vitest --run`
+- `node --experimental-strip-types scripts/check-template.ts`
 - `vite build --mode prod`
 
 ## 后续可继续演进的方向

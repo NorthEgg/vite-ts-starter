@@ -19,8 +19,8 @@
     "format:check": "oxfmt --check .",
     "stylelint": "stylelint \"src/**/*.{css,scss,vue}\"",
     "stylelint:fix": "stylelint \"src/**/*.{css,scss,vue}\" --fix",
-    "template:check": "node scripts/check-template.cjs",
-    "init:template": "node scripts/bootstrap-template.cjs",
+    "template:check": "node --experimental-strip-types scripts/check-template.ts",
+    "init:template": "node --experimental-strip-types scripts/bootstrap-template.ts",
     "prepare": "husky"
   },
   "engines": {

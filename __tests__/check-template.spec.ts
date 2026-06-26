@@ -4,6 +4,8 @@ import path from 'node:path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
+import * as templateCheck from '../scripts/check-template';
+
 const tempDirs: string[] = [];
 
 function createFixtureDir() {
@@ -52,7 +54,6 @@ describe('check-template script', () => {
 
     try {
       process.chdir(fixtureDir);
-      const templateCheck = require('../scripts/check-template.cjs');
       const failures = templateCheck.runTemplateCheck();
 
       expect(failures).toEqual(
@@ -73,8 +74,6 @@ describe('check-template script', () => {
 
     try {
       process.chdir(fixtureDir);
-      const templateCheck = require('../scripts/check-template.cjs');
-
       expect(templateCheck.runTemplateCheck()).toEqual([]);
     } finally {
       process.chdir(originalCwd);

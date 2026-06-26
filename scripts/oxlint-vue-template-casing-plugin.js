@@ -174,7 +174,7 @@ function collectInvalidTags(templateContent, startOffset) {
   return invalidTags;
 }
 
-module.exports = {
+export default {
   meta: {
     name: 'local-vue-template-casing',
   },

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-const fs = require('node:fs');
-const path = require('node:path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 function getRoot() {
   return process.cwd();
 }
 
-const requiredFiles = [
+export const requiredFiles = [
   'README.md',
   'package.json',
   'vite.config.ts',
@@ -17,9 +17,9 @@ const requiredFiles = [
   '.github/workflows/ci.yml',
 ];
 
-const forbiddenPatterns = [/demo_test/i, /test-layout/i, /vuex/i];
+export const forbiddenPatterns = [/demo_test/i, /test-layout/i, /vuex/i];
 
-const scanFiles = [
+export const scanFiles = [
   'src',
   'README.md',
   'package.json',
@@ -28,7 +28,7 @@ const scanFiles = [
   '.github/workflows',
 ];
 
-function collectFiles(targetPath) {
+export function collectFiles(targetPath: string): string[] {
   const absolutePath = path.join(getRoot(), targetPath);
 
   if (!fs.existsSync(absolutePath)) {
@@ -53,8 +53,8 @@ function collectFiles(targetPath) {
     });
 }
 
-function runTemplateCheck() {
-  const failures = [];
+export function runTemplateCheck() {
+  const failures: string[] = [];
 
   for (const relativePath of requiredFiles) {
     const absolutePath = path.join(getRoot(), relativePath);
@@ -81,7 +81,7 @@ function runTemplateCheck() {
   return failures;
 }
 
-function main() {
+export function main() {
   const failures = runTemplateCheck();
 
   if (failures.length) {
@@ -95,15 +95,6 @@ function main() {
   console.log('Template check passed.');
 }
 
-if (require.main === module) {
+if (import.meta.url === new URL(process.argv[1], 'file:').href) {
   main();
 }
-
-module.exports = {
-  collectFiles,
-  forbiddenPatterns,
-  main,
-  requiredFiles,
-  runTemplateCheck,
-  scanFiles,
-};

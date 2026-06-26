@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
-const fs = require('node:fs');
-const path = require('node:path');
-const { URL } = require('node:url');
+import fs from 'node:fs';
+import path from 'node:path';
+import { URL } from 'node:url';
 
 function getRoot() {
   return process.cwd();
 }
 
-function parseArgs(argv) {
-  const args = {};
+export function parseArgs(argv: string[]) {
+  const args: Record<string, string> = {};
 
   for (let index = 0; index < argv.length; index += 1) {
     const current = argv[index];
@@ -19,6 +19,10 @@ function parseArgs(argv) {
     }
 
     const [, rawKey, inlineValue] = current.match(/^--([^=]+)=?(.*)$/) || [];
+    if (!rawKey) {
+      continue;
+    }
+
     const next = argv[index + 1];
     const hasInlineValue = inlineValue !== '';
     const value = hasInlineValue
@@ -50,19 +54,19 @@ Optional:
 `);
 }
 
-function readTextFile(relativePath) {
+function readTextFile(relativePath: string) {
   return fs.readFileSync(path.join(getRoot(), relativePath), 'utf8');
 }
 
-function writeTextFile(relativePath, content) {
+function writeTextFile(relativePath: string, content: string) {
   fs.writeFileSync(path.join(getRoot(), relativePath), content, 'utf8');
 }
 
-function escapeSingleQuotes(value) {
+export function escapeSingleQuotes(value: string) {
   return String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
 }
 
-function normalizeRepoUrl(rawRepo) {
+export function normalizeRepoUrl(rawRepo: string) {
   const repoValue = String(rawRepo)
     .trim()
     .replace(/^git\+/, '')
@@ -99,13 +103,34 @@ function normalizeRepoUrl(rawRepo) {
   return repoValue;
 }
 
-function toGitRepoUrl(repoUrl) {
+export function toGitRepoUrl(repoUrl: string) {
   return repoUrl.startsWith('git+') ? repoUrl : `git+${repoUrl}`;
 }
 
-function updatePackageJson(config) {
+type TemplateConfig = {
+  name: string;
+  title: string;
+  zhTitle: string;
+  repoUrl: string;
+  author?: string;
+  description?: string;
+};
+
+export function updatePackageJson(config: TemplateConfig) {
   const packagePath = path.join(getRoot(), 'package.json');
-  const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+  const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8')) as {
+    name: string;
+    description?: string;
+    author?: string;
+    homepage?: string;
+    repository?: {
+      type: string;
+      url: string;
+    };
+    bugs?: {
+      url: string;
+    };
+  };
 
   packageJson.name = config.name;
   packageJson.description = config.description || packageJson.description;
@@ -126,7 +151,12 @@ function updatePackageJson(config) {
   );
 }
 
-function replaceOrThrow(relativePath, pattern, replacement, label) {
+export function replaceOrThrow(
+  relativePath: string,
+  pattern: RegExp,
+  replacement: string,
+  label: string,
+) {
   const content = readTextFile(relativePath);
 
   if (!pattern.test(content)) {
@@ -136,7 +166,7 @@ function replaceOrThrow(relativePath, pattern, replacement, label) {
   writeTextFile(relativePath, content.replace(pattern, replacement));
 }
 
-function main() {
+export function main() {
   const args = parseArgs(process.argv.slice(2));
 
   if (args.help === 'true' || args.h === 'true') {
@@ -150,7 +180,7 @@ function main() {
     return;
   }
 
-  const config = {
+  const config: TemplateConfig = {
     name: args.name,
     title: args.title,
     zhTitle: args['zh-title'] || args.title,
@@ -198,16 +228,6 @@ function main() {
   console.log(`- repo: ${config.repoUrl}`);
 }
 
-if (require.main === module) {
+if (import.meta.url === new URL(process.argv[1], 'file:').href) {
   main();
 }
-
-module.exports = {
-  escapeSingleQuotes,
-  main,
-  normalizeRepoUrl,
-  parseArgs,
-  replaceOrThrow,
-  toGitRepoUrl,
-  updatePackageJson,
-};
