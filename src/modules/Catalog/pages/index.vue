@@ -55,21 +55,21 @@ export default defineComponent({
 
     <template #side>
       <LayoutSection :title="t('catalog.manageTitle')">
-        <el-button
+        <ElButton
           type="primary"
           class="create-action"
           @click="handleCreateResource()"
         >
           <IconFont icon="iconestablish" class="mr-2" />
           {{ $t('catalog.create') }}
-        </el-button>
+        </ElButton>
       </LayoutSection>
     </template>
 
     <template #content>
       <LayoutSection has-divider flex-content :loading="loadingContent">
         <template #head>
-          <el-date-picker
+          <ElDatePicker
             v-model="testI18nDate"
             :start-placeholder="$t('base.rangeStart')"
             :end-placeholder="$t('base.rangeEnd')"

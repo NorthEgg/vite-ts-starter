@@ -5,7 +5,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
+  <RouterView v-slot="{ Component }">
     <Component :is="Component" />
-  </router-view>
+  </RouterView>
 </template>

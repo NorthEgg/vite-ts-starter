@@ -35,27 +35,27 @@ export default defineComponent({
 </script>
 
 <template>
-  <el-dropdown class="navigation-avatar" trigger="hover">
+  <ElDropdown class="navigation-avatar" trigger="hover">
     <div style="outline: none; padding: 0 12px">
       <img src="@/assets/images/navigation-avatar.webp" />
     </div>
     <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item
+      <ElDropdownMenu>
+        <ElDropdownItem
           v-for="(cmdItem, index) in commandList"
           :key="index"
           @click="handleCommand(cmdItem)"
         >
           <div class="navigation-avatar__dropdown-command">
-            <el-icon>
+            <ElIcon>
               <component :is="cmdItem.icon" />
-            </el-icon>
+            </ElIcon>
             <span>{{ cmdItem.label }}</span>
           </div>
-        </el-dropdown-item>
-      </el-dropdown-menu>
+        </ElDropdownItem>
+      </ElDropdownMenu>
     </template>
-  </el-dropdown>
+  </ElDropdown>
 </template>
 
 <style lang="scss">

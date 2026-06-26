@@ -54,7 +54,7 @@ async function handleToggleStatus() {
 </script>
 
 <template>
-  <router-link
+  <RouterLink
     :to="`${$route.params.locale ? '/' + $route.params.locale + '/' : '/'}detail/${dataset.id}/overview`"
   >
     <ul class="catalog-item-container">
@@ -109,7 +109,7 @@ async function handleToggleStatus() {
         </span>
       </li>
     </ul>
-  </router-link>
+  </RouterLink>
 </template>
 
 <style lang="scss" scoped>

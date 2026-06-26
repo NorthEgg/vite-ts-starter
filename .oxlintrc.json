@@ -16,6 +16,12 @@
     "auto-imports.d.ts",
     "components.d.ts"
   ],
+  "jsPlugins": [
+    {
+      "name": "vue-local",
+      "specifier": "./scripts/oxlint-vue-template-casing-plugin.cjs"
+    }
+  ],
   "rules": {
     "accessor-pairs": [
       "error",
@@ -226,6 +232,7 @@
         "disallowRedundantWrapping": true
       }
     ],
+    "vue-local/component-name-in-template-casing": "error",
     "prefer-rest-params": "error",
     "prefer-spread": "error",
     "prefer-template": "error"
@@ -291,6 +298,7 @@
     {
       "files": ["**/*.vue"],
       "rules": {
+        "vue/component-definition-name-casing": ["error", "PascalCase"],
         "vue/require-default-prop": "off"
       }
     }

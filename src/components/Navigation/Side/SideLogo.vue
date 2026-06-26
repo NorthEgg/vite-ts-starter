@@ -17,12 +17,12 @@ export default defineComponent({
 
 <template>
   <div class="side-logo-container">
-    <router-link :to="`/${$route.params.locale || ''}`">
+    <RouterLink :to="`/${$route.params.locale || ''}`">
       <img class="side-logo-img" src="@/assets/images/logo.svg" :alt="title" />
       <h1 class="side-logo-title">
         {{ title }}
       </h1>
-    </router-link>
+    </RouterLink>
   </div>
 </template>
 

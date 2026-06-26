@@ -57,7 +57,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <el-dropdown
+  <ElDropdown
     class="translations-box"
     popper-class="translations-box"
     :class="{
@@ -67,14 +67,14 @@ export default defineComponent({
     @command="handleChange"
   >
     <span class="icon-outer">
-      <!-- Translations<el-icon class="el-icon--right">
+      <!-- Translations<ElIcon class="el-icon--right">
         <ArrowDown />
-      </el-icon> -->
+      </ElIcon> -->
       <LogoIcon :dark="dark" />
     </span>
     <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item
+      <ElDropdownMenu>
+        <ElDropdownItem
           v-for="(localeItem, index) in localesList"
           :key="index"
           :command="localeItem"
@@ -83,10 +83,10 @@ export default defineComponent({
           <span class="custom-dropdown-item">
             {{ localeItem.localeName }}
           </span>
-        </el-dropdown-item>
-      </el-dropdown-menu>
+        </ElDropdownItem>
+      </ElDropdownMenu>
     </template>
-  </el-dropdown>
+  </ElDropdown>
 </template>
 
 <style lang="scss">

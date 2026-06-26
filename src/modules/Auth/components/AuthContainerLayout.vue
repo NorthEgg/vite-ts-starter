@@ -120,7 +120,7 @@ export default defineComponent({
         {{ desc }}
       </p>
     </div>
-    <el-form
+    <ElForm
       ref="boxForm"
       :model="formData"
       label-position="top"
@@ -128,19 +128,19 @@ export default defineComponent({
       @keyup.enter="onSubmit()"
     >
       <template v-for="(formItem, index) in formConfig" :key="index">
-        <el-form-item v-bind="getFormItemAttrs(formItem.attrs)">
+        <ElFormItem v-bind="getFormItemAttrs(formItem.attrs)">
           <div class="form-custom-label">
             <p>{{ formItem.label }}</p>
-            <el-link
+            <ElLink
               v-if="formItem.link"
               type="primary"
               :underline="false"
               @click="handleClickLink(formItem.link)"
             >
               {{ formItem.link.text }}
-            </el-link>
+            </ElLink>
           </div>
-          <el-input
+          <ElInput
             v-model="formData[formItem.attrs.prop]"
             v-bind="getInputItemAttrs(formItem)"
           >
@@ -156,23 +156,23 @@ export default defineComponent({
                 <AutoIconPheyeSlashBold v-else @click="tooglePassword()" />
               </div>
             </template>
-          </el-input>
-        </el-form-item>
+          </ElInput>
+        </ElFormItem>
       </template>
       <div
         v-for="(actionItem, index) in actionList"
         :key="`${index}-`"
         class="submit-form-action-list"
       >
-        <el-button
+        <ElButton
           v-bind="actionItem.attrs"
           class="submit-form-action-button"
           v-on="getActionItemEvent(actionItem.on) || {}"
         >
           {{ actionItem.text }}
-        </el-button>
+        </ElButton>
       </div>
-    </el-form>
+    </ElForm>
   </div>
 </template>
 

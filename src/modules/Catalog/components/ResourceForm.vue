@@ -34,13 +34,13 @@ export default defineComponent({
 
 <template>
   <div class="resource-form-container">
-    <el-form
+    <ElForm
       ref="refForm"
       :model="modelValue"
       label-position="right"
       label-width="145px"
     >
-      <el-form-item
+      <ElFormItem
         prop="name"
         :label="$t('catalog.name')"
         :rules="
@@ -50,14 +50,14 @@ export default defineComponent({
           })
         "
       >
-        <el-input
+        <ElInput
           v-model="modelValue.title"
           maxlength="30"
           show-word-limit
           :placeholder="$t('catalog.name')"
         />
-      </el-form-item>
-      <el-form-item
+      </ElFormItem>
+      <ElFormItem
         prop="subtitle"
         :label="$t('catalog.subtitle')"
         :rules="
@@ -67,15 +67,15 @@ export default defineComponent({
           })
         "
       >
-        <el-input
+        <ElInput
           v-model="modelValue.subtitle"
           maxlength="30"
           show-word-limit
           :placeholder="$t('catalog.subtitle')"
         />
-      </el-form-item>
-      <el-form-item prop="description" :label="$t('catalog.description')">
-        <el-input
+      </ElFormItem>
+      <ElFormItem prop="description" :label="$t('catalog.description')">
+        <ElInput
           v-model="modelValue.description"
           type="textarea"
           :placeholder="$t('catalog.description')"
@@ -83,8 +83,8 @@ export default defineComponent({
           :autosize="{ minRows: 2 }"
           show-word-limit
         />
-      </el-form-item>
-    </el-form>
+      </ElFormItem>
+    </ElForm>
   </div>
 </template>
 

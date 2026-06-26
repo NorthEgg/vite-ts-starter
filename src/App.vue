@@ -36,7 +36,7 @@ watch(
 
 <template>
   <ElConfigProvider :locale="currentElementLocale">
-    <router-view />
+    <RouterView />
   </ElConfigProvider>
 </template>
 

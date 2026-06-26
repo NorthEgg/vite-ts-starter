@@ -157,9 +157,9 @@ export default defineComponent({
           src="@/assets/images/logo.svg"
           alt=""
         > -->
-          <el-icon>
+          <ElIcon>
             <Promotion />
-          </el-icon>
+          </ElIcon>
         </template>
       </AuthContainerLayout>
     </div>

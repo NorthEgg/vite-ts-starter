@@ -26,7 +26,7 @@ export default defineComponent({
       </LayoutSection>
     </template>
     <template #content>
-      <router-view />
+      <RouterView />
     </template>
   </LayoutArea>
 </template>

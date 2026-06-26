@@ -113,7 +113,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <el-dialog
+  <ElDialog
     v-model="visible"
     :title="title"
     :show-close="false"
@@ -153,15 +153,15 @@ export default defineComponent({
         class="modal-container__component"
       />
       <div v-if="!hideFooter" class="modal-container__footer">
-        <el-button plain round @click="handleCancel()">
+        <ElButton plain round @click="handleCancel()">
           {{ $t('base.btnCancel') }}
-        </el-button>
-        <el-button type="primary" round @click="handleConfirm()">
+        </ElButton>
+        <ElButton type="primary" round @click="handleConfirm()">
           {{ confirmText || $t('base.btnConfirm') }}
-        </el-button>
+        </ElButton>
       </div>
     </div>
-  </el-dialog>
+  </ElDialog>
 </template>
 
 <style lang="scss" scoped>

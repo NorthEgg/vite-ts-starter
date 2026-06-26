@@ -13,7 +13,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <el-tooltip
+  <ElTooltip
     effect="dark"
     :tabindex="-1"
     :placement="placement"
@@ -28,7 +28,7 @@ withDefaults(defineProps<Props>(), {
     <span>
       <slot></slot>
     </span>
-  </el-tooltip>
+  </ElTooltip>
 </template>
 
 <style lang="scss" scoped>
