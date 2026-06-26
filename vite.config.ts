@@ -1,6 +1,7 @@
 import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
+import { codeInspectorPlugin } from 'code-inspector-plugin';
 import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import IconsResolver from 'unplugin-icons/resolver';
@@ -9,6 +10,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import Components from 'unplugin-vue-components/vite';
 import type { Plugin } from 'vite';
 import { loadEnv } from 'vite';
+import VueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig } from 'vitest/config';
 
 const vendorChunkGroups: Record<string, string[]> = {
@@ -78,12 +80,21 @@ const htmlPlugin = (): Plugin => {
   };
 };
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd());
+  const isDevServer = command === 'serve';
 
   return {
     base: env.VITE_ROUTER_MODE === 'hash' ? '' : '/',
     plugins: [
+      ...(isDevServer
+        ? [
+            VueDevTools(),
+            codeInspectorPlugin({
+              bundler: 'vite',
+            }),
+          ]
+        : []),
       UnoCSS(),
       vue(),
       AutoImport({
