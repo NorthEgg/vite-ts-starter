@@ -1,7 +1,6 @@
 import path from 'path';
 
 import vue from '@vitejs/plugin-vue';
-import { codeInspectorPlugin } from 'code-inspector-plugin';
 import UnoCSS from 'unocss/vite';
 import AutoImport from 'unplugin-auto-import/vite';
 import IconsResolver from 'unplugin-icons/resolver';
@@ -87,14 +86,7 @@ export default defineConfig(({ mode, command }) => {
   return {
     base: env.VITE_ROUTER_MODE === 'hash' ? '' : '/',
     plugins: [
-      ...(isDevServer
-        ? [
-            VueDevTools(),
-            codeInspectorPlugin({
-              bundler: 'vite',
-            }),
-          ]
-        : []),
+      ...(isDevServer ? [VueDevTools()] : []),
       UnoCSS(),
       vue(),
       AutoImport({

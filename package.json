@@ -81,7 +81,6 @@
     "@vue/compiler-sfc": "^3.5.38",
     "@vue/test-utils": "2.4.11",
     "babel-plugin-transform-vite-meta-env": "^1.0.3",
-    "code-inspector-plugin": "^1.6.2",
     "cross-env": "^10.1.0",
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
